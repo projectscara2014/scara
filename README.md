@@ -1,2 +1,2 @@
-# scara
-Building a SCARA robot
+# SCARA
+Building a SCARA robot.
