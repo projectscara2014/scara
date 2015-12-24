@@ -40,9 +40,8 @@ def find_dynamixel_and_arduino() :
     serial_ports_list = serial_ports()
     
     system = platform.system()
-    print(system)
-    print('available serial ports : ')
-    print(serial_ports_list)
+    print('system --> ',system)
+    print('available serial ports : ',serial_ports_list)
     dynamixel = ''
     arduino = ''
 
@@ -66,10 +65,12 @@ def find_dynamixel_and_arduino() :
     #check if this function called by dynamixel.py or arduino.py
     #return the arduino or arduino or dynamixel port respectively
     stack = inspect.stack()
-    print('checking stack') #comment after testing
+    # print('checking stack') #comment after testing
     if 'dynamixel' in stack[1][1] :
-        print('DYNAMIXEL \n\n') #comment after testing
         return[dynamixel]
     elif 'arduino' in stack[1][1] :
-        print('ARDUINO \n\n') #comment after testing
         return[arduino]
+
+
+__all__ = ['find_dynamixel_and_arduino']
+

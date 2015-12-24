@@ -1,11 +1,9 @@
-from debug import debug
-
 import time                              #import time liabrary to use the time.sleep()
                                          #function to generate delays
 import serial                            #import the serial library 
-import platform
-import serial_ports_setup
-import status_packet_handling
+from subordinate import serial_ports_setup
+from subordinate import status_packet_handling
+from subordinate import exception_handling
 
 ##---IMPORTANT GLOBAL VARIABLES---
 GO_TO_DYNA_1_POS=0
@@ -14,7 +12,6 @@ GO_TO_DYNA_2_POS=0
 ##---INITIALIZATION VARIABLES---
 dynamixel = ''
 system = ''
-#arduino = ''
 
 #---DYNAMIXEL VARIABLES---
 motor_1_offset = 2048 - 15
@@ -27,25 +24,23 @@ read_limit           = 80
 stall_count_limit    = 10
 
 def startup(com) :
-    ser = serial.Serial(port = com)      #create an instance of the serial.Serial class 
-    print(ser)
-    ser.baudrate = 57600                 #set baudrate equal to 9600
-    print(ser.baudrate)
-    return ser
+    try :
+        ser = serial.Serial(port = com)      #create an instance of the serial.Serial class 
+    except : 
+        exception_handling.handle_exception(__name__,'cant connect')
+    else :
+        print('dynamixel : ',dynamixel)
+        print(ser)
+        ser.baudrate = 57600                 #set baudrate equal to 9600
+        return ser
 
 def init() : 
 
     global system 
     global dynamixel
-    # global arduino
 
-    system = platform.system()
-    # [dynamixel,arduino] = serial_ports_setup.find_dynamixel_and_arduino()
     [dynamixel] = serial_ports_setup.find_dynamixel_and_arduino()
-    print('dynamixel : ',dynamixel)
-    # print('arduino : ',arduino)
     dynamixel = startup(dynamixel)
-    # arduino = startup(arduino)
     dynamixel_initializations()
 
 def not_checksum(l) :
