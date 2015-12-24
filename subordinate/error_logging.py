@@ -1,4 +1,6 @@
 import time
+import sys
+gui = sys.modules['__main__']
 
 def log(error) :
 
@@ -86,6 +88,6 @@ def log(error) :
     + ' ' + t.hour + ':' + t.minute + ':' + t.second\
     + ' --> ' + error + '\n'
 
-    log = open('log.txt','a')
+    log = open(gui.WORKING_DIRECTORY + '/log.txt','a')
     log.write(return_string)
     log.close()
