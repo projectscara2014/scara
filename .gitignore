@@ -4,3 +4,5 @@ subordinate/__pycache__/
 main/__pycache__/
 subordinate/__pycache__
 main/__pycache__
+
+*.pyc
