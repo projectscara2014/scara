@@ -1,4 +1,6 @@
-from string_handling import * # skip_character, skip_untli_character, skip_useless, remove_useless, string_to_int
+from subordinate.string_handling import * # skip_character, skip_untli_character, skip_useless, remove_useless, string_to_int
+import sys
+gui = sys.modules['__main__']
 
 LOOKUP_OUTPUT = [0,0,0]
 DYNA_1_POS = 0
@@ -216,18 +218,15 @@ def init_lookup() :
 				array.append(element.pop())
 			POSITION_ARRAY_FLAGS.append(array)
 
-	with open('lookup.txt','r') as logs :
+	with open(gui.WORKING_DIRECTORY + 'main/lookup.txt','r') as logs :
 		logs_ = logs.read()
 		edit_position_array(logs_)
 		logs.close()
 
-
-
-
 ######### Initialization call #########
 
 init_lookup()
-print("Position array :- ",POSITION_ARRAY)
-print
-print("position array flags : ",POSITION_ARRAY_FLAGS)
-print
+# print("Position array :- ",POSITION_ARRAY)
+# print
+# print("position array flags : ",POSITION_ARRAY_FLAGS)
+# print

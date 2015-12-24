@@ -1,6 +1,6 @@
 import sys
 gui = sys.modules['__main__']
-import error_logging # log
+from subordinate import error_logging # log
 
 def handle_exception(module_name,exception_name,*args) :
 	
@@ -20,14 +20,17 @@ def handle_exception(module_name,exception_name,*args) :
 		'py_main' : py_main,
 	}
 
+	module_name = module_name.split('.')[-1]
+	print('exception called by --> ' + module_name)
+	
 	if module_name in module_names.keys() and\
 		exception_name in module_names[module_name] :
 		
 		gui.EXCEPTION_MODULE = module_name
+		print(gui.EXCEPTION_MODULE)
 		gui.EXCEPTION = exception_name
-		error_logging.log(module_name + ':' + exception_name)
+		error_logging.log(module_name + ' : ' + exception_name)
 		gui.exception_caught(*args)
-		gui.some_file.n = int(args[0])
 		
 	else : 
 		print('invalid exception')
