@@ -15,7 +15,7 @@ class debug() :
 
 
 class logs() : 
-	def __init__(self,*args,**kwargs) :
+	def __init__(self,*Args,**kwargs) :
 		self.args = args
 		print(self.args)
 
