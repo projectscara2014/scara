@@ -1,0 +1,9 @@
+25/Dec/2015 19:38:31 --> dynamixel--> cant connect
+25/Dec/2015 21:35:39 --> dynamixel--> cant connect
+25/Dec/2015 21:36:42 --> dynamixel--> cant connect
+25/Dec/2015 21:51:50 --> dynamixel--> cant connect
+25/Dec/2015 21:53:26 --> dynamixel--> cant connect
+25/Dec/2015 21:54:15 --> dynamixel--> cant connect
+25/Dec/2015 21:55:30 --> dynamixel--> cant connect
+25/Dec/2015 21:55:59 --> dynamixel--> cant connect
+25/Dec/2015 21:56:48 --> dynamixel--> cant connect

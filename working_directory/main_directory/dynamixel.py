@@ -1,9 +1,11 @@
-import time                              #import time liabrary to use the time.sleep()
-                                         #function to generate delays
+# from debug import debug
+
+import time                              #import time liabrary to use the time.sleep() function to generate delays
 import serial                            #import the serial library 
-from subordinate import serial_ports_setup
-from subordinate import status_packet_handling
-from subordinate import exception_handling
+
+from subordinate_directory import serial_ports_setup
+from subordinate_directory import status_packet_handling
+from subordinate_directory.string_handling import char_to_int
 
 ##---IMPORTANT GLOBAL VARIABLES---
 GO_TO_DYNA_1_POS=0
@@ -11,7 +13,6 @@ GO_TO_DYNA_2_POS=0
 
 ##---INITIALIZATION VARIABLES---
 dynamixel = ''
-system = ''
 
 #---DYNAMIXEL VARIABLES---
 motor_1_offset = 2048 - 15
@@ -22,57 +23,47 @@ send_and_check_limit = 10
 dyna_write_limit     = 3 
 read_limit           = 80
 stall_count_limit    = 10
-
-def startup(com) :
-    try :
-        ser = serial.Serial(port = com)      #create an instance of the serial.Serial class 
-    except : 
-        exception_handling.handle_exception(__name__,'cant connect')
-    else :
-        print('dynamixel : ',dynamixel)
-        print(ser)
-        ser.baudrate = 57600                 #set baudrate equal to 9600
-        return ser
+max_acceptable_error_in_position = 0
 
 def init() : 
-
-    global system 
     global dynamixel
-
-    [dynamixel] = serial_ports_setup.find_dynamixel_and_arduino()
-    dynamixel = startup(dynamixel)
+    dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
     dynamixel_initializations()
 
-def not_checksum(l) :
-    checksum = 0
-    for i in range(len(l)) :
-        checksum += l[i]
-    not_checksum = (~checksum)&0xff
-    return not_checksum
-
-def instruction_length(instruction,*args) :
-    instructions_that_require_parameters = [0x02,0x03,0x04]
-    if(instruction in instructions_that_require_parameters) :
-        return (len(args) + 2)
-    else :
-        return 2
-
-def build_instruction_packet(motor_id,instruction,*args) : 
-    instructions_that_require_parameters = [0x02,0x03,0x04]
-    instruction_length_ = instruction_length(instruction,*args)
-    checksum = [motor_id,instruction_length_,instruction]
-    if(instruction in instructions_that_require_parameters) :
-        for i in range(len(args)) :
-            checksum.append(args[i])
-    not_checksum_ = not_checksum(checksum)
-    instruction_packet = '\xff\xff'
-    for i in range(len(checksum)) :
-        instruction_packet += chr(checksum[i])
-    instruction_packet += chr(not_checksum_)
-    #print (list(instruction_packet))
-    return(instruction_packet)
-
 def send_and_check(motor_id,instruction,*args) :
+    '''
+    Ensures the packet has been succesfully delivered
+    '''
+    def build_instruction_packet(motor_id,instruction,*args) : 
+        
+        def not_checksum(l) :
+            checksum = 0
+            for i in range(len(l)) :
+                checksum += l[i]
+            not_checksum = (~checksum)&0xff
+            return not_checksum
+
+        def instruction_length(instruction,*args) :
+            instructions_that_require_parameters = [0x02,0x03,0x04]
+            if(instruction in instructions_that_require_parameters) :
+                return (len(args) + 2)
+            else :
+                return 2
+
+        instructions_that_require_parameters = [0x02,0x03,0x04]
+        instruction_length_ = instruction_length(instruction,*args)
+        checksum = [motor_id,instruction_length_,instruction]
+        if(instruction in instructions_that_require_parameters) :
+            for i in range(len(args)) :
+                checksum.append(args[i])
+        not_checksum_ = not_checksum(checksum)
+        instruction_packet = '\xff\xff'
+        for i in range(len(checksum)) :
+            instruction_packet += chr(checksum[i])
+        instruction_packet += chr(not_checksum_)
+        #print (list(instruction_packet))
+        return(instruction_packet)
+
     instruction_packet = build_instruction_packet(motor_id,instruction,*args)
     
     global send_and_check_limit
@@ -86,9 +77,10 @@ def send_and_check(motor_id,instruction,*args) :
         #print("raw status",list(status_packet))
         status_packet = status_packet_handling.get_status_packet(instruction_packet,status_packet)
         if(status_packet == False) :
-         #   print("decoded status => FALSE")
+            # No status packet / Incorrect status packet
             count+=1
-        elif(status_packet == True):
+        elif(status_packet == True): 
+            # TRUE ONLY WHEN Dynamixel 1
             return True
         else:
           #  print("decoded status",list(status_packet))
@@ -100,9 +92,10 @@ def send_and_check(motor_id,instruction,*args) :
                 status_packet_handling.error_service_routine(error)
     print("send_and_check>>limit overshoot")
     status_packet_handling.error_service_routine(1,type=1)
-    return False
     # USER DEFINED ERROR: 1 :- IN CASE OF COMMUNICATION ERROR
+    return False
 
+# FUNCTION TO MOVE THE ARM TO THE REQUIRED POSITION
 def dyna_move():
     global GO_TO_DYNA_1_POS
     global GO_TO_DYNA_2_POS
@@ -110,7 +103,26 @@ def dyna_move():
     global dyna_write_limit
     count = 0
 
-    # FUNCTION TO CONVERT ANGLES TO POSITIONS
+    # FUNCTION TO CORRECTLY MOVE THE DYNAMIXEL TO THE REQUIRED POSITION
+    def position_write(motor_id,goal_pos) :
+        global motor_1_offset
+        global motor_2_offset
+
+        if(motor_id==1):
+            offset = motor_1_offset
+        elif(motor_id==2):
+            offset = motor_2_offset
+
+        # FUNCTION TO CONVERT ANGLES TO POSITIONS
+        def angle_to_hex(angle,offset):
+            angle = -angle
+            angle = angle + offset
+            angle = angle%4096
+            return [(int(angle%256)),(int(angle/256))]
+
+        [h_byte,l_byte] = angle_to_hex(goal_pos,offset)
+        #print("writing motor ",motor_id," to :-",[h_byte,l_byte])
+        send_and_check(motor_id,3,30,h_byte,l_byte)
 
     while(count < dyna_write_limit) :
      #   print("writing to dyna")#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -121,7 +133,6 @@ def dyna_move():
         if(reached == True):
             break
         elif(reached == "again"):
-            
             count +=1
         else:
             count +=1
@@ -129,156 +140,83 @@ def dyna_move():
             print("Writing to dynamixel again")
     if(count==dyna_write_limit):
         print("dyna write limit reached")
-
-RANDOM_LIST = []
+        # CHANGE -- Handle Exception
 
 def till_dyna_reached() :
-    global RANDOM_LIST #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     global GO_TO_DYNA_1_POS
     global GO_TO_DYNA_2_POS
 
     global read_limit
+    global stall_count_limit
+
+    def position_read():
+
+        def angle_from_status_packet(packet,offset) : 
+
+            def hex_to_angle(position_low,position_high,offset):
+                angle = (char_to_int(position_high))*256 + char_to_int(position_low)
+                angle = -angle
+                angle += offset
+                angle = angle%4096
+                return int(angle)
+
+            #print(list(packet))  # debug    
+            number_of_parameters = char_to_int(packet[3]) - 2
+            parameters = []
+            for i in range(5,5+number_of_parameters) : 
+                parameters.append(packet[i])
+            #print("hex = ",parameters) # debug
+            return hex_to_angle(parameters[0],parameters[1],offset)
+
+        global motor_1_offset
+        global motor_2_offset
+
+        #status_packet1 = send_and_check(1,2,30,2)# UNCOMMENT when Dynamixel 1 works
+        status_packet1 = "\xff\xff\x01\x04\x00\x00\x00\xfa" # COMMENT when Dynamixel 1 works
+        status_packet2 = send_and_check(2,2,36,2)
+
+        if(not(status_packet1 and status_packet2)):
+            print("position_read did not get a status_packet")
+            return False
+        
+        current_angles = [angle_from_status_packet(status_packet1,motor_1_offset)\
+        ,angle_from_status_packet(status_packet2,motor_2_offset)]
+        return current_angles
+
     count = 0
     stall_count = 0
     reqd_pos = [GO_TO_DYNA_1_POS%4096,GO_TO_DYNA_2_POS%4096]
-##    print("reqd pos   = ",reqd_pos)#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     current_pos = position_read()
     last_pos = current_pos
 
     def compare(current,reqd):
-        max_diff=0
-        current[0] = reqd[0]     ## COMMENT when dynamixel 1 works
+        global max_acceptable_error_in_position
+
+        current[0] = reqd[0]     # COMMENT when dynamixel 1 works
         l = zip(current,reqd)
         def mod(s):
             if(s<0):s*=-1
             return s
         
         for element in l:
-            if(mod(element[0]-element[1])> max_diff):
+            if(mod(element[0]-element[1])> max_acceptable_error_in_position):
                 return False
         return True
     
     while(count < read_limit):
-##        print("current pos = ",current_pos)
-##        print("count = ",count)
-##        print("stall_count = ",stall_count)
-##        
         if(compare(current_pos,reqd_pos)):
-           # print("same aaya ------> current_pos & reqd_pos")#@@@@@@@@@@@@@@@@@@@@
-           # store_in_list(current_pos[1]) ######################
             return True
         elif(current_pos == last_pos):
             if(stall_count < stall_count_limit) :
                 stall_count += 1
             else:
-                #print("stall limit reached")#^^^^^^^^^^^^^^^^^^^^^^^^^^
-     #           print("current pos = ",current_pos)#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 return "again"
         else:
             stall_count = 0
             last_pos = current_pos
-            #print("reading again")#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
         current_pos = position_read()
         count +=1
     return False
-
-##def till_dyna_reached() :
-##    global RANDOM_LIST #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-##    global GO_TO_DYNA_1_POS
-##    global GO_TO_DYNA_2_POS
-##
-##    global read_limit
-##    count = 0
-##    stall_count = 0
-##    reqd_pos = [GO_TO_DYNA_1_POS,GO_TO_DYNA_2_POS]
-##    #print("reqd pos   = ",reqd_pos)#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-##    current_pos = position_read()
-##    last_pos = current_pos
-##
-##    while(count < read_limit):
-##        current_pos = position_read()
-##        RANDOM_LIST.append(current_pos)
-##        count +=1
-##    return True
-
-def char_to_int(character) : 
-    for i in range(256) : 
-        if(chr(i) == character) : 
-            return i
-
-
-def angle_from_status_packet(packet,offset) : 
-##    def hex_to_angle(position_low,position_high,offset):
-##        angle = (char_to_int(position_high))*256 + char_to_int(position_low)
-##        angle *= 360
-##        angle /= 4096
-##        angle += offset
-##        angle %= 360
-##        #print(int(angle))
-##        return int(angle)
-
-    def hex_to_angle(position_low,position_high,offset):
-        angle = (char_to_int(position_high))*256 + char_to_int(position_low)
-        angle = -angle
-        angle += offset
-        angle = angle%4096
-        return int(angle)
-    #print(list(packet))
-    number_of_parameters = char_to_int(packet[3]) - 2
-    parameters = []
-    for i in range(5,5+number_of_parameters) : 
-        parameters.append(packet[i])
-    #print("hex = ",parameters)
-    return hex_to_angle(parameters[0],parameters[1],offset)
-
-def position_read():
-    global motor_1_offset
-    global motor_2_offset
-
-    #status_packet1 = send_and_check(1,2,30,2)#----------------------->>>
-    status_packet1 = "\xff\xff\x01\x04\x00\x00\x00\xfa"
-    status_packet2 = send_and_check(2,2,36,2)
-    #status_packet2 = "\xff\xff\x02\x04\x00\x00\x00\xfb"
-    #print(list(status_packet2))
-    if(not(status_packet1 and status_packet2)):
-        print("Status Packet ERROR")
-        return False
-    
-    l = [angle_from_status_packet(status_packet1,motor_1_offset)\
-    ,angle_from_status_packet(status_packet2,motor_2_offset)]
-    return l
-
-def position_write(motor_id,goal_pos) :
-    global motor_1_offset
-    global motor_2_offset
-
-    if(motor_id==1):
-        offset = motor_1_offset
-    else:
-        offset = motor_2_offset
-
-##    def angle_to_hex(angle,offset):
-##        if(angle == int(angle)) : 
-##            if(angle%45 != 0) : 
-##                angle += 0.1
-##        angle += offset
-##        angle %= 360
-##        angle *= 4096
-##        angle /= 360
-##        angle %= 4096
-##        angle = int(angle)
-##        return([(int(angle%256)),(int(angle/256))])
-
-    def angle_to_hex(angle,offset):
-        angle = -angle
-        angle = angle + offset
-        angle = angle%4096
-        return [(int(angle%256)),(int(angle/256))]
-
-    [h_byte,l_byte] = angle_to_hex(goal_pos,offset)
-    #print("writing motor ",motor_id," to :-",[h_byte,l_byte])
-    send_and_check(motor_id,3,30,h_byte,l_byte)
 
 def dynamixel_initializations():
     send_and_check(1,3,26,8,8,24)   #PID for motor 1
@@ -324,9 +262,9 @@ def speed_control():
 
 ##k=[]
 ##for i in range(512):
-##	if(i not in HYPER_LIST):
-##		k.append(i)
-##print(k)		
+##  if(i not in HYPER_LIST):
+##      k.append(i)
+##print(k)      
 
 ##def move_to(angle):
 ##    global GO_TO_DYNA_2_POS

@@ -1,6 +1,6 @@
 import sys
 gui = sys.modules['__main__']
-from subordinate import error_logging # log
+import error_logging
 
 def handle_exception(module_name,exception_name,*args) :
 	
@@ -21,20 +21,12 @@ def handle_exception(module_name,exception_name,*args) :
 	}
 
 	module_name = module_name.split('.')[-1]
-	print('exception called by --> ' + module_name)
-	
+
 	if module_name in module_names.keys() and\
 		exception_name in module_names[module_name] :
-		
-		gui.EXCEPTION_MODULE = module_name
-		print(gui.EXCEPTION_MODULE)
-		gui.EXCEPTION = exception_name
-		error_logging.log(module_name + ' : ' + exception_name)
-		gui.exception_caught(*args)
-		
+		print('Exception :' + module_name + '--> ' + exception_name)
+		error_logging.log(module_name + '--> ' + exception_name)
+		# CHANGE -- Implement functions in GUI and call from here
 	else : 
 		print('invalid exception')
-		print()
-
-
-error_logging.log('rana here')
+		# CHANGE -- Let GUI print this in a msg box

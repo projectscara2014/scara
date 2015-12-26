@@ -31,6 +31,7 @@ def log(error) :
         def get_time(self) :
 
             def get_before_and_after(string,after,before) :
+                
                 dont_need_character_list = [' ']
                 if((after in string) and (before in string)) :
                     i = string.index(after) + len(after)
@@ -43,38 +44,41 @@ def log(error) :
                 else :
                     print('before or after not in string')
 
-            def char_to_int(character) :
-                for i in range(256) :
-                    if(chr(i) == character) :
-                        return i
-
+            def one_character_to_two_character(string) : 
+                if len(string) == 1 : 
+                    return('0' + string)
+                else : 
+                    return(string)
+                    
             self.t = str(time.localtime())
             self.year = get_before_and_after(self.t,'tm_year=',',')
             self.month = get_before_and_after(self.t,'tm_mon=',',')
             self.day = get_before_and_after(self.t,'tm_mday=',',')
-            self.hour = get_before_and_after(self.t,'tm_hour=',',')
-            self.minute = get_before_and_after(self.t,'tm_min=',',')
-            self.second = get_before_and_after(self.t,'tm_sec=',',')
+            
+            self.hour = one_character_to_two_character(get_before_and_after(self.t,'tm_hour=',','))
+            self.minute = one_character_to_two_character(get_before_and_after(self.t,'tm_min=',','))
+            self.second = one_character_to_two_character(get_before_and_after(self.t,'tm_sec=',','))
+            
             self.week_day = get_before_and_after(self.t,'tm_wday=',',')
             day = {
-                '0':'Mon',
-                '1':'Tue',
-                '2':'Wed',
-                '3':'Thu',
-                '4':'Fri',
-                '6':'Sat',
-                '7':'Sun'
+                '00':'Mon',
+                '01':'Tue',
+                '02':'Wed',
+                '03':'Thu',
+                '04':'Fri',
+                '06':'Sat',
+                '07':'Sun'
             }
             month = {
-                '1':'Jan',
-                '2':'Feb',
-                '3':'Mar',
-                '4':'Apr',
-                '5':'May',
-                '6':'Jun',
-                '7':'Jul',
-                '8':'Aug',
-                '9':'Sep',
+                '01':'Jan',
+                '02':'Feb',
+                '03':'Mar',
+                '04':'Apr',
+                '05':'May',
+                '06':'Jun',
+                '07':'Jul',
+                '08':'Aug',
+                '09':'Sep',
                 '10':'Aug',
                 '11':'Nov',
                 '12':'Dec'
@@ -88,6 +92,6 @@ def log(error) :
     + ' ' + t.hour + ':' + t.minute + ':' + t.second\
     + ' --> ' + error + '\n'
 
-    log = open(gui.WORKING_DIRECTORY + '/log.txt','a')
-    log.write(return_string)
-    log.close()
+    with open(gui.WORKING_DIRECTORY + '/log.txt','a') as log: 
+        log.write(return_string)
+        
