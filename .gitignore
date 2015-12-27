@@ -1,8 +1,8 @@
 __pycache__
 __pycache__/
-subordinate/__pycache__/
-main/__pycache__/
-subordinate/__pycache__
-main/__pycache__
+subordinate_directory/__pycache__/
+main_directory/__pycache__/
+subordinate_directory/__pycache__
+main_directory/__pycache__
 
 *.pyc
