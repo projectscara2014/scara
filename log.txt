@@ -1,11 +1,5 @@
-23/Dec/2015 16:45:12 --> rana here
-23/Dec/2015 16:45:48 --> rana here
-24/Dec/2015 2:8:20 --> rana here
-24/Dec/2015 13:15:39 --> rana here
-24/Dec/2015 13:15:39 --> dynamixel : cant connect
-24/Dec/2015 13:15:54 --> rana here
-24/Dec/2015 13:15:54 --> dynamixel : cant connect
-24/Dec/2015 13:16:9 --> rana here
-24/Dec/2015 13:16:9 --> dynamixel : cant connect
-24/Dec/2015 13:29:35 --> rana here
-24/Dec/2015 13:29:35 --> dynamixel : cant connect
+24/Dec/2015 15:54:6 --> dynamixel : cant connect
+24/Dec/2015 16:19:36 --> dynamixel : cant connect
+24/Dec/2015 16:42:36 --> dynamixel : cant connect
+24/Dec/2015 18:5:16 --> dynamixel : cant connect
+24/Dec/2015 18:6:29 --> dynamixel : cant connect
