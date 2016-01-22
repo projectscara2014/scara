@@ -68,7 +68,7 @@ class RUN(tk.Toplevel):
         self.button.grid(row=10,column=0,pady=5)
         #tk.Label(self,text="").pack(side=tk.TOP)
         tk.Button(self,text="Back to main menu?",command=self.close_window,bg='#b87fed').grid(row=15,column=0,pady=180)
-        print str("hullalala le ")
+        print(str("hullalala le "))
         #self.close_button()
         
         
@@ -82,7 +82,7 @@ class RUN(tk.Toplevel):
             self.control_retained()
 
     def control_passed(self,text):    
-        print "going out of GUI..."
+        print("going out of GUI...")
         print("passing control")
         self.withdraw()
         t=tk.Toplevel(self)
@@ -110,7 +110,7 @@ class RUN(tk.Toplevel):
         
     def quit_win(setup_page,progress_page):
         scara.py_main.FLAG = True
-        print "\nFlag true in gui"
+        print("\nFlag true in gui")
         
 
   
