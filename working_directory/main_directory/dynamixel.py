@@ -171,7 +171,7 @@ def till_dyna_reached() :
         global motor_1_offset
         global motor_2_offset
 
-        #status_packet1 = send_and_check(1,2,30,2)# UNCOMMENT when Dynamixel 1 works
+        #status_packet1 = send_and_check(1,2,36,2)# UNCOMMENT when Dynamixel 1 works
         status_packet1 = "\xff\xff\x01\x04\x00\x00\x00\xfa" # COMMENT when Dynamixel 1 works
         status_packet2 = send_and_check(2,2,36,2)
 
@@ -221,8 +221,8 @@ def till_dyna_reached() :
 def dynamixel_initializations():
     send_and_check(1,3,26,8,8,24)   #PID for motor 1
     send_and_check(2,3,26,8,8,24)   #PID for motor 2
-    send_and_check(1,3,32,0,1)
-    send_and_check(2,3,32,0,1)
+    send_and_check(1,3,32,0,1)      #SPEED for motor 1
+    send_and_check(2,3,32,0,1)      #SPEED for motor 2
 #-------------------------------------------------------------------
 
 

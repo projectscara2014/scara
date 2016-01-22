@@ -10,6 +10,8 @@ class Dynamixel :
 		self.instruction_packet_length = ''
 		self.instruction= ''
 		self.parameters = []
+		self.expected_position_low = '\x00'
+		self.expected_position_high = '\x00'
 	
 	def read(self,in_waiting) : 
 		return self.make_string_from_list(self.status_packet)
@@ -23,6 +25,9 @@ class Dynamixel :
 		self.status_packet.extend(self.build_status_packet())
 		self.build_status_packet()
 		self.print_packet(self.status_packet)
+		# if self.instruction == '\x03' and self.parameters[0] == '\x1e' : 
+		# 	self.expected_position_low = self.parameeters[1]
+		# 	self.expected_position_high = self.parameters[2]
 
 	def inWaiting(self) : 
 		return(len(self.status_packet))
@@ -35,6 +40,7 @@ class Dynamixel :
 				checksum += l[i]
 			not_checksum = (~checksum)&0xff
 			return not_checksum
+
 		instructions_that_return_parameters = ['\x02']
 		
 		status_packet = ['\xff','\xff']
@@ -50,6 +56,7 @@ class Dynamixel :
 			length_of_data_to_be_read = self.parameters[1]
 			status_packet.append(chr(char_to_int(length_of_data_to_be_read)+2))	#status packet length --> number_of_parameters + 2
 			status_packet.append('\x00')	#error byte
+
 			#return parameters --> check if starting address is 0x1E and return DYNA_POS_1 and DYNA_POS_2
 
 		checksum = [ord(self.motor_id),2]
