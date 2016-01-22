@@ -24,9 +24,16 @@ def handle_exception(module_name,exception_name,*args) :
 
 	if module_name in module_names.keys() and\
 		exception_name in module_names[module_name] :
-		print('Exception :' + module_name + '--> ' + exception_name)
+		print('Exception : ' + module_name + '--> ' + exception_name)
 		error_logging.log(module_name + '--> ' + exception_name)
 		# CHANGE -- Implement functions in GUI and call from here
+		if(module_name == 'dynamixel' and exception_name == 'cant connect'):
+			dynamixel_not_connected()
 	else : 
 		print('invalid exception')
 		# CHANGE -- Let GUI print this in a msg box
+
+def dynamixel_not_connected():
+	print("*** dynamixel_not_connected() ***")
+	print("display an error message or something in gui")
+	sys.exit(1)

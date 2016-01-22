@@ -46,8 +46,8 @@ class Dynamixel :
 		else :
 			#instruction returns parameters --> read
 			
-			starting_address = parameter[0]
-			length_of_data_to_be_read = parameter[1]
+			starting_address = self.parameters[0]
+			length_of_data_to_be_read = self.parameters[1]
 			status_packet.append(chr(char_to_int(length_of_data_to_be_read)+2))	#status packet length --> number_of_parameters + 2
 			status_packet.append('\x00')	#error byte
 			#return parameters --> check if starting address is 0x1E and return DYNA_POS_1 and DYNA_POS_2
@@ -62,7 +62,7 @@ class Dynamixel :
 	def print_packet(self,packet) :
 		packet = self.make_string_from_list(packet)	
 		for character in packet :
-			print(hex(ord(character)),end='/')
+			print(hex(ord(character)),)
 		print()
 
 	def make_string_from_list(self,list_) : 
@@ -71,6 +71,6 @@ class Dynamixel :
 			return_string += str(element) 
 		return return_string
 		
-dynamixel = Dynamixel()
-dynamixel.write('\xff\xff\x02\x07\x03\x1e')
-dynamixel.read(dynamixel.inWaiting())
+# dynamixel = Dynamixel()
+# dynamixel.write('\xff\xff\x02\x07\x03\x1e')
+# dynamixel.read(dynamixel.inWaiting())
