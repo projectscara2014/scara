@@ -7,3 +7,13 @@
 25/Dec/2015 21:55:30 --> dynamixel--> cant connect
 25/Dec/2015 21:55:59 --> dynamixel--> cant connect
 25/Dec/2015 21:56:48 --> dynamixel--> cant connect
+22/Jan/2016 14:46:49 --> dynamixel--> cant connect
+22/Jan/2016 14:48:57 --> dynamixel--> cant connect
+22/Jan/2016 14:56:31 --> dynamixel--> cant connect
+22/Jan/2016 14:56:58 --> dynamixel--> cant connect
+22/Jan/2016 15:47:15 --> dynamixel--> cant connect
+22/Jan/2016 15:47:23 --> dynamixel--> cant connect
+22/Jan/2016 15:48:22 --> dynamixel--> cant connect
+22/Jan/2016 15:49:24 --> dynamixel--> cant connect
+22/Jan/2016 16:02:48 --> dynamixel--> cant connect
+22/Jan/2016 16:08:52 --> dynamixel--> cant connect

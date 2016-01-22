@@ -1,6 +1,6 @@
 import time
 import Tkinter as tk
-# from main_directory import py_main
+from main_directory import py_main
 
 parameter_list = [0,1,1,2,3,5,8,13,21,34]*2
 
