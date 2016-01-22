@@ -17,3 +17,4 @@
 22/Jan/2016 15:49:24 --> dynamixel--> cant connect
 22/Jan/2016 16:02:48 --> dynamixel--> cant connect
 22/Jan/2016 16:08:52 --> dynamixel--> cant connect
+22/Jan/2016 16:10:53 --> dynamixel--> cant connect
