@@ -25,7 +25,7 @@ def skip_useless(string,i) :
 		j += 1
 	return(j - i)
 
-def remove_useless(string) : 
+def remove_useless(string,useless_array = [' ','\n','\t','%']) : 
 	i = 0
 	return_string = ''
 	while(i < len(string)) : 
