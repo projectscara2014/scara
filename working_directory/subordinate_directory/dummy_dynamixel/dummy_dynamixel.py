@@ -1,3 +1,7 @@
+'''---------------- to add ---------------------
+seperate memories for dynamixel1 and dynamixel2
+permanent memory saving function for EEPROM memory
+---------------------------------------------'''
 import sys
 SYSTEM_PATH_SEPERATOR = ''
 if sys.platform.startswith('win') : 
@@ -35,7 +39,9 @@ from subordinate_directory import status_packet_handling #print_packet
 class Dynamixel : 
 	
 	def __init__(self) :
-		self.memory = self.read_memory()
+		self.memory_1 = self.read_memory(1)
+		# self.memory_2 = self.read_memory(2)
+		self.memory = self.memory_1	#change
 
 		self.status_packet = []
 
@@ -124,7 +130,7 @@ class Dynamixel :
 			return_string += str(element) 
 		return return_string
 
-	def read_memory(self) :
+	def read_memory(self,dynamixel_id) :
 		'''
 		returns a dictionary consisting of address:value pairs 
 		as elements, simulating the dynamixel memory
@@ -132,7 +138,13 @@ class Dynamixel :
 		memory = {}
 		text_memory = ''
 		# with open(gui.WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dymmy_dynamixel_memory.txt','r') as f : 
-		with open(WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory.txt','r') as f : 
+		if dynamixel_id == 1 : 
+			memory_path = WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory_1.txt'
+		elif dynamixel_id == 2 :
+			memory_path = WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory_2.txt'
+		else : 
+			raise 'dummy_dynamixel.read_memory(self,dynamixel_id) --> incorrect dynamixel ID'
+		with open(memory_path,'r') as f : 
 			text_memory = f.read()
 		list_memory = []
 		return_string = ''
