@@ -32,6 +32,27 @@ def get_variables(string) :
 		return_array = temp_return_array
 		return return_array
 
+	def decode_range(range_) : 
+		range_ = range_[1:-1].split(':')
+		print(range_)
+		lower_limit = 0
+		upper_limit = 0
+		try : 
+			lower_limit = int(range_[0])
+		except ValueError :
+			if range_[0] == '' :
+				lower_limit = 0
+			else : 
+				raise 'undefined range'
+		try : 
+			upper_limit = int(range_[1])
+		except ValueError :
+			if range_[1] == '' :
+				upper_limit = 0
+			else : 
+				raise 'undefined range'
+		return [lower_limit,upper_limit]
+
 	return_array = lines_from_string(string)
 
 	temp_return_array = []
@@ -41,6 +62,11 @@ def get_variables(string) :
 			temp_return_array[-1].append([element.split('=')[0],element.split('=')[1]]) 
 	return_array = temp_return_array
 
+	#decode range
+
 	return return_array
 
+
+
+print(decode_range('(:7)'))
 print(get_variables(text_file))
