@@ -21,7 +21,7 @@ def get_variables(string) :
 				return_array.append(append_string)
 			else : 
 				append_string += element
-
+		print(return_array)
 		temp_return_array = []
 		for line in return_array : 
 			line = string_handling.remove_useless(line,[' ','\n','\t'])
@@ -30,6 +30,7 @@ def get_variables(string) :
 			else :
 				temp_return_array.append(line)
 		return_array = temp_return_array
+		print(return_array)
 		return return_array
 
 	def decode_range(range_) : 
@@ -66,7 +67,4 @@ def get_variables(string) :
 
 	return return_array
 
-
-
-print(decode_range('(:7)'))
 print(get_variables(text_file))
