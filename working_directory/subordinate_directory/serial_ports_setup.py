@@ -4,7 +4,7 @@ import serial # serial.Serial
 import platform # platform.system
 import inspect # inspect.stack
 from subordinate_directory import exception_handling
-from subordinate_directory import dummy_dynamixel
+from subordinate_directory.dummy_dynamixel import dummy_dynamixel
 
 def find_dynamixel_and_arduino() :
     global dynamixel_port,arduino_port
@@ -91,6 +91,6 @@ def serial_ports():
             pass
     return result
 
-[dynamixel_port,arduino_port] = get_connected_serial_ports()
+# [dynamixel_port,arduino_port] = get_connected_serial_ports()
 
-__all__ = ['find_dynamixel_and_arduino']
+# __all__ = ['find_dynamixel_and_arduino']

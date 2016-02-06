@@ -28,6 +28,7 @@ max_acceptable_error_in_position = 0
 def init() : 
     global dynamixel
     dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
+    dynamixel.print_memory()
     dynamixel_initializations()
 
 def send_and_check(motor_id,instruction,*args) :
