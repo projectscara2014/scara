@@ -18,3 +18,13 @@
 22/Jan/2016 16:02:48 --> dynamixel--> cant connect
 22/Jan/2016 16:08:52 --> dynamixel--> cant connect
 22/Jan/2016 16:10:53 --> dynamixel--> cant connect
+22/Jan/2016 16:42:07 --> dynamixel--> cant connect
+31/Jan/2016 20:10:33 --> dynamixel--> cant connect
+31/Jan/2016 20:10:45 --> dynamixel--> cant connect
+31/Jan/2016 20:10:50 --> dynamixel--> cant connect
+5/Feb/2016 12:47:03 --> dynamixel--> cant connect
+5/Feb/2016 12:49:00 --> dynamixel--> cant connect
+5/Feb/2016 12:50:24 --> dynamixel--> cant connect
+5/Feb/2016 12:50:48 --> dynamixel--> cant connect
+5/Feb/2016 21:02:29 --> dynamixel--> cant connect
+5/Feb/2016 21:02:41 --> dynamixel--> cant connect

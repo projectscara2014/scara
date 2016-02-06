@@ -223,6 +223,8 @@ def dynamixel_initializations():
     send_and_check(2,3,26,8,8,24)   #PID for motor 2
     send_and_check(1,3,32,0,1)      #SPEED for motor 1
     send_and_check(2,3,32,0,1)      #SPEED for motor 2
+    send_and_check(1,3,25,1)        #LED for motor 1
+    send_and_check(2,3,25,1)        #LED for motor 2
 #-------------------------------------------------------------------
 
 
