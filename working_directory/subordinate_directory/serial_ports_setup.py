@@ -16,8 +16,9 @@ def find_dynamixel_and_arduino() :
         try :
             ser = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
         except : 
-            # return dummy_dynamixel.Dynamixel()
-            exception_handling.handle_exception('dynamixel','cant connect')
+            dynamixel = dummy_dynamixel.Dynamixel()
+            return dynamixel
+            # exception_handling.handle_exception('dynamixel','cant connect')
         else :
             print(ser)
             ser.baudrate = 57600                 #set baudrate equal to 57600
