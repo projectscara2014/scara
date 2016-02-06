@@ -293,6 +293,7 @@ def save_variables(file_name,character_list,variable_list):
         t.write(str(variable_list[-1]))
 
 def check_range(character,inputted_var):
+    ########## add "file_name"
     if(character == 'a'):
         if(inputted_var<100):
             return True

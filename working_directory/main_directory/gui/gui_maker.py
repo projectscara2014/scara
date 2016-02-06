@@ -280,6 +280,7 @@ class message_box :
 
 empty_label = label_maker("  ", bg_color = global_window_background_colour, relief = "flat")
 #---------------------------------------------
+
 def get_variables(file_name):
     with open(file_name,'r') as t:
         k = t.read().split("\n")
