@@ -7,7 +7,7 @@ from subordinate_directory import exception_handling
 from subordinate_directory.dummy_dynamixel import dummy_dynamixel
 
 def find_dynamixel_and_arduino() :
-    global dynamixel_port,arduino_port
+    global dynamixel_port,arduino1_port,arduino2_port
 
     #check if this function called by dynamixel.py or arduino.py
     #return the arduino or arduino or dynamixel port respectively
@@ -24,8 +24,15 @@ def find_dynamixel_and_arduino() :
             ser.baudrate = 57600                 #set baudrate equal to 57600
             return ser
 
-    elif 'arduino' in stack[1][1] :
-        return[arduino]
+    elif 'arduino1' in stack[1][1] :
+        try:
+            ser = serial.Serial(port = arduino1_port)
+        except:
+            print("ERROR! Error in connecting to arduino1")
+        else:
+            return ser
+    elif 'arduino2' in stack[1][1] :
+        return[arduino2_port]
     else : 
         print('serial_ports_setup.py called by some module\
             other that dynamixel.py or arduino.py')
@@ -52,13 +59,14 @@ def get_connected_serial_ports() :
             print("Connect Exactly two serial devices")
             # CHANGE -- Let GUI print this in a msg box
         dynamixel_port = 'com4'
-        arduino_port = 'com3'      # CHANGE
+        arduino1_port = 'com3'      # CHANGE
+        arduino2_port = 'com5'
     #for others
     else :
         print('unsupported operating system')
         # CHANGE -- Let GUI print this in a msg box
         
-    return [dynamixel_port,arduino_port]
+    return [dynamixel_port,arduino1_port,arduino2_port]
 
 def serial_ports():
     """Lists serial ports
@@ -91,6 +99,14 @@ def serial_ports():
             pass
     return result
 
+<<<<<<< HEAD
 # [dynamixel_port,arduino_port] = get_connected_serial_ports()
 
 # __all__ = ['find_dynamixel_and_arduino']
+=======
+[dynamixel_port,arduino1_port,arduino2_port] = get_connected_serial_ports()
+
+__all__ = ['find_dynamixel_and_arduino']
+
+# CHANGE --- add functionality to find and setup ports on its own
+>>>>>>> refs/remotes/origin/develop
