@@ -30,6 +30,7 @@ int input_12v;
 int input_ldr1;
 int input_ldr2;
 char serial_command;
+char data_packet;
 int debug_pin = 13;
 
 void setup() {
@@ -81,7 +82,10 @@ void service_serial_command(char serial_command){
 	}
     if(serial_command == 'D'){ //* Dynamixel supply on
     	initialize_dynamixel();
-    } 
+    }
+    if(serial_command == 'R'){ //* Repeat last sent data packet
+    	repeat_last_sent_data_packet();
+    }
 	//#CHANGE
 }
 
@@ -137,24 +141,30 @@ void initialize_to_default(){
 	// This function gives default initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
-
+	data_packet = 'i'; //* initialization acknowledgement
+	Serial.write(data_packet);
 	digitalWrite(debug_pin,LOW);
-	Serial.write("arduino_1_ready"); //*
 	//#CHANGE
 }
 
 void initialize_dynamixel(){
 	turn_on_dynamixel();
-	Serial.write("relay_on"); //*
+	data_packet = 'd'; //* Acknowledgement that supply is on
+	Serial.write(data_packet); 
 	while(Serial.available()!=1){}
 	serial_command = Serial.read();
-	if(serial_command == 'd'){ //* Dynamixel acknowledgement
+	if(serial_command == 'Y'){ //* Dynamixel acknowledgement
 		flag_check_ldr = 1;
 		flag_check_12v_brownout = 1;
 	}
 	else{
-		Serial.write('Wrong_command'); //*
+		data_packet = 'x'; //* Wrong Command 
+		Serial.write(data_packet);
 	}
+}
+
+void repeat_last_sent_data_packet(){
+	Serial.write(data_packet);
 }
 
 // Functions for ease of access
@@ -174,3 +184,11 @@ void turn_off_dynamixel(){
 void turn_on_dynamixel(){
 	// This function will turn on the dynamixel
 	digitalWrite(pin_relay_12v,HIGH);}
+
+
+// Debug Funciton
+void blink_debug_led(){
+	digitalWrite(debug_pin,LOW);
+	delay(500);
+	digitalWrite(debug_pin,HIGH);
+}
