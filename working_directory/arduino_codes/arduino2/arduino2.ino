@@ -1,22 +1,17 @@
 void setup() {
-<<<<<<< HEAD
   // put your setup code here, to run once:
-=======
   
   Serial.begin(9600);
   pinMode(A3,INPUT);
   pinMode(A4,INPUT);
   pinMode(3,OUTPUT);
   pinMode(2,OUTPUT);
->>>>>>> develop
 
 }
 
 void loop() {
-<<<<<<< HEAD
   // put your main code here, to run repeatedly:
 
-=======
 
   int a3 = analogRead(A3);
   int a4 = analogRead(A4);
@@ -36,5 +31,4 @@ void loop() {
   else {
     digitalWrite(3,HIGH);
   }
->>>>>>> develop
 }
