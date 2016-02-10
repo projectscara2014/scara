@@ -14,21 +14,35 @@ def find_dynamixel_and_arduino() :
     stack = inspect.stack()
     if 'dynamixel' in stack[1][1] :
         try :
-            ser = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
+            dynamixel = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
         except :
             dynamixel = dummy_dynamixel.Dynamixel()
             return dynamixel
-            return dummy_dynamixel.Dynamixel()
             # exception_handling.handle_exception('dynamixel','cant connect')
         else :
-            print(ser)
-            ser.baudrate = 57600                 #set baudrate equal to 57600
-            return ser
+            print(dynamixel)
+            dynamixel.baudrate = 57600                 #set baudrate equal to 57600
+            return dynamixel
 
     elif 'arduino1' in stack[1][1] :
-        return[arduino1]
+        try :
+            arduino1 = serial.Serial(port = arduino1_port)
+        except :
+            raise OSError('ARDUINO1 NOT CONNECTED')
+        else :
+            print(arduino1)
+            arduino1.baudrate = 9600
+            return arduino1
+
     elif 'arduino2' in stack[1][1] :
-        return[arduino2]
+        try : 
+            arduino2 = serial.Serial(port = arduino2_port)
+        except : 
+            raise OSError('ARDUINO2 NOT CONNECTED')
+        else :
+            print(arduino2)
+            arduino2.baudrate = 9600
+            return arduino2
     else : 
         print('serial_ports_setup.py called by some module\
             other that dynamixel.py or arduino.py')
