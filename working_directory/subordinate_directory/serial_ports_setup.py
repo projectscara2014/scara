@@ -15,13 +15,10 @@ def find_dynamixel_and_arduino() :
     if 'dynamixel' in stack[1][1] :
         try :
             ser = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
-        except : 
-<<<<<<< HEAD
+        except :
             dynamixel = dummy_dynamixel.Dynamixel()
             return dynamixel
-=======
             return dummy_dynamixel.Dynamixel()
->>>>>>> feature/block_position_setup
             # exception_handling.handle_exception('dynamixel','cant connect')
         else :
             print(ser)
@@ -100,14 +97,11 @@ def serial_ports():
             pass
     return result
 
-<<<<<<< HEAD
 # [dynamixel_port,arduino_port] = get_connected_serial_ports()
 
 # __all__ = ['find_dynamixel_and_arduino']
-=======
 [dynamixel_port,arduino1_port,arduino2_port] = get_connected_serial_ports()
 
 __all__ = ['find_dynamixel_and_arduino']
 
 # CHANGE --- add functionality to find and setup ports on its own
->>>>>>> develop
