@@ -23,6 +23,10 @@ char pin_ldr_2 = A2;
 int input_5v;
 int input_12v;
 char serial_command;
+<<<<<<< HEAD
+=======
+int debug_pin = 13;
+>>>>>>> develop
 
 void setup() {
 	Serial.begin(57600);
@@ -32,7 +36,15 @@ void setup() {
 	pinMode(pin_12v_brownout,INPUT);
 	pinMode(pin_ldr_1,INPUT);
 	pinMode(pin_ldr_2,INPUT);
+<<<<<<< HEAD
 
+=======
+        pinMode(debug_pin,OUTPUT);
+        
+        // Other Initializations
+        digitalWrite(13,LOW);
+        
+>>>>>>> develop
 	// Safety Initializations
 	turn_off_dynamixel();
 
@@ -58,7 +70,14 @@ void loop() {
 
 void service_serial_command(char serial_command){
 	// This function is used for calling various functions as per the serial command. 
+<<<<<<< HEAD
 	
+=======
+	if(serial_command == 'i'){
+		initialize_to_default();
+	}
+            
+>>>>>>> develop
 	//#CHANGE
 }
 
@@ -107,3 +126,13 @@ void turn_off_backup_battery(){
 
 	//#CHANGE
 }
+<<<<<<< HEAD
+=======
+
+void initialize_to_default(){
+	// This function gives default initializations
+	Serial.write("arduino_1_ready");
+
+	//#CHANGE
+}
+>>>>>>> develop
