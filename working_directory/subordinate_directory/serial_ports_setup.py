@@ -16,8 +16,8 @@ def find_dynamixel_and_arduino() :
         try :
             ser = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
         except : 
-            # return dummy_dynamixel.Dynamixel()
-            exception_handling.handle_exception('dynamixel','cant connect')
+            return dummy_dynamixel.Dynamixel()
+            # exception_handling.handle_exception('dynamixel','cant connect')
         else :
             print(ser)
             ser.baudrate = 57600                 #set baudrate equal to 57600
@@ -38,7 +38,8 @@ def get_connected_serial_ports() :
     # print('system --> ',system)
     print('available serial ports : ',serial_ports_list)
     dynamixel_port = ''
-    arduino_port = ''
+    arduino1_port = ''
+    arduino2_port = ''
 
     #for unix
     if system.startswith('Darwin') :
@@ -46,7 +47,8 @@ def get_connected_serial_ports() :
             if port.startswith('/dev/tty.usbserial') :
                 dynamixel_port = port
             elif port.startswith('/dev/tty.usbmodem') :
-                arduino_port = port
+                arduino1_port = port
+                arduino2_port = port
     #for windows
     elif system.startswith('Win') :
         if len(serial_ports_list) != 2 :
