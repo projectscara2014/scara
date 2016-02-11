@@ -25,9 +25,14 @@ def find_dynamixel_and_arduino() :
             return ser
 
     elif 'arduino1' in stack[1][1] :
-        return[arduino1]
+        try:
+            ser = serial.Serial(port = arduino1_port)
+        except:
+            print("ERROR! Error in connecting to arduino1")
+        else:
+            return ser
     elif 'arduino2' in stack[1][1] :
-        return[arduino2]
+        return[arduino2_port]
     else : 
         print('serial_ports_setup.py called by some module\
             other that dynamixel.py or arduino.py')
@@ -104,4 +109,8 @@ def serial_ports():
 __all__ = ['find_dynamixel_and_arduino']
 
 # CHANGE --- add functionality to find and setup ports on its own
+<<<<<<< HEAD
 >>>>>>> develop
+=======
+>>>>>>> refs/remotes/origin/develop
+>>>>>>> origin/master
