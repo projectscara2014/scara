@@ -21,6 +21,7 @@ def initialize_to_default():
 		print("arduino2py ---> 'i'")
 	else:
 		recieved_packet = send_and_recieve('R') #Repeat packet
+		print("py2arduino ----> 'R'")
 		if(recieved_packet == 'i'):
 			print("arduino2py ---> 'i'")
 		else:	
@@ -31,6 +32,7 @@ def send_and_recieve(data_packet):
 	global arduino1
 	clear_buffer()
 	arduino1.write(data_packet)
+	time.sleep(0.1)
 	return get_recieving_packet()
 
 def clear_buffer():
@@ -44,7 +46,7 @@ def get_recieving_packet():
 	recieved_packet = 'None'
 	for i in range(500):
 		if(arduino1.inWaiting()>0):
-			recieved_packet = arduino1.read(arduino1.inWaiting())
+			recieved_packet = arduino1.read(1)
 			if(recieved_packet == 'x'):
 				print("PROTOCOL ERROR")		
 				sys.exit(0)

@@ -13,7 +13,7 @@ int flag_dynamixel2_disconnected = 0;
 
 //THRESHOLDS
 int threshold_12v = 700; //#CHANGE
-int threshold_5v = 512; //#CHANGE
+int threshold_5v = 800; //#CHANGE
 int threshold_ldr = 512;
 
 //Pin Definitions
@@ -105,33 +105,17 @@ void check_for_12v_brownout(){
 void check_for_5v_brownout(){
 	// This function is used to check for stable 5 Volts
 	input_5v = analogRead(pin_5v_brownout);
-	// if(flag_5v_brownout_detected == 0){
 	// 	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
 
-	Serial.println(input_5v);
-	delay(500);
-
-	// if(input_5v<threshold_5v){
-	// 	turn_on_backup_battery();
-	// 	flag_5v_brownout_detected = 1;
-	// }
-	// else{
-	// 	// turn_off_backup_battery();
-	// 	flag_5v_brownout_detected = 0;
-	// }
-
-
-	// 	if(input_5v<threshold_5v){
-	// 		turn_on_backup_battery();
-	// 		flag_5v_brownout_detected = 1;
-	// 	}
-	// }
-	// else{
-	// 	if(input_5v>threshold_5v){
-	// 		turn_off_backup_battery();
-	// 		flag_5v_brownout_detected = 0;
-	// 	}
-	// }	
+	if(input_5v<threshold_5v){
+		turn_on_backup_battery();
+		flag_5v_brownout_detected = 1;
+	}
+	else{
+		turn_off_backup_battery();
+		flag_5v_brownout_detected = 0;
+	}
+	
 }
 
 void check_both_ldr(){
