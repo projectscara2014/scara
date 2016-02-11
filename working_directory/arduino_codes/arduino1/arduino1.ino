@@ -2,8 +2,6 @@
 
 //FLAGS -- Mainloop
 int flag_check_ldr =  0;
-int flag_check_5v_brownout = 1;
-int flag_check_12v_brownout = 1;
 
 // FLAGS -- Status
 int flag_5v_brownout_detected = 0;
@@ -48,6 +46,7 @@ void setup() {
 	// Safety Initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
+	flag_check_12v_brownout = 0;
 
     // Other Initializations
     digitalWrite(13,HIGH);
@@ -61,14 +60,10 @@ void loop() {
 	}
 
 	// checks for 12 Volt brown out
-	if(flag_check_12v_brownout == 1){
-		check_for_12v_brownout();
-	}
+	check_for_12v_brownout();
 
 	// checks for 5 Volt brown out
-	if(flag_check_5v_brownout == 1){
-		check_for_5v_brownout();
-	}
+	check_for_5v_brownout();
 
 	// checks for LDR status
 	if(flag_check_ldr == 1){
@@ -94,11 +89,14 @@ void service_serial_command(char serial_command){
 void check_for_12v_brownout(){
 	// This function is used to check for stable 12 Volts
 	input_12v = analogRead(pin_12v_brownout);
-	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
+	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation) 900 500
 	if(input_12v<threshold_12v){
 		turn_off_dynamixel();
 		flag_12v_brownout_detected = 1;
-		flag_check_12v_brownout = 0;
+	}
+	else{
+		turn_on_dynamixel(); //COMMENT
+		flag_12v_brownout_detected = 0;
 	}
 }
 
@@ -115,7 +113,6 @@ void check_for_5v_brownout(){
 		turn_off_backup_battery();
 		flag_5v_brownout_detected = 0;
 	}
-	
 }
 
 void check_both_ldr(){
@@ -141,6 +138,7 @@ void initialize_to_default(){
 	// This function gives default initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
+	flag_check_12v_brownout = 0;
 	data_packet = 'i'; //* initialization acknowledgement
 	Serial.write(data_packet);
 	digitalWrite(debug_pin,LOW);
@@ -148,6 +146,9 @@ void initialize_to_default(){
 }
 
 void initialize_dynamixel(){
+	flag_check_12v_brownout = 1;
+	check_for_12v_brownout();
+	// check if flag is on or off and decide to switch dynamixel
 	turn_on_dynamixel();
 	data_packet = 'd'; //* Acknowledgement that supply is on
 	Serial.write(data_packet); 

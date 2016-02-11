@@ -54,9 +54,26 @@ def get_recieving_packet():
 				break
 	return recieved_packet
 
+def dynamixel_initialization():
+	# send command to switch on relay
+		# check for brown out at 12v
+		# switch on relay if all is good
+		# if all not good, send something
+		# start checking for brownout at 12v
+		# 'expected_data_packet' = 'd'
+		# send acknowledgement packet
+	# wait for acknowledgement
+	# wait for some time till dynamixel is initialized
+	# send LED--ON command to dynamixel.
+	# if error, send command to switch off relay
+	# if no error, send 'd'
+
+
 print("\n------>\n")
 init()
 print("\n------>\n")
+time.sleep(5)
+
 sys.exit(0)
 
 
