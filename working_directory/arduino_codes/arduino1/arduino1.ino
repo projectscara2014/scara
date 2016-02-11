@@ -3,7 +3,7 @@
 //FLAGS -- Mainloop
 int flag_check_ldr =  0;
 int flag_check_5v_brownout = 1;
-int flag_check_12v_brownout = 0;
+int flag_check_12v_brownout = 1;
 
 // FLAGS -- Status
 int flag_5v_brownout_detected = 0;
@@ -13,14 +13,14 @@ int flag_dynamixel2_disconnected = 0;
 
 //THRESHOLDS
 int threshold_12v = 700; //#CHANGE
-int threshold_5v = 700; //#CHANGE
+int threshold_5v = 512; //#CHANGE
 int threshold_ldr = 512;
 
 //Pin Definitions
-char pin_5v_brownout = A3;
-char pin_12v_brownout = A4;
-char pin_ldr_1 = A1;
-char pin_ldr_2 = A2;
+char pin_5v_brownout = A2;
+char pin_12v_brownout = A3;
+char pin_ldr_1 = A5;
+char pin_ldr_2 = A4;
 int pin_relay_5v = 6;
 int pin_relay_12v = 7;
 
@@ -42,6 +42,8 @@ void setup() {
 	pinMode(pin_ldr_1,INPUT);
 	pinMode(pin_ldr_2,INPUT);
     pinMode(debug_pin,OUTPUT);
+    pinMode(pin_relay_5v,OUTPUT);
+    pinMode(pin_relay_12v,OUTPUT);
         
 	// Safety Initializations
 	turn_off_dynamixel();
@@ -65,7 +67,7 @@ void loop() {
 
 	// checks for 5 Volt brown out
 	if(flag_check_5v_brownout == 1){
-		check_for_12v_brownout();
+		check_for_5v_brownout();
 	}
 
 	// checks for LDR status
@@ -103,19 +105,33 @@ void check_for_12v_brownout(){
 void check_for_5v_brownout(){
 	// This function is used to check for stable 5 Volts
 	input_5v = analogRead(pin_5v_brownout);
-	if(flag_5v_brownout_detected == 1){
-		// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
-		if(input_5v<threshold_5v){
-			turn_on_backup_battery();
-			flag_5v_brownout_detected = 1;
-		}
-	}
-	else{
-		if(input_5v>threshold_5v){
-			turn_off_backup_battery();
-			flag_5v_brownout_detected = 0;
-		}
-	}	
+	// if(flag_5v_brownout_detected == 0){
+	// 	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
+
+	Serial.println(input_5v);
+	delay(500);
+
+	// if(input_5v<threshold_5v){
+	// 	turn_on_backup_battery();
+	// 	flag_5v_brownout_detected = 1;
+	// }
+	// else{
+	// 	// turn_off_backup_battery();
+	// 	flag_5v_brownout_detected = 0;
+	// }
+
+
+	// 	if(input_5v<threshold_5v){
+	// 		turn_on_backup_battery();
+	// 		flag_5v_brownout_detected = 1;
+	// 	}
+	// }
+	// else{
+	// 	if(input_5v>threshold_5v){
+	// 		turn_off_backup_battery();
+	// 		flag_5v_brownout_detected = 0;
+	// 	}
+	// }	
 }
 
 void check_both_ldr(){
