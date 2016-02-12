@@ -13,17 +13,34 @@ def init():
 	
 def initialize_to_default():
 	time.sleep(2)
+	send_and_check('I','i')
 
-	recieved_packet = send_and_recieve('I')
-	print("py2arduino ---> 'I' ")
-	
-	if(recieved_packet == 'i'):
-		print("arduino2py ---> 'i'")
+def dynamixel_initialization():
+	send_and_check('D','d')
+	# send command to switch on relay
+		# check for brown out at 12v
+		# switch on relay if all is good
+		# if all not good, send -- 'n'
+		# start checking for brownout at 12v
+		# 'expe cted_data_packet' = 'L'
+		# send acknowledgement packet -- 'd'
+	# wait for acknowledgement -- 'd'
+	# wait for some time till dynamixel is initialized
+	# send LED--ON command to dynamixel.
+	# if error, send command to switch off relay
+	# if no error, send 'L' to switch on LDR checking
+
+def send_and_check(outgoing_packet,expected_packet,delay_val = 0):
+	recieved_packet = send_and_recieve(outgoing_packet)
+	print("py2arduino ---> "+outgoing_packet)
+	time.sleep(delay_val)
+	if(recieved_packet == expected_packet):
+		print("arduino2py ---> "+expected_packet)
 	else:
 		recieved_packet = send_and_recieve('R') #Repeat packet
 		print("py2arduino ----> 'R'")
-		if(recieved_packet == 'i'):
-			print("arduino2py ---> 'i'")
+		if(recieved_packet == expected_packet):
+			print("arduino2py ---> "+expected_packet)
 		else:	
 			print("communication not successful")
 			# CHANGE
@@ -44,7 +61,7 @@ def clear_buffer():
 
 def get_recieving_packet():
 	recieved_packet = 'None'
-	for i in range(500):
+	for i in range(50):
 		if(arduino1.inWaiting()>0):
 			recieved_packet = arduino1.read(1)
 			if(recieved_packet == 'x'):
@@ -54,26 +71,11 @@ def get_recieving_packet():
 				break
 	return recieved_packet
 
-def dynamixel_initialization():
-	# send command to switch on relay
-		# check for brown out at 12v
-		# switch on relay if all is good
-		# if all not good, send something
-		# start checking for brownout at 12v
-		# 'expected_data_packet' = 'd'
-		# send acknowledgement packet
-	# wait for acknowledgement
-	# wait for some time till dynamixel is initialized
-	# send LED--ON command to dynamixel.
-	# if error, send command to switch off relay
-	# if no error, send 'd'
-
-
 print("\n------>\n")
 init()
+# time.sleep(5)
+dynamixel_initialization()
 print("\n------>\n")
-time.sleep(5)
-
 sys.exit(0)
 
 

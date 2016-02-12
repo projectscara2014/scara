@@ -27,8 +27,9 @@ int input_5v;
 int input_12v;
 int input_ldr1;
 int input_ldr2;
-char serial_command;
-char data_packet;
+char serial_data_received;
+char last_sent_data_packet;
+// char next_expected_data_packet = ' ';
 int debug_pin = 13;
 
 void setup() {
@@ -46,7 +47,6 @@ void setup() {
 	// Safety Initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
-	flag_check_12v_brownout = 0;
 
     // Other Initializations
     digitalWrite(13,HIGH);
@@ -55,8 +55,8 @@ void setup() {
 void loop() {
 	// checks for serial communication
 	if(Serial.available()>0){
-		serial_command = Serial.read();
-		service_serial_command(serial_command);
+		serial_data_received = Serial.read();
+		service_serial_data_received(serial_data_received);
 	}
 
 	// checks for 12 Volt brown out
@@ -72,16 +72,19 @@ void loop() {
 }
 
 // Functions to be run continuously
-void service_serial_command(char serial_command){
+void service_serial_data_received(char serial_data_received){
 	// This function is used for calling various functions as per the serial command. 
-	if(serial_command == 'I'){ //* Initialize arduino
+	if(serial_data_received == 'I'){ //* Initialize arduino
 		initialize_to_default();
 	}
-    if(serial_command == 'D'){ //* Dynamixel supply on
+    if(serial_data_received == 'D'){ //* Dynamixel supply on
     	initialize_dynamixel();
     }
-    if(serial_command == 'R'){ //* Repeat last sent data packet
+    if(serial_data_received == 'R'){ //* Repeat last sent data packet
     	repeat_last_sent_data_packet();
+    }
+    if(serial_data_received == 'L'){ //* Start checking LDR values
+    	start_checking_ldr();
     }
 	//#CHANGE
 }
@@ -95,7 +98,7 @@ void check_for_12v_brownout(){
 		flag_12v_brownout_detected = 1;
 	}
 	else{
-		turn_on_dynamixel(); //COMMENT
+		turn_on_dynamixel(); //COMMENT LETER
 		flag_12v_brownout_detected = 0;
 	}
 }
@@ -138,34 +141,35 @@ void initialize_to_default(){
 	// This function gives default initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
-	flag_check_12v_brownout = 0;
-	data_packet = 'i'; //* initialization acknowledgement
-	Serial.write(data_packet);
+	send('i'); //* initialization acknowledgement
 	digitalWrite(debug_pin,LOW);
 	//#CHANGE
 }
 
 void initialize_dynamixel(){
-	flag_check_12v_brownout = 1;
 	check_for_12v_brownout();
-	// check if flag is on or off and decide to switch dynamixel
-	turn_on_dynamixel();
-	data_packet = 'd'; //* Acknowledgement that supply is on
-	Serial.write(data_packet); 
-	while(Serial.available()!=1){}
-	serial_command = Serial.read();
-	if(serial_command == 'Y'){ //* Dynamixel acknowledgement
-		flag_check_ldr = 1;
-		flag_check_12v_brownout = 1;
+	if(flag_12v_brownout_detected == 1){
+		send('n'); //* Not OK
 	}
 	else{
-		data_packet = 'x'; //* Wrong Command 
-		Serial.write(data_packet);
+		turn_on_dynamixel();
+		send('d'); //* Acknowledgement that supply is on
 	}
 }
 
+void start_checking_ldr(){
+	flag_check_ldr = 1;
+	send('l'); //* Acknowledgement that LDR checking has started
+}
+
+void send(char character){
+	last_sent_data_packet = character;
+	Serial.write(last_sent_data_packet);
+}
+
+
 void repeat_last_sent_data_packet(){
-	Serial.write(data_packet);
+	Serial.write(last_sent_data_packet);
 }
 
 // Functions for ease of access
