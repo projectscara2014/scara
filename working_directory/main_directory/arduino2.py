@@ -3,7 +3,8 @@ import time
 
 #--------------------- ARDUINO SETUP --------------------------
 # arduino = serial.Serial('/dev/cu.usbmodem1411')
-arduino = serial.Serial('/dev/tty.usbserial-A8YZSL0U')
+# arduino = serial.Serial('/dev/tty.usbserial-A8YZSL0U')
+arduino = serial.Serial('com7')
 # from subordinate_directory import serial_ports_setup
 # arduino = serial_ports_setup.find_dynamixel_and_arduino()
 def decorate_serial_object(serial_object) : 
