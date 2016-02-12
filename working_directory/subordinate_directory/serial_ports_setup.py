@@ -20,10 +20,12 @@ def find_dynamixel_and_arduino() :
             return dynamixel
             # exception_handling.handle_exception('dynamixel','cant connect')
         else :
-            print(dynamixel)
-            dynamixel.baudrate = 57600                 #set baudrate equal to 57600
+            # print(dynamixel)
+            # dynamixel.baudrate = 57600                 #set baudrate equal to 57600
+            # return dynamixel
+            dynamixel = dummy_dynamixel.Dynamixel()
             return dynamixel
-
+            
     elif 'arduino1' in stack[1][1] :
         try :
             arduino1 = serial.Serial(port = arduino1_port)

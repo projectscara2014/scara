@@ -1,6 +1,6 @@
 #------------------angles_to_coordinates----------------------
-LENGTH_OF_FIRST_ARM = 25
-LENGTH_OF_SECOND_ARM = 27
+LENGTH_OF_FIRST_ARM = 25.75
+LENGTH_OF_SECOND_ARM = 25.3
 
 #------------------coordinates_to_angles---------------
 
@@ -16,5 +16,8 @@ MAXIMUM_NUMBER_OF_BLOCKS=12
 MAXIMUM_ALPHA = 135
 
 #-----------display_area_blocks_position-------------
-alpha = 72.7824
-beta = -134.964
+#alpha = 72.7824
+alpha = 30.761
+#beta = -134.964
+beta = -61.523
+offset=0

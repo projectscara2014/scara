@@ -2,7 +2,8 @@ import serial
 import time
 
 #--------------------- ARDUINO SETUP --------------------------
-arduino = serial.Serial('/dev/cu.usbmodem1421')
+# arduino = serial.Serial('/dev/cu.usbmodem1411')
+arduino = serial.Serial('/dev/tty.usbserial-A8YZSL0U')
 # from subordinate_directory import serial_ports_setup
 # arduino = serial_ports_setup.find_dynamixel_and_arduino()
 def decorate_serial_object(serial_object) : 
@@ -33,6 +34,7 @@ def decorate_serial_object(serial_object) :
 
 arduino = decorate_serial_object(arduino)
 arduino.set_baudrate(57600)
+time.sleep(5)
 
 GO_TO_SERVO_POS = 0
 
@@ -49,7 +51,7 @@ PICK_COMMUNICATION_TIMEOUT_LIMIT = 25
 PLACE_COMMUNICATION_TIMEOUT_LIMIT = 25
 
 def send_and_check(instruction_packet,timeout=5) :
-	print(timeout) 
+	# print(timeout) 
 	arduino.write(instruction_packet) 
 	start_time = time.time()
 	elapsed_time = 0
@@ -58,11 +60,12 @@ def send_and_check(instruction_packet,timeout=5) :
 		elapsed_time = time.time() - start_time
 		if arduino.inWaiting() > 0 :
 			returned_data = arduino.read(arduino.inWaiting())
+			# print(returned_data)
 			if OKAY_CHARACTER in returned_data :
 				FLAG += 1
-			elif DONE_CHARACTER in returned_data :
+			if DONE_CHARACTER in returned_data :
 				FLAG += 1 
-			elif NOT_OKAY_CHARACTER in returned_data : 
+			if NOT_OKAY_CHARACTER in returned_data : 
 				arduino.write(instruction_packet)
 	if FLAG != 2 : 
 		raise OSError('arduino not responding')
@@ -85,3 +88,5 @@ def move(pos) :
 	global GO_TO_SERVO_POS
 	GO_TO_SERVO_POS = pos
 	rotate()
+
+

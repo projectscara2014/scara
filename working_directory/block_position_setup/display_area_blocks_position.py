@@ -41,9 +41,28 @@ def run(n) :
     return_array = []
     for (x,y) in zip(x_array,y_array) :
         return_array.append(this_to_that.coordinates_to_list(x,y))
-
+    
     # #print(return_array)
-    return return_array
+
+    for block in return_array : 
+        block[0] += var.offset
+        block[2] += var.offset
+
+    def angle_to_scars(angle) :
+        return int(angle*4096.0/360)
+
+    r = []
+    for block in return_array :
+        m = []
+        for i in range(4) :
+            m.append(angle_to_scars(block[i]))
+        for i in range(4,7) :
+            m.append(block[i])
+        r.append(m)
+
+    return r
+
+    #return return_array
 
 
 print(run(1))

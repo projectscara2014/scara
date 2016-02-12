@@ -5,6 +5,7 @@ a = var.LENGTH_OF_FIRST_ARM
 b = var.LENGTH_OF_SECOND_ARM
 
 def angles_to_coordinates(alpha,beta):
+        
 	theta = beta_to_theta(beta)
 	R = a*cos(radians(theta)) + b*cos(radians(mod(beta)-theta))
 	entire_list = calculate_entire_block_position_list(alpha,beta) 
@@ -13,6 +14,7 @@ def angles_to_coordinates(alpha,beta):
 	y = R*cos(radians(eta))
 	x = R*sin(radians(eta))
 	return [x,y]
+
 
 def coordinates_to_angles(x,y) :
     global a
@@ -36,12 +38,18 @@ def coordinates_to_list(x,y):
 	return return_block_array
 
 def calculate_entire_block_position_list(alpha,beta,s=False) :
+
 	global a
 	global b
 	default_s_value = 45
 	if not s : 
 		s = default_s_value
 	
+	def scars_to_angles(scars) :
+		return scars*360.0/4096
+	
+	alpha = scars_to_angles(alpha)
+	beta = scars_to_angles(beta)
 
 	def calculate_other_values(alpha,beta,s) :
 		alpha_1 = alpha_2 = beta_1 = beta_2 = s1 = s2 = z = 0
@@ -83,8 +91,18 @@ def calculate_entire_block_position_list(alpha,beta,s=False) :
 		#print([alpha_1,beta_1,alpha_2,beta_2,s1,s2,1])
 		return [alpha_1,beta_1,alpha_2,beta_2,s1,s2,1]
 
-	return calculate_other_values(alpha,beta,s)
+	def angles_to_scars(angle) :
+		return angle*4096.0/360
 
+	return_array = calculate_other_values(alpha,beta,s)
+	r = []
+	for i in range(4) :
+		r.append(angles_to_scars(return_array[i]))
+		
+	for i in  range(4,7) :
+		r.append(return_array[i])
+	return r
+	
 def beta_to_theta(beta):
 	z = mod(beta)
 	x = sin(radians(z))
@@ -100,9 +118,7 @@ def beta_to_y(beta):
 	theta = beta_to_theta(beta)
 	y = a*cos(radians(theta))+b*cos(radians(mod(beta)-theta))
 	return y
-# def offset_angles(alpha,beta):
-# 	  for i in range (n):
-	  	
+
 
 # print(calculate_entire_block_position_list(20,-30))
 # print(coordinates_to_angles(0,20))
