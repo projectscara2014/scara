@@ -3,16 +3,16 @@
 //-------------- SERVO CALIBRATED POSITIONS ------------------ 
 float gripper_servo_grab_angle=20;
 float gripper_servo_release_angle=100;
-int vertical_servo_down_angle = 75;
+int vertical_servo_down_angle = 80;
 int vertical_servo_up_angle = 140;
 
 int gripper_servo_initial_position = 90;
 int vertical_servo_initial_position = 120;
 int rotation_servo_initial_position = 90;
 //-------------- SERVO PIN ATTACHMENTS --------------------
-int vertical_servo_pin=9;
-int rotation_servo_pin=10;
-int gripper_servo_pin=3;
+int vertical_servo_pin = 6;
+int rotation_servo_pin = 5;
+int gripper_servo_pin =  3;
 
 //-------------- COMMUNICATION BYTES ------------------------
 int start_byte = 255;  // "\xff"

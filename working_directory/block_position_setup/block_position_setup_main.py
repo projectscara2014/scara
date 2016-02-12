@@ -29,6 +29,7 @@ from main_directory import dynamixel
 from main_directory import arduino2
 from main_directory import lookup
 import this_to_that
+import time
 
 def print_dynamixel_position() : 
 	print("dynamixel 1 position --> {0}".format(dynamixel.GO_TO_DYNA_1_POS))
@@ -41,7 +42,7 @@ def move_dynamixel(dynamixel_1_movement=0,dynamixel_2_movement=0) :
 
 def move_servo(servo_movement) :
 	arduino2.GO_TO_SERVO_POS += servo_movement
-	arduino2.write()
+	arduino2.rotate()
 
 def print_everything() : 
 	text.insert('end','dynamixel_movement_per_command --> {0}\nservo_movement_per_command --> {1}\n'.\
@@ -74,8 +75,6 @@ def on_key_press(event):
 
 	def move(keypress) :
 		global dynamixel_movement_per_command,servo_movement_per_command
-
-		print_everything()
 
 		if(keypress == 113) :
 			# "q" pressed
@@ -111,8 +110,18 @@ def on_key_press(event):
 			# "f" pressed
 			if servo_movement_per_command > 1 :
 				servo_movement_per_command -= 1
-		elif keypress == 112 :
+		elif keypress == 111 :
 			# "p" pressed
+			arduino2.pick()
+		elif keypress == 108 : 
+			# "l" pressed 
+			arduino2.place()
+		
+		print_everything()
+		if keypress == 112 :
+			# "p" pressed
+			arduino2.pick()
+			arduino2.place()
 			root.destroy()
 
 		else :
@@ -137,11 +146,10 @@ def block_position_setup() :
 		root.mainloop()
 		entire_block_position_list = this_to_that.calculate_entire_block_position_list(dynamixel.GO_TO_DYNA_1_POS,\
 			dynamixel.GO_TO_DYNA_2_POS,arduino2.GO_TO_SERVO_POS)
-		with open('saved_positions.txt','w') as f:
-			f.write(str(entire_block_position_list) + '\n')
+		with open('saved_positions.txt','r+') as f:
+			f.write(f.read() + str(entire_block_position_list) + '\n')
+			print('done writing to the text file')
 	setup_one_block()
 
 block_position_setup()
 print('and continuing ...')
-
-
