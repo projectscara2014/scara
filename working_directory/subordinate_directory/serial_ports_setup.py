@@ -20,11 +20,11 @@ def find_dynamixel_and_arduino() :
             return dynamixel
             # exception_handling.handle_exception('dynamixel','cant connect')
         else :
-            # print(dynamixel)
-            # dynamixel.baudrate = 57600                 #set baudrate equal to 57600
-            # return dynamixel
-            dynamixel = dummy_dynamixel.Dynamixel()
+            print(dynamixel)
+            dynamixel.baudrate = 57600                 #set baudrate equal to 57600
             return dynamixel
+            # dynamixel = dummy_dynamixel.Dynamixel()
+            # return dynamixel
             
     elif 'arduino1' in stack[1][1] :
         try :
@@ -74,7 +74,7 @@ def get_connected_serial_ports() :
             # CHANGE -- Let GUI print this in a msg box
         dynamixel_port = 'com4'
         arduino1_port = 'com3'      # CHANGE
-        arduino2_port = 'com5'
+        arduino2_port = 'com7'
     #for others
     else :
         print('unsupported operating system')
