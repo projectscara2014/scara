@@ -86,35 +86,30 @@ def send_and_recieve(data_packet):
 def clear_buffer():
 	if(arduino1.inWaiting()>0):
 		recieved_packet = arduino1.read(arduino1.inWaiting())
-		if(recieved_packet == 'x'):
-			print("PROTOCOL ERROR")		
-			sys.exit(0)
 
 def get_recieving_packet():
 	recieved_packet = 'None'
 	for i in range(50):
 		if(arduino1.inWaiting()>0):
 			recieved_packet = arduino1.read(1)
-			if(recieved_packet == 'x'):
-				print("PROTOCOL ERROR")		
-				sys.exit(0)
-			else:
-				break
+			break
 	return recieved_packet
 
 def service_arduino1_error_packets(recieved_packet):
 	return_val = False
-	print("have to service -- "+recieved_packet)
+	print("Service routine called:- Have to service --> "+recieved_packet)
+	print("ARDUINO1.PY ERROR ===>"),
 	if(recieved_packet == 'B'):
-		print("ERROR ===> 12V supply brownout occured")
+		print("12V supply brownout occured")
 	elif(recieved_packet == 'b'):
-		print("ERROR ===> 5V supply brownout occured")
+		print("5V supply brownout occured")
 	elif(recieved_packet == '1'):
-		print("ERROR ===> Dynamixel 1 and 2 disconnected")
+		print("Dynamixel 1 and 2 disconnected")
 	elif(recieved_packet == '2'):
-		print("ERROR ===> Dynamixel 2 disconnected")
+		print("Dynamixel 2 disconnected")
 	elif(recieved_packet == 'x'):
 		return_val = send_and_recieve(last_sent_command)
+		print("Incorrect protocol")
 
 	return return_val
 	# CHANGE
@@ -122,8 +117,7 @@ def service_arduino1_error_packets(recieved_packet):
 print("\n------>\n")
 init()
 dynamixel_initialization()
-get_status()
-
+send_and_check('g','G')
 print("\n------>\n")
 sys.exit(0)
 
