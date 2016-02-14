@@ -77,14 +77,20 @@ void service_serial_data_received(char serial_data_received){
 	if(serial_data_received == 'I'){ //* Initialize arduino
 		initialize_to_default();
 	}
-    if(serial_data_received == 'D'){ //* Dynamixel supply on
+    else if(serial_data_received == 'D'){ //* Dynamixel supply on
     	initialize_dynamixel();
     }
-    if(serial_data_received == 'R'){ //* Repeat last sent data packet
+    else if(serial_data_received == 'R'){ //* Repeat last sent data packet
     	repeat_last_sent_data_packet();
     }
-    if(serial_data_received == 'L'){ //* Start checking LDR values
+    else if(serial_data_received == 'L'){ //* Start checking LDR values
     	start_checking_ldr();
+    }
+    else if(serial_data_received == 'S'){
+    	send_status();
+    }
+    else{
+    	send('x');
     }
 	//#CHANGE
 }
@@ -98,7 +104,7 @@ void check_for_12v_brownout(){
 		flag_12v_brownout_detected = 1;
 	}
 	else{
-		turn_on_dynamixel(); //COMMENT LETER
+		// turn_on_dynamixel(); //COMMENT LETER
 		flag_12v_brownout_detected = 0;
 	}
 }
@@ -149,7 +155,7 @@ void initialize_to_default(){
 void initialize_dynamixel(){
 	check_for_12v_brownout();
 	if(flag_12v_brownout_detected == 1){
-		send('n'); //* Not OK
+		send('B'); //* 12V brown_out
 	}
 	else{
 		turn_on_dynamixel();
@@ -172,6 +178,23 @@ void repeat_last_sent_data_packet(){
 	Serial.write(last_sent_data_packet);
 }
 
+void send_status(){
+	if(flag_12v_brownout_detected == 1){
+		send('B'); //* 12V brown_out
+	}
+	if(flag_5v_brownout_detected == 1){
+		send('b'); //*  5V brown_out
+	}
+	if(flag_dynamixel1_disconnected == 1){
+		send('1'); //* Dynamixel 1 & 2 Disconnected
+	}
+	if(flag_dynamixel2_disconnected == 1){
+		send('2'); //* Dynamixel 2 Disconnected
+	}
+	if(flag_12v_brownout_detected+flag_5v_brownout_detected+flag_dynamixel1_disconnected+flag_dynamixel2_disconnected == 0){
+		send('o'); //* All OK
+	}
+}
 // Functions for ease of access
 void turn_on_backup_battery(){
 	// This function will turn on backup battery
