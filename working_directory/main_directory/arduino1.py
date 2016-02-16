@@ -22,7 +22,7 @@ def init():
 	arduino1.baudrate = 57600
 	initialize_to_default()
 	if(not send_and_check('h','0')):
-		print("WRONG DYNAMIXEL INITIALIZED")
+		print("WRONG SERVO INITIALIZED")
 		sys.exit(0)
 	
 def initialize_to_default():
@@ -30,13 +30,11 @@ def initialize_to_default():
 	send_and_check('I','i')
 
 def dynamixel_initialization():
+	# CHANGE --- Add exceptions throughout the function
 	if(not send_and_check('D','d')):
 		print("ERROR in dynamixel_initialization @arduino1.py")
 		sys.exit(0)
-	# wait for dynamixel to intialize
-	# tell dynamixel to switch on LED
-	# if not Ok, exception
-	# if OK, do the following
+	time.sleep(1)
 	send_and_check('L','l')
 	# if not ok, exception
 
@@ -119,8 +117,8 @@ def service_arduino1_error_packets(recieved_packet):
 
 print("\n------>\n")
 init()
-get_status()
-send_and_check('D','d')
+dynamixel_initialization()
+# send_and_check('D','d')
 get_status()
 # dynamixel_initialization()
 print("\n------>\n")

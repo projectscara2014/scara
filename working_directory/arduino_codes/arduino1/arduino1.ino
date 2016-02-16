@@ -2,7 +2,7 @@
 
 //FLAGS -- Mainloop
 int flag_check_ldr =  0;
-// int flag_check_12v_brownout = 1;
+int flag_check_12v_brownout = 1;
 
 // FLAGS -- Status
 int flag_5v_brownout_detected = 0;
@@ -13,7 +13,7 @@ int flag_dynamixel2_disconnected = 0;
 //THRESHOLDS
 int threshold_12v = 700; //#CHANGE
 int threshold_5v = 800; //#CHANGE
-int threshold_ldr = 512;
+int threshold_ldr = 700;
 
 //Pin Definitions
 char pin_5v_brownout = A2;
@@ -61,7 +61,9 @@ void loop() {
 	}
 
 	// checks for 12 Volt brown out
-	check_for_12v_brownout();
+	if(flag_check_12v_brownout == 1){
+		check_for_12v_brownout();		
+	}
 
 	// checks for 5 Volt brown out
 	check_for_5v_brownout();
@@ -103,6 +105,8 @@ void check_for_12v_brownout(){
 	// This function is used to check for stable 12 Volts
 	input_12v = analogRead(pin_12v_brownout);
 	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation) 900 500
+	// Serial.println(input_12v);
+
 	if(input_12v<threshold_12v){
 		turn_off_dynamixel();
 		flag_12v_brownout_detected = 1;
@@ -162,12 +166,14 @@ void initialize_dynamixel(){
 		send('B'); //* 12V brown_out
 	}
 	else{
+		flag_check_12v_brownout = 0;
 		turn_on_dynamixel();
-		send('d'); //* Acknowledgement that supply is o
+		send('d'); //* Acknowledgement that supply is on
 	}
 }
 
 void start_checking_ldr(){
+	flag_check_12v_brownout = 1;
 	flag_check_ldr = 1;
 	send('l'); //* Acknowledgement that LDR checking has started
 }
