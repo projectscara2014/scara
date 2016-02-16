@@ -19,9 +19,13 @@ int start_byte = 255;  // "\xff"
 int pick_command = 97; // "a"
 int place_command= 98; // "b"
 int move_command = 99; // "c"
+int handshake_command = 104; //"h"
+
 char OKAY_CHARACTER = 'O';
 char DONE_CHARACTER = 'D';
 char NOT_OKAY_CHARACTER = 'N';
+char ARDUINO_NUMBER = '2';
+
 int DELAY = 3000;
 
 Servo rotation_servo;
@@ -59,6 +63,9 @@ void loop(){
       // _blink_();
       Serial.write(OKAY_CHARACTER);
 
+      if(command == handshake_command) {
+        Serial.write(ARDUINO_NUMBER);
+      }
       if(command == move_command) {
         move(parameter);
         Serial.write(DONE_CHARACTER);
