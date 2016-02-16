@@ -58,9 +58,9 @@ void loop(){
     _start_byte_ = Serial.read();
     command = Serial.read();
     parameter = Serial.read();
-  
+    
     if(_start_byte_ == start_byte) {
-      // _blink_();
+      _blink_();
       Serial.write(OKAY_CHARACTER);
 
       if(command == handshake_command) {
