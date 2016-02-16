@@ -2,6 +2,7 @@
 
 //FLAGS -- Mainloop
 int flag_check_ldr =  0;
+// int flag_check_12v_brownout = 1;
 
 // FLAGS -- Status
 int flag_5v_brownout_detected = 0;
@@ -43,10 +44,10 @@ void setup() {
     pinMode(debug_pin,OUTPUT);
     pinMode(pin_relay_5v,OUTPUT);
     pinMode(pin_relay_12v,OUTPUT);
-        
-	// Safety Initializations
-	turn_off_dynamixel();
-	turn_off_backup_battery();
+
+    // Safety Initializations
+    turn_off_dynamixel();
+    turn_off_backup_battery();
 
     // Other Initializations
     digitalWrite(13,HIGH);
@@ -86,8 +87,11 @@ void service_serial_data_received(char serial_data_received){
     else if(serial_data_received == 'L'){ //* Start checking LDR values
     	start_checking_ldr();
     }
-    else if(serial_data_received == 'S'){
+    else if(serial_data_received == 'S'){ //* Ask for status
     	send_status();
+    }
+    else if(serial_data_received == 'h'){ //* Handshaking initialized
+    	send_handshaking_value();
     }
     else{
     	send('x');
@@ -159,7 +163,7 @@ void initialize_dynamixel(){
 	}
 	else{
 		turn_on_dynamixel();
-		send('d'); //* Acknowledgement that supply is on
+		send('d'); //* Acknowledgement that supply is o
 	}
 }
 
@@ -195,6 +199,10 @@ void send_status(){
 		send('o'); //* All OK
 	}
 }
+
+void send_handshaking_value(){
+	send('0'); //* Indicates Arduino number == 1
+}
 // Functions for ease of access
 void turn_on_backup_battery(){
 	// This function will turn on backup battery
@@ -215,8 +223,8 @@ void turn_on_dynamixel(){
 
 
 // Debug Funciton
-void blink_debug_led(){
-	digitalWrite(debug_pin,LOW);
-	delay(500);
-	digitalWrite(debug_pin,HIGH);
-}
+// void blink_debug_led(){
+// 	digitalWrite(debug_pin,LOW);
+// 	delay(500);
+// 	digitalWrite(debug_pin,HIGH);
+// }

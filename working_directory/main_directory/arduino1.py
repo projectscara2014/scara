@@ -21,6 +21,9 @@ def init():
 	arduino1 = serial_ports_setup.find_dynamixel_and_arduino()
 	arduino1.baudrate = 57600
 	initialize_to_default()
+	if(not send_and_check('h','0')):
+		print("WRONG DYNAMIXEL INITIALIZED")
+		sys.exit(0)
 	
 def initialize_to_default():
 	time.sleep(2)
@@ -116,8 +119,10 @@ def service_arduino1_error_packets(recieved_packet):
 
 print("\n------>\n")
 init()
-dynamixel_initialization()
-send_and_check('g','G')
+get_status()
+send_and_check('D','d')
+get_status()
+# dynamixel_initialization()
 print("\n------>\n")
 sys.exit(0)
 
