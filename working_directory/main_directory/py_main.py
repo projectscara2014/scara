@@ -1,4 +1,12 @@
-from main_directory import lookup
+import __init__
+###from main_directory import lookup
+from subordinate_directory import serial_ports_setup
+
+[arduino1,arduino2] = serial_ports_setup.get_connected_arduino_objects()
+print(arduino1)
+print(arduino2)
+import sys
+sys.exit(1)
 from main_directory import dynamixel
 
 import time
