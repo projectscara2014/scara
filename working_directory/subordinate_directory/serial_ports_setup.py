@@ -11,7 +11,7 @@ from subordinate_directory import exception_handling
 def get_connected_arduino_objects() : 
     #returns a list [arduino_1_serial_object,arduino_2_serial_object]
 
-    global arduino_1_port,arduino_2_port
+    global arduino_1_obj,arduino_2_obj
 
     def decorate_serial_object(serial_object) : 
         
@@ -21,7 +21,7 @@ def get_connected_arduino_objects() :
                 try : 
                     return_value = function(*args,**kwargs)
                 except OSError :
-                    print('arduino not connected')
+                    print('arduino disconnected')
                 else :
                     return return_value
             return wrapper
@@ -30,7 +30,7 @@ def get_connected_arduino_objects() :
             try :
                 serial_object.baudrate = baudrate
             except serial.serialutil.SerialException :
-                print('arduino not connected')
+                print('arduino disconnected')
         
         serial_object.write = decorator(serial_object.write)
         serial_object.read = decorator(serial_object.read)
@@ -38,11 +38,9 @@ def get_connected_arduino_objects() :
         serial_object.set_baudrate = set_baudrate
         return serial_object
 
-    arduino1 = serial.Serial(arduino_1_port)
-    arduino1 = decorate_serial_object(arduino1)
+    arduino1 = decorate_serial_object(arduino_1_obj)
     arduino1.set_baudrate(57600)
-    arduino2 = serial.Serial(arduino_2_port)
-    arduino2 = decorate_serial_object(arduino2)
+    arduino2 = decorate_serial_object(arduino_2_obj)
     arduino2.set_baudrate(57600)
 
     return [arduino1,arduino2]
@@ -55,20 +53,19 @@ def get_connected_dynamixel_object(dynamixel_module) :
         pass
 
 def get_connected_arduino_ports() : 
-    global serial_ports_list
+    global serial_objects_list
 
-    print(serial_ports_list)
-    
+    for obj in serial_objects_list:
+        print(obj.port)
+
     def handshake(device) : 
         # returns the serial_port in "serial_ports_list" to which the "device" is connected
 
         def arduino_1_handshake(serial_port) :
             # returns True if arduino2 is connected to "serial_port", else returns False
 
-            arduino = serial.Serial(serial_port)
+            arduino = serial_port
             arduino.baudrate = 57600
-            print("sleeping for 3")
-            time.sleep(3)
             ARDUINO_NUMBER = '0'
             
             def send_and_check(instruction_packet,timeout=5) :
@@ -90,12 +87,10 @@ def get_connected_arduino_ports() :
         def arduino_2_handshake(serial_port) : 
             # returns True if arduino1 is connedted to "serial_port", else returns False
             
-            arduino = serial.Serial(serial_port)
+            arduino = serial_port
             arduino.baudrate = 57600
-            print("sleeping for 3")
-            time.sleep(3)
 
-            def send_and_check(instruction_packet,timeout=5) :
+            def send_and_check(instruction_packet,timeout=3) :
                 arduino.write(instruction_packet) 
                 start_time = time.time()
                 elapsed_time = 0
@@ -108,7 +103,7 @@ def get_connected_arduino_ports() :
                     elapsed_time = time.time() - start_time
                     if arduino.inWaiting() > 0 :
                         returned_data = arduino.read(arduino.inWaiting())
-                        print(returned_data)
+                        # print(returned_data)
                         if OKAY_CHARACTER in returned_data :
                             FLAG += 1
                         if ARDUINO_NUMBER in returned_data :
@@ -116,7 +111,6 @@ def get_connected_arduino_ports() :
                         if NOT_OKAY_CHARACTER in returned_data : 
                             arduino.write(instruction_packet)
                 if FLAG == 2 :
-                    print(elapsed_time)
                     return True
                 return False
                 # try changing this to --> return FLAG == 2
@@ -132,23 +126,22 @@ def get_connected_arduino_ports() :
 
         ignore_serial_ports = ['/dev/tty.Bluetooth-Incoming-Port']
 
-        for serial_port in serial_ports_list :
-            if serial_port not in ignore_serial_ports :
+        for serial_port in serial_objects_list :
+            if serial_port.port not in ignore_serial_ports :
                 if handshake_function(serial_port) == True :
-                    serial_ports_list.pop(serial_ports_list.index(serial_port))
+                    serial_objects_list.pop(serial_objects_list.index(serial_port))
                     return serial_port
                 
         raise OSError(device + ' is not connected')
     
-    arduino_1_port = handshake('arduino1')
-    print('arduino_1_port --> ',arduino_1_port)
-    arduino_2_port = handshake('arduino2')
-    print('arduino_2_port --> ',arduino_2_port)
+    arduino_1_obj = handshake('arduino1')
+    print('arduino 1 port --> ',arduino_1_obj.port)
+    arduino_2_obj = handshake('arduino2')
+    print('arduino 2 port --> ',arduino_2_obj.port)
 
+    return [arduino_1_obj,arduino_2_obj]
 
-    return [arduino_1_port,arduino_2_port]
-
-def get_available_serial_ports():
+def get_available_serial_objects():
     """Lists serial ports
 
     :raises EnvironmentError:
@@ -173,19 +166,17 @@ def get_available_serial_ports():
     for port in ports:
         try:
             s = serial.Serial(port)
-            s.close()
-            result.append(port)
+            result.append(s)
         except (OSError, serial.SerialException):
             pass
+
+    time.sleep(3)
+
     return result
 
+serial_objects_list = get_available_serial_objects()
 
-
-serial_ports_list = get_available_serial_ports()
-
-[arduino_1_port,arduino_2_port] = get_connected_arduino_ports()
-
-
+[arduino_1_obj,arduino_2_obj] = get_connected_arduino_ports()
 
 
 

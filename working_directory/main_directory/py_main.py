@@ -9,6 +9,8 @@ from main_directory import dynamixel
 print("run some arduino1 function")
 dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
 
+dynamixel.dyna_move() #moves dynamixel to 0,0 position
+
 import sys
 sys.exit(1)
 from main_directory import lookup
