@@ -28,21 +28,10 @@ int input_5v;
 int input_12v;
 int input_ldr1;
 int input_ldr2;
-<<<<<<< HEAD
-char serial_command;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-char data_packet;
->>>>>>> f043c313ea879ab08a2fd097ad582648b28e24e3
-=======
 char serial_data_received;
 char last_sent_data_packet;
 // char next_expected_data_packet = ' ';
->>>>>>> feature/arduino1
 int debug_pin = 13;
->>>>>>> develop
 
 void setup() {
 	Serial.begin(57600);
@@ -52,31 +41,13 @@ void setup() {
 	pinMode(pin_12v_brownout,INPUT);
 	pinMode(pin_ldr_1,INPUT);
 	pinMode(pin_ldr_2,INPUT);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-        pinMode(debug_pin,OUTPUT);
-        
-        // Other Initializations
-        digitalWrite(13,LOW);
-=======
     pinMode(debug_pin,OUTPUT);
-<<<<<<< HEAD
->>>>>>> f043c313ea879ab08a2fd097ad582648b28e24e3
-        
->>>>>>> develop
-	// Safety Initializations
-	turn_off_dynamixel();
-	turn_off_backup_battery();
-=======
     pinMode(pin_relay_5v,OUTPUT);
     pinMode(pin_relay_12v,OUTPUT);
 
     // Safety Initializations
     turn_off_dynamixel();
     turn_off_backup_battery();
->>>>>>> feature/arduino1
 
     // Other Initializations
     digitalWrite(13,HIGH);
@@ -106,21 +77,7 @@ void loop() {
 // Functions to be run continuously
 void service_serial_data_received(char serial_data_received){
 	// This function is used for calling various functions as per the serial command. 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-=======
-	if(serial_command == 'i'){
-		initialize_to_default();
-	}
-            
->>>>>>> develop
-=======
-	if(serial_command == 'I'){ //* Initialize arduino
-=======
 	if(serial_data_received == 'I'){ //* Initialize arduino
->>>>>>> feature/arduino1
 		initialize_to_default();
 	}
     else if(serial_data_received == 'D'){ //* Dynamixel supply on
@@ -129,9 +86,6 @@ void service_serial_data_received(char serial_data_received){
     else if(serial_data_received == 'R'){ //* Repeat last sent data packet
     	repeat_last_sent_data_packet();
     }
-<<<<<<< HEAD
->>>>>>> f043c313ea879ab08a2fd097ad582648b28e24e3
-=======
     else if(serial_data_received == 'L'){ //* Start checking LDR values
     	start_checking_ldr();
     }
@@ -144,7 +98,6 @@ void service_serial_data_received(char serial_data_received){
     else{
     	send('x');
     }
->>>>>>> feature/arduino1
 	//#CHANGE
 }
 
@@ -265,17 +218,10 @@ void turn_off_backup_battery(){
 	// This function will turn off backup battery
 	digitalWrite(pin_relay_5v,LOW); }
 
-<<<<<<< HEAD
-	//#CHANGE
-}
-<<<<<<< HEAD
-=======
-=======
 void turn_off_dynamixel(){
 	// This function will turn off the dynamixel
 	digitalWrite(pin_relay_12v,LOW);
 	flag_check_ldr = 0;}
->>>>>>> f043c313ea879ab08a2fd097ad582648b28e24e3
 
 void turn_on_dynamixel(){
 	// This function will turn on the dynamixel
@@ -283,17 +229,8 @@ void turn_on_dynamixel(){
 
 
 // Debug Funciton
-<<<<<<< HEAD
-void blink_debug_led(){
-	digitalWrite(debug_pin,LOW);
-	delay(500);
-	digitalWrite(debug_pin,HIGH);
-}
->>>>>>> develop
-=======
 // void blink_debug_led(){
 // 	digitalWrite(debug_pin,LOW);
 // 	delay(500);
 // 	digitalWrite(debug_pin,HIGH);
 // }
->>>>>>> feature/arduino1
