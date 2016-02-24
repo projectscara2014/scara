@@ -22,11 +22,11 @@ def find_dynamixel_and_arduino() :
             return dynamixel
             # exception_handling.handle_exception('dynamixel','cant connect')
         else :
-            # print(dynamixel)
-            # dynamixel.baudrate = 57600                 #set baudrate equal to 57600
-            # return dynamixel
-            dynamixel = dummy_dynamixel.Dynamixel()
+            print(dynamixel)
+            dynamixel.baudrate = 57600                 #set baudrate equal to 57600
             return dynamixel
+            # dynamixel = dummy_dynamixel.Dynamixel()
+            # return dynamixel
             
     elif 'arduino1' in stack[1][1] :
         try :
@@ -170,6 +170,34 @@ def get_connected_serial_ports() :
         }
 
         handshake_function = device_handshake_dictionary.get(device)
+
+    system = platform.system()
+    # print('system --> ',system)
+    print('available serial ports : ',serial_ports_list)
+    dynamixel_port = ''
+    arduino1_port = ''
+    arduino2_port = ''
+
+    #for unix
+    if system.startswith('Darwin') :
+        for port in serial_ports_list :
+            if port.startswith('/dev/tty.usbserial') :
+                dynamixel_port = port
+            elif port.startswith('/dev/tty.usbmodem') :
+                arduino1_port = port
+                arduino2_port = port
+    #for windows
+    elif system.startswith('Win') :
+        if len(serial_ports_list) != 2 :
+            print("Connect Exactly two serial devices")
+            # CHANGE -- Let GUI print this in a msg box
+        dynamixel_port = 'com4'
+        arduino1_port = 'com3'      # CHANGE
+        arduino2_port = 'com7'
+    #for others
+    else :
+        print('unsupported operating system')
+        # CHANGE -- Let GUI print this in a msg box
         
         ignore_serial_ports = ['/dev/tty.Bluetooth-Incoming-Port']
 

@@ -110,7 +110,7 @@ def on_key_press(event):
 			# "f" pressed
 			if servo_movement_per_command > 1 :
 				servo_movement_per_command -= 1
-		elif keypress == 111 :
+		elif keypress == 112 :
 			# "p" pressed
 			arduino2.pick()
 		elif keypress == 108 : 
@@ -118,8 +118,8 @@ def on_key_press(event):
 			arduino2.place()
 		
 		print_everything()
-		if keypress == 112 :
-			# "p" pressed
+		if keypress == 111 :
+			# "o" pressed
 			arduino2.pick()
 			arduino2.place()
 			root.destroy()
