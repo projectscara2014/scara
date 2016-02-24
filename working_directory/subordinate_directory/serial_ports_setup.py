@@ -29,16 +29,6 @@ def find_dynamixel_and_arduino() :
             # return dynamixel
             
     elif 'arduino1' in stack[1][1] :
-<<<<<<< HEAD
-        try:
-            ser = serial.Serial(port = arduino1_port)
-        except:
-            print("ERROR! Error in connecting to arduino1")
-        else:
-            return ser
-    elif 'arduino2' in stack[1][1] :
-        return[arduino2_port]
-=======
         try :
             arduino1 = serial.Serial(port = arduino1_port)
         except :
@@ -57,7 +47,6 @@ def find_dynamixel_and_arduino() :
             print(arduino2)
             arduino2.baudrate = 9600
             return arduino2
->>>>>>> feature/block_position_setup
     else : 
         print('serial_ports_setup.py called by some module\
             other that dynamixel.py or arduino.py')
