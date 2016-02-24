@@ -3,7 +3,6 @@
 import time                              #import time liabrary to use the time.sleep() function to generate delays
 import serial                            #import the serial library 
 
-time.sleep(5)
 from subordinate_directory import status_packet_handling
 from subordinate_directory.string_handling import char_to_int
 
@@ -25,14 +24,22 @@ read_limit           = 80
 stall_count_limit    = 10
 max_acceptable_error_in_position = 0
 
-def init() : 
-    global dynamixel
-    dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
-    try :
-        dynamixel.print_memory()
-    except :
-        pass
-    dynamixel_initializations()
+# def init() : 
+#     global dynamixel
+#     dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
+#     try :
+#         dynamixel.print_memory()
+#     except :
+#         pass
+#     dynamixel_initializations()
+
+def dynamixel_initializations():
+    send_and_check(1,3,26,8,8,24)   #PID for motor 1
+    send_and_check(2,3,26,8,8,24)   #PID for motor 2
+    send_and_check(1,3,32,0,1)      #SPEED for motor 1
+    send_and_check(2,3,32,0,1)      #SPEED for motor 2
+    send_and_check(1,3,25,1)        #LED for motor 1
+    send_and_check(2,3,25,1)        #LED for motor 2
 
 def send_and_check(motor_id,instruction,*args) :
     '''
@@ -221,20 +228,6 @@ def till_dyna_reached() :
         current_pos = position_read()
         count +=1
     return False
-
-def dynamixel_initializations():
-    send_and_check(1,3,26,8,8,24)   #PID for motor 1
-    send_and_check(2,3,26,8,8,24)   #PID for motor 2
-    send_and_check(1,3,32,0,1)      #SPEED for motor 1
-    send_and_check(2,3,32,0,1)      #SPEED for motor 2
-    send_and_check(1,3,25,1)        #LED for motor 1
-    send_and_check(2,3,25,1)        #LED for motor 2
-#-------------------------------------------------------------------
-
-
-init()
-dyna_move()
-##move_to(180)
 
 #-------------------------------------------------------------------
 

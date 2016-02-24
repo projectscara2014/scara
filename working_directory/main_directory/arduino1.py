@@ -16,26 +16,30 @@ known_error_packets = ['B','b','1','2','x']
 # 2 --> Dynamixel 2 disconnected
 # x --> Command not understood
 
-def init():
+def init(arduino1_serial_object):
 	global arduino1
-	arduino1 = serial_ports_setup.find_dynamixel_and_arduino()
-	arduino1.baudrate = 57600
+	arduino1 = arduino1_serial_object
 	initialize_to_default()
 	if(not send_and_check('h','0')):
-		print("WRONG SERVO INITIALIZED")
+		print("WRONG ARDUINO INITIALIZED")
 		sys.exit(0)
 	
 def initialize_to_default():
-	time.sleep(2)
-	send_and_check('I','i')
+	if(not send_and_check('I','i')):
+		print("ERROR in arduino_initialization @arduino1.py")
+		sys.exit(0)
 
-def dynamixel_initialization():
+def dynamixel_initialization1():
 	# CHANGE --- Add exceptions throughout the function
 	if(not send_and_check('D','d')):
 		print("ERROR in dynamixel_initialization @arduino1.py")
 		sys.exit(0)
-	time.sleep(1)
-	send_and_check('L','l')
+	time.sleep(5)
+
+def dynamixel_initialization2():
+	if(not send_and_check('L','l')):
+		print("ERROR in dynamixel_initialization @arduino1.py")
+		sys.exit(0)
 	# if not ok, exception
 
 def get_status():
@@ -58,9 +62,9 @@ def _send_and_check_(outgoing_packet,expected_packet):
 	global known_error_packets
 	return_val = False
 
-	print("py2arduino ---> "+outgoing_packet)
+	print("py_to_arduino1 ---> "+outgoing_packet)
 	recieved_packet = send_and_recieve(outgoing_packet)
-	print("arduino2py ---> "+recieved_packet)
+	print("arduino1_to_py ---> "+recieved_packet)
 	if(recieved_packet == expected_packet):
 		print("recieved_packet matches expected_packet")
 		return_val = True
@@ -114,32 +118,3 @@ def service_arduino1_error_packets(recieved_packet):
 
 	return return_val
 	# CHANGE
-
-print("\n------>\n")
-init()
-dynamixel_initialization()
-# send_and_check('D','d')
-get_status()
-# dynamixel_initialization()
-print("\n------>\n")
-sys.exit(0)
-
-
-
-# def wait_for(word,msg_type):
-# 	global arduino1
-# 	return_val = False
-# 	for i in range(5000):
-		# if(arduino1.inWaiting()==len(word)):
-		# 	message = arduino1.read(len(word))
-# 			return_val = decode_message(message,word,msg_type)
-# 	return return_val
-
-# def decode_message(message,word,msg_type):
-# 	return_val = False
-# 	if(msg_type == 1): # word == message
-# 		if(word == message):
-# 			return_val = True
-# 	return return_val
-
-

@@ -1,4 +1,3 @@
-import __init__
 ###from main_directory import lookup
 from subordinate_directory import serial_ports_setup
 
@@ -6,15 +5,19 @@ from subordinate_directory import serial_ports_setup
 print(arduino1_serial_object)
 print(arduino2_serial_object)
 from main_directory import dynamixel
-print("run some arduino1 function")
-dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
+from main_directory import arduino1
+arduino1.init(arduino1_serial_object)
+arduino1.dynamixel_initialization1()
 
-dynamixel.dyna_move() #moves dynamixel to 0,0 position
+dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
 
 import sys
 sys.exit(1)
+
+dynamixel.dyna_move() #moves dynamixel to 0,0 position
+
+
 from main_directory import lookup
-from main_directory import arduino1
 
 import time
 
