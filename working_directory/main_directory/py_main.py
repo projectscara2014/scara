@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import __init__
 ###from main_directory import lookup
 from subordinate_directory import serial_ports_setup
@@ -8,13 +7,8 @@ print(arduino1)
 print(arduino2)
 import sys
 sys.exit(1)
-=======
 from main_directory import lookup
 from main_directory import arduino1
-<<<<<<< HEAD
-=======
->>>>>>> 676418a4bea63516b0313f06b70a2eec63a9875f
->>>>>>> feature/block_position_setup
 from main_directory import dynamixel
 
 import time
