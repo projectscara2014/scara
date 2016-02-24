@@ -2,14 +2,17 @@ import __init__
 ###from main_directory import lookup
 from subordinate_directory import serial_ports_setup
 
-[arduino1,arduino2] = serial_ports_setup.get_connected_arduino_objects()
-print(arduino1)
-print(arduino2)
+[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects()
+print(arduino1_serial_object)
+print(arduino2_serial_object)
+from main_directory import dynamixel
+print("run some arduino1 function")
+dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
+
 import sys
 sys.exit(1)
 from main_directory import lookup
 from main_directory import arduino1
-from main_directory import dynamixel
 
 import time
 
