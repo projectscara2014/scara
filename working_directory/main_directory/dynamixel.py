@@ -87,17 +87,18 @@ def send_and_check(motor_id,instruction,*args) :
         status_packet = dynamixel.read(dynamixel.inWaiting())
         #print("raw status",list(status_packet))
         status_packet = status_packet_handling.get_status_packet(instruction_packet,status_packet)
+        print(status_packet)
         if(status_packet == False) :
             # No status packet / Incorrect status packet
             count+=1
-        elif(status_packet == True): 
+        elif(status_packet == True):
+            print("hi")
             # TRUE ONLY WHEN Dynamixel 1
             return True
         else:
           #  print("decoded status",list(status_packet))
             error = status_packet_handling.check_for_error(status_packet)
-            if(error == False) :
-           #     print("error packet => FALSE")
+            if(error == False):
                 return status_packet
             else:
                 status_packet_handling.error_service_routine(error)

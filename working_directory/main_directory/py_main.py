@@ -12,7 +12,7 @@ arduino1.dynamixel_initialization1()
 dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
 
 import sys
-sys.exit(1)
+sys.exit(0)
 
 dynamixel.dyna_move() #moves dynamixel to 0,0 position
 
