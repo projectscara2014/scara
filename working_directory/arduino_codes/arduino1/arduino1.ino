@@ -26,11 +26,15 @@ int pin_relay_12v = 7;
 //Other Definitions
 int input_5v;
 int input_12v;
+<<<<<<< HEAD
 int input_ldr1;
 int input_ldr2;
 char serial_data_received;
 char last_sent_data_packet;
 // char next_expected_data_packet = ' ';
+=======
+char serial_command;
+>>>>>>> feature/block_position_setup
 int debug_pin = 13;
 
 void setup() {
@@ -41,6 +45,7 @@ void setup() {
 	pinMode(pin_12v_brownout,INPUT);
 	pinMode(pin_ldr_1,INPUT);
 	pinMode(pin_ldr_2,INPUT);
+<<<<<<< HEAD
     pinMode(debug_pin,OUTPUT);
     pinMode(pin_relay_5v,OUTPUT);
     pinMode(pin_relay_12v,OUTPUT);
@@ -48,6 +53,16 @@ void setup() {
     // Safety Initializations
     turn_off_dynamixel();
     turn_off_backup_battery();
+=======
+
+        pinMode(debug_pin,OUTPUT);
+        
+        // Other Initializations
+        digitalWrite(13,LOW);
+        
+	// Safety Initializations
+	turn_off_dynamixel();
+>>>>>>> feature/block_position_setup
 
     // Other Initializations
     digitalWrite(13,HIGH);
@@ -77,6 +92,7 @@ void loop() {
 // Functions to be run continuously
 void service_serial_data_received(char serial_data_received){
 	// This function is used for calling various functions as per the serial command. 
+<<<<<<< HEAD
 	if(serial_data_received == 'I'){ //* Initialize arduino
 		initialize_to_default();
 	}
@@ -98,6 +114,13 @@ void service_serial_data_received(char serial_data_received){
     else{
     	send('x');
     }
+=======
+
+	if(serial_command == 'i'){
+		initialize_to_default();
+	}
+            
+>>>>>>> feature/block_position_setup
 	//#CHANGE
 }
 
@@ -209,6 +232,7 @@ void send_status(){
 void send_handshaking_value(){
 	send('0'); //* Indicates Arduino number == 1
 }
+<<<<<<< HEAD
 // Functions for ease of access
 void turn_on_backup_battery(){
 	// This function will turn on backup battery
@@ -234,3 +258,5 @@ void turn_on_dynamixel(){
 // 	delay(500);
 // 	digitalWrite(debug_pin,HIGH);
 // }
+=======
+>>>>>>> feature/block_position_setup

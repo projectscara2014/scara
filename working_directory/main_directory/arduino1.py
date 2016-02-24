@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import serial
 import time
 from subordinate_directory import serial_ports_setup
@@ -143,3 +144,5 @@ sys.exit(0)
 # 	return return_val
 
 
+=======
+>>>>>>> feature/block_position_setup
