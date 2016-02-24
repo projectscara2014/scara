@@ -112,7 +112,7 @@ void check_for_12v_brownout(){
 		flag_12v_brownout_detected = 1;
 	}
 	else{
-		// turn_on_dynamixel(); //COMMENT LETER
+		// turn_on_dynamixel(); //COMMENT LATER
 		flag_12v_brownout_detected = 0;
 	}
 }
