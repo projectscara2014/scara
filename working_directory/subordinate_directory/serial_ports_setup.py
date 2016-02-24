@@ -8,6 +8,7 @@ import time     #time.time, time.sleep
 from subordinate_directory import exception_handling
 ###from subordinate_directory.dummy_dynamixel import dummy_dynamixel
 
+
 def get_connected_arduino_objects() : 
     #returns a list [arduino_1_serial_object,arduino_2_serial_object]
 
@@ -46,11 +47,17 @@ def get_connected_arduino_objects() :
     return [arduino1,arduino2]
 
 def get_connected_dynamixel_object(dynamixel_module) : 
-    global dynamixel_port
+    global serial_objects_list
 
-    def dynamixel_handshake(serial_port) : 
-    # returns True if dynamixel is connected to "serial_port", else returns False
-        pass
+    def dynamixel_handshake(serial_object) : 
+        # returns True if dynamixel is connected to "serial_port", else returns False
+        dynamixel_module.dynamixel = serial_object
+        dynamixel_module.send_and_check(1,3,25,1)
+        return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
+        print(return_value)
+
+    dynamixel_handshake(serial_objects_list[0])
+    print("close other open ports")
 
 def get_connected_arduino_ports() : 
     global serial_objects_list
