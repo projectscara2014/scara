@@ -51,13 +51,16 @@ def get_connected_dynamixel_object(dynamixel_module) :
 
     def dynamixel_handshake(serial_object) : 
         # returns True if dynamixel is connected to "serial_port", else returns False
+        serial_object.baudrate = 57600
         dynamixel_module.dynamixel = serial_object
         dynamixel_module.send_and_check(1,3,25,1)
         return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
         print(return_value)
 
     dynamixel_handshake(serial_objects_list[0])
+    print("okay")
     print("close other open ports")
+    print("ok")
 
 def get_connected_arduino_ports() : 
     global serial_objects_list
