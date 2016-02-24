@@ -4,6 +4,7 @@ import time                              #import time liabrary to use the time.s
 import serial                            #import the serial library 
 
 from subordinate_directory import serial_ports_setup
+time.sleep(5)
 from subordinate_directory import status_packet_handling
 from subordinate_directory.string_handling import char_to_int
 
@@ -28,7 +29,10 @@ max_acceptable_error_in_position = 0
 def init() : 
     global dynamixel
     dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
-    dynamixel.print_memory()
+    try :
+        dynamixel.print_memory()
+    except :
+        pass
     dynamixel_initializations()
 
 def send_and_check(motor_id,instruction,*args) :
