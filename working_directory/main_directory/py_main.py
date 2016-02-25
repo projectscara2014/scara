@@ -11,6 +11,13 @@ arduino1.dynamixel_initialization1()
 # dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
 from main_directory import dynamixel
 arduino1.dynamixel_initialization2()
+# import sys
+# sys.exit(0)
+
+from main_directory import arduino2
+arduino2.init(arduino2_serial_object)
+
+
 import sys
 sys.exit(0)
 
