@@ -4,18 +4,15 @@ from subordinate_directory import serial_ports_setup
 [arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects()
 print(arduino1_serial_object)
 print(arduino2_serial_object)
-from main_directory import dynamixel1 as dynamixel
 from main_directory import arduino1
 arduino1.init(arduino1_serial_object)
 arduino1.dynamixel_initialization1()
 
-dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
-
+# dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
+from main_directory import dynamixel
+arduino1.dynamixel_initialization2()
 import sys
 sys.exit(0)
-
-dynamixel.dyna_move() #moves dynamixel to 0,0 position
-
 
 from main_directory import lookup
 
