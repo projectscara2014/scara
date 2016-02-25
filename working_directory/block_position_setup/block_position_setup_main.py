@@ -146,14 +146,24 @@ def on_key_press(event):
 				arduino2.GO_TO_SERVO_POS = int(entire_block_position_list[5])		
 			dynamixel.dyna_move()
 			arduino2.rotate()	
+<<<<<<< HEAD
 		else :
 			print('INVALID KEY PRESSED')
 		print_everything()
 		if keypress == 111 :
+=======
+		elif keypress == 111 :
+>>>>>>> 5276a2a5ea03b4da16dc2b524031e5a71f32fe20
 			# "o" pressed
 			# arduino2.pick()
 			# arduino2.place()
 			root.destroy()
+<<<<<<< HEAD
+=======
+		else :
+			print('INVALID KEY PRESSED')
+		print_everything()
+>>>>>>> 5276a2a5ea03b4da16dc2b524031e5a71f32fe20
 		
 	keypress = char_to_int(event.char)
 	move(keypress)
