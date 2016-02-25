@@ -1,41 +1,9 @@
 import serial
 import time
 
-#--------------------- ARDUINO SETUP --------------------------
-# arduino = serial.Serial('/dev/cu.usbmodem1411')
-# arduino = serial.Serial('/dev/tty.usbserial-A8YZSL0U')
-arduino = serial.Serial('com7')
-# from subordinate_directory import serial_ports_setup
-# arduino = serial_ports_setup.find_dynamixel_and_arduino()
-def decorate_serial_object(serial_object) : 
-	
-	def decorator(function) :
-		def wrapper(*args,**kwargs) : 
-			return_value = None
-			try : 
-				return_value = function(*args,**kwargs)
-			except OSError :
-				print('arduino not connected')
-			else :
-				return return_value
-		return wrapper
-
-	def set_baudrate(baudrate) : 
-		try :
-			serial_object.baudrate = baudrate
-		except serial.serialutil.SerialException :
-			print('arduino not connected')
-	
-	serial_object.write = decorator(serial_object.write)
-	serial_object.read = decorator(serial_object.read)
-	serial_object.inWaiting = decorator(serial_object.inWaiting)
-	serial_object.set_baudrate = set_baudrate
-	return serial_object
-#--------------------------------------------------------------
-
-arduino = decorate_serial_object(arduino)
-arduino.set_baudrate(57600)
-time.sleep(5)
+def init(arduino_serial_object):
+	global arduino
+	arduino = arduino_serial_object
 
 GO_TO_SERVO_POS = 0
 
@@ -53,6 +21,8 @@ PLACE_COMMUNICATION_TIMEOUT_LIMIT = 25
 
 def send_and_check(instruction_packet,timeout=5) :
 	# print(timeout) 
+	global arduino
+
 	arduino.write(instruction_packet) 
 	start_time = time.time()
 	elapsed_time = 0
@@ -84,11 +54,6 @@ def pick() :
 def place() : 
 	instruction_packet = chr(START_BYTE) + chr(PLACE_COMMAND) + chr(0)
 	send_and_check(instruction_packet,timeout = PLACE_COMMUNICATION_TIMEOUT_LIMIT)
-
-def move(pos) : 
-	global GO_TO_SERVO_POS
-	GO_TO_SERVO_POS = pos
-	rotate()
 
 # instruction_packet = chr(START_BYTE) + 'h' + chr(0)
 # send_and_check(instruction_packet)

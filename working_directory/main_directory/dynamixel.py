@@ -8,8 +8,8 @@ from subordinate_directory import status_packet_handling
 from subordinate_directory.string_handling import char_to_int
 
 ##---IMPORTANT GLOBAL VARIABLES---
-GO_TO_DYNA_1_POS=0
-GO_TO_DYNA_2_POS=0
+GO_TO_DYNA_1_POS = 0
+GO_TO_DYNA_2_POS = 0
 
 ##---INITIALIZATION VARIABLES---
 dynamixel = ''
@@ -17,6 +17,10 @@ dynamixel = ''
 #---DYNAMIXEL VARIABLES---
 motor_1_offset = 2048 - 15
 motor_2_offset = 2048 + 50
+motor_1_limit_high = 1500
+motor_1_limit_low  = -1500
+motor_2_limit_high = 1500
+motor_2_limit_low  = -1500
 
 ##---LIMITING VARIABLES---
 send_and_check_limit = 10
@@ -95,11 +99,26 @@ def send_and_check(motor_id,instruction,*args) :
     # USER DEFINED ERROR: 1 :- IN CASE OF COMMUNICATION ERROR
     return False
 
+def constrain_limits():
+    global motor_1_limit_low,motor_1_limit_high,motor_2_limit_low,motor_2_limit_high
+    global GO_TO_DYNA_1_POS,GO_TO_DYNA_2_POS
+
+    print("Target value: "+str(GO_TO_DYNA_1_POS)+" ; "+str(GO_TO_DYNA_2_POS))
+    if(GO_TO_DYNA_1_POS>motor_1_limit_high):
+        GO_TO_DYNA_1_POS = motor_1_limit_high
+    elif(GO_TO_DYNA_1_POS<motor_1_limit_low):
+        GO_TO_DYNA_1_POS = motor_1_limit_low
+    if(GO_TO_DYNA_2_POS>motor_2_limit_high):
+        GO_TO_DYNA_2_POS = motor_2_limit_high
+    elif(GO_TO_DYNA_2_POS<motor_2_limit_low):
+        GO_TO_DYNA_2_POS = motor_2_limit_low
+    print("Constrained value: "+str(GO_TO_DYNA_1_POS)+" ; "+str(GO_TO_DYNA_2_POS))
+
 # FUNCTION TO MOVE THE ARM TO THE REQUIRED POSITION
 def dyna_move():
     global GO_TO_DYNA_1_POS
     global GO_TO_DYNA_2_POS
-
+    constrain_limits()
     global dyna_write_limit
     count = 0
 
