@@ -3,6 +3,7 @@
 import time                              #import time liabrary to use the time.sleep() function to generate delays
 import serial                            #import the serial library 
 
+from subordinate_directory import serial_ports_setup
 from subordinate_directory import status_packet_handling
 from subordinate_directory.string_handling import char_to_int
 
@@ -24,22 +25,10 @@ read_limit           = 80
 stall_count_limit    = 10
 max_acceptable_error_in_position = 0
 
-# def init() : 
-#     global dynamixel
-#     dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
-#     try :
-#         dynamixel.print_memory()
-#     except :
-#         pass
-#     dynamixel_initializations()
-
-def dynamixel_initializations():
-    send_and_check(1,3,26,8,8,24)   #PID for motor 1
-    send_and_check(2,3,26,8,8,24)   #PID for motor 2
-    send_and_check(1,3,32,0,1)      #SPEED for motor 1
-    send_and_check(2,3,32,0,1)      #SPEED for motor 2
-    send_and_check(1,3,25,1)        #LED for motor 1
-    send_and_check(2,3,25,1)        #LED for motor 2
+def init() : 
+    global dynamixel
+    dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
+    dynamixel_initializations()
 
 def send_and_check(motor_id,instruction,*args) :
     '''
@@ -85,21 +74,19 @@ def send_and_check(motor_id,instruction,*args) :
         dynamixel.write(instruction_packet)
         time.sleep(0.05)
         status_packet = dynamixel.read(dynamixel.inWaiting())
-        print("raw status",list(status_packet))
+        #print("raw status",list(status_packet))
         status_packet = status_packet_handling.get_status_packet(instruction_packet,status_packet)
-        print(status_packet)
         if(status_packet == False) :
             # No status packet / Incorrect status packet
             count+=1
-        elif(status_packet == True):
-            print("hi")
+        elif(status_packet == True): 
             # TRUE ONLY WHEN Dynamixel 1
             return True
         else:
-            # print("decoded status",list(status_packet))
+          #  print("decoded status",list(status_packet))
             error = status_packet_handling.check_for_error(status_packet)
-            if(error == False):
-                print("false error")
+            if(error == False) :
+           #     print("error packet => FALSE")
                 return status_packet
             else:
                 status_packet_handling.error_service_routine(error)
@@ -231,7 +218,19 @@ def till_dyna_reached() :
         count +=1
     return False
 
+def dynamixel_initializations():
+    send_and_check(1,3,26,8,8,24)   #PID for motor 1
+    send_and_check(2,3,26,8,8,24)   #PID for motor 2
+    send_and_check(1,3,32,0,1)      #SPEED for motor 1
+    send_and_check(2,3,32,0,1)      #SPEED for motor 2
+    send_and_check(1,3,25,1)        #LED for motor 1
+    send_and_check(2,3,25,1)        #LED for motor 2
 #-------------------------------------------------------------------
+
+
+init()
+dyna_move()
+##move_to(180)
 
 HYPER_LIST = []
 
