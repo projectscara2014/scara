@@ -4,7 +4,7 @@ from subordinate_directory import serial_ports_setup
 [arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects()
 print(arduino1_serial_object)
 print(arduino2_serial_object)
-from main_directory import dynamixel
+from main_directory import dynamixel1 as dynamixel
 from main_directory import arduino1
 arduino1.init(arduino1_serial_object)
 arduino1.dynamixel_initialization1()
