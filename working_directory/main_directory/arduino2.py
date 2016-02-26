@@ -44,6 +44,10 @@ def send_and_check(instruction_packet,timeout=5) :
 
 def rotate() :
 	global GO_TO_SERVO_POS 
+	GO_TO_SERVO_POS = int(GO_TO_SERVO_POS)
+	print(START_BYTE)
+	print(MOVE_COMMAND)
+	print(GO_TO_SERVO_POS)
 	instruction_packet = chr(START_BYTE) + chr(MOVE_COMMAND) + chr(GO_TO_SERVO_POS)
 	send_and_check(instruction_packet,timeout = ROTATE_COMMUNICATION_TIMEOUT_LIMIT)
 

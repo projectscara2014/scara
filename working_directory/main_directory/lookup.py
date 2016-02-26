@@ -27,14 +27,14 @@ def lookup(letter,directive):
 
 	global LOOKUP_OUTPUT #delete later
 
-	if (letter == "A"):
+	if (letter == "C"):
 		sort(0,directive)
 		# for A, index is 0
-	if (letter == "B"):
+	if (letter == "A"):
 		sort(1,directive)
-	if (letter == "C"):
+	if (letter == "S"):
 		sort(2,directive)
-	if (letter == "D"):
+	if (letter == "R"):
 		sort(3,directive)
 
 @debug()
