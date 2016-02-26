@@ -26,6 +26,12 @@ char DONE_CHARACTER = 'D';
 char NOT_OKAY_CHARACTER = 'N';
 char ARDUINO_NUMBER = '2';
 
+// ---------- INITIALIZATION FLAGS AND COMMANDS --------------
+int RESET_FLAG = 1;
+int move_out_of_reset_command = 114; // "r"
+int IN_RESET_CHARACTER = 'R';
+
+
 int DELAY = 3000;
 
 Servo rotation_servo;
@@ -48,6 +54,42 @@ void setup(){
 
   pinMode(13,OUTPUT);
   digitalWrite(13,LOW);
+
+  //wait for initialization communication with python code
+  int _start_byte_ = 0;
+  int command = 0;
+  int parameter = 0;
+
+  while(RESET_FLAG == 1) {
+    if(Serial.available() == 3) {
+      _start_byte_ = Serial.read();
+      command = Serial.read();
+      parameter = Serial.read();
+
+      if(_start_byte_ == start_byte) {
+        // _blink_();
+
+        if(command == move_out_of_reset_command) {
+          RESET_FLAG = 0;
+          Serial.write(OKAY_CHARACTER);
+          Serial.write(DONE_CHARACTER);
+        }
+        else {
+          Serial.write(IN_RESET_CHARACTER);
+        }
+      } 
+
+      else {
+        Serial.write(NOT_OKAY_CHARACTER);
+        // flush buffer
+        while(Serial.available() > 0) {
+          Serial.read();
+        }
+      }
+    }
+  }
+  // Serial.write("entering loop()");
+  // _blink_();
 }
 
 void loop(){
@@ -60,13 +102,13 @@ void loop(){
     parameter = Serial.read();
     
     if(_start_byte_ == start_byte) {
-      _blink_();
+      // _blink_();
       Serial.write(OKAY_CHARACTER);
 
       if(command == handshake_command) {
         Serial.write(ARDUINO_NUMBER);
       }
-      if(command == move_command) {
+      else if(command == move_command) {
         move(parameter);
         Serial.write(DONE_CHARACTER);
       }
@@ -77,6 +119,14 @@ void loop(){
       else if(command == place_command) {
         place();
         Serial.write(DONE_CHARACTER);
+      }
+
+      else {
+        Serial.write(NOT_OKAY_CHARACTER);
+        //flush buffer
+        while(Serial.available() > 0) {
+          Serial.read();
+        }  
       }
     }
 
@@ -91,6 +141,7 @@ void loop(){
 }
 
 void pick() {
+  // Serial.write("picking up");
   gripper_servo.write(gripper_servo_release_angle);
   delay(DELAY);
   vertical_servo.write(vertical_servo_down_angle);
@@ -99,20 +150,25 @@ void pick() {
   delay(DELAY);
   vertical_servo.write(vertical_servo_up_angle);
   delay(DELAY);
+  // double_blink();
 }
 
 void place() {
+  // Serial.write("placing");
   vertical_servo.write(vertical_servo_down_angle);
   delay(DELAY);
   gripper_servo.write(gripper_servo_release_angle);
   delay(DELAY);
   vertical_servo.write(vertical_servo_up_angle);
   delay(DELAY); 
+  // double_blink();
 }
 
 void move(int position) {
+  // Serial.write("moving");
   rotation_servo.write(position);
   delay(10);
+  // double_blink();
 }
 
 void _blink_() {
@@ -120,4 +176,15 @@ void _blink_() {
   delay(500);
   digitalWrite(13,LOW);
   delay(500);
+}
+
+void double_blink() {
+  digitalWrite(13,HIGH);
+  delay(250);
+  digitalWrite(13,LOW);
+  delay(250);
+  digitalWrite(13,HIGH);
+  delay(250);
+  digitalWrite(13,LOW);
+  delay(250);
 }
