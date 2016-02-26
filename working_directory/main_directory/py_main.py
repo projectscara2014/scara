@@ -11,15 +11,9 @@ arduino1.dynamixel_initialization1()
 # dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
 from main_directory import dynamixel
 arduino1.dynamixel_initialization2()
-# import sys
-# sys.exit(0)
 
 from main_directory import arduino2
 arduino2.init(arduino2_serial_object)
-
-
-import sys
-sys.exit(0)
 
 from main_directory import lookup
 
@@ -74,12 +68,17 @@ def modify_blocks(obj):
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.pick(LOOKUP_OUTPUT[2])
-        
+        arduino2.GO_TO_SERVO_POS = lookup.LOOKUP_OUTPUT[2]
+        try:
+            arduino2.rotate()   
+        except:
+            break
+        arduino2.pick()
         # print("DYNA_1_POS = ",lookup.DYNA_1_POS)
         # print("DYNA_2_POS = ",lookup.DYNA_2_POS)
         # print("----")
         #-------------------------------------------------------
-        time.sleep(3)
+        time.sleep(1)
         print("----")
         #---------------- PLACE FORWARD ------------------------
         print("Placing ",CURRENT_ARRAY[i]," on display area")
@@ -93,12 +92,15 @@ def modify_blocks(obj):
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.place(DISPLAY_AREA_something)
+        arduino2.GO_TO_SERVO_POS = DISPLAY_AREA_POSITIONS[i][5]
+        arduino2.rotate()   
+        arduino2.place()
         p = i+1
         if(FLAG):
             break
         #-------------------------------------------------------
         print("-----------------")
-        time.sleep(3)
+        time.sleep(1)
     print("wait thoda...\nwait thoda...\nwait thoda...")
     print("-----------------")
     for k in range (p):
@@ -118,9 +120,11 @@ def modify_blocks(obj):
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.pick(DISPLAY_AREA_something)
-        
+        arduino2.GO_TO_SERVO_POS = DISPLAY_AREA_POSITIONS[i][5]
+        arduino2.rotate()   
+        arduino2.pick()
         #-------------------------------------------------------
-        time.sleep(3)
+        time.sleep(1)
         print("----")
         #--------------- PLACE REVERSE --------------------------
         print("Placing ",CURRENT_ARRAY[i]," in arena")
@@ -135,7 +139,9 @@ def modify_blocks(obj):
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.place(LOOKUP_OUTPUT[2])
-        
+        arduino2.GO_TO_SERVO_POS = lookup.LOOKUP_OUTPUT[2]
+        arduino2.rotate()   
+        arduino2.place()
         #-------------------------------------------------------
         print("-----------------")
         time.sleep(3)
