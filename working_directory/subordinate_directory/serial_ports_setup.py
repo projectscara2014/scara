@@ -5,9 +5,10 @@ import platform # platform.system
 import inspect # inspect.stack
 import time     #time.time, time.sleep
 
+import __init__
 from subordinate_directory import exception_handling
+from subordinate_directory.debug import debug
 ###from subordinate_directory.dummy_dynamixel import dummy_dynamixel
-
 
 def get_connected_arduino_objects() : 
     #returns a list [arduino_1_serial_object,arduino_2_serial_object]
@@ -102,24 +103,36 @@ def get_connected_arduino_ports() :
             
             arduino = serial_port
             arduino.baudrate = 57600
-
-            def send_and_check(instruction_packet,timeout=3) :
+            OKAY_CHARACTER = 'O'        # Okay I am doing it
+            DONE_CHARACTER = 'D' 
+            ARDUINO_NUMBER = '2'
+            NOT_OKAY_CHARACTER = 'N'    # Not Okay
+            IN_RESET_CHARACTER = 'R'
+            MOVE_OUT_OF_RESET_COMMAND = 114 # "r"
+            START_BYTE = 255
+            
+            @debug() 
+            def send_and_check(instruction_packet,timeout=10) :
                 arduino.write(instruction_packet) 
                 start_time = time.time()
                 elapsed_time = 0
 
-                OKAY_CHARACTER = 'O'        # Okay I am doing it
-                ARDUINO_NUMBER = '2'
-                NOT_OKAY_CHARACTER = 'N'    # Not Okay
                 FLAG = 0
                 while elapsed_time < timeout and FLAG != 2:
                     elapsed_time = time.time() - start_time
                     if arduino.inWaiting() > 0 :
                         returned_data = arduino.read(arduino.inWaiting())
                         # print(returned_data)
+                        if IN_RESET_CHARACTER in returned_data :
+                            send_and_check(chr(START_BYTE) + chr(MOVE_OUT_OF_RESET_COMMAND) + chr(0))   # is timeout - elapsed_time correct
+                            print('writing instruction packet again')
+                            arduino.write(instruction_packet)
+                            FLAG = 0
                         if OKAY_CHARACTER in returned_data :
                             FLAG += 1
                         if ARDUINO_NUMBER in returned_data :
+                            FLAG += 1 
+                        if DONE_CHARACTER in returned_data : 
                             FLAG += 1 
                         if NOT_OKAY_CHARACTER in returned_data : 
                             arduino.write(instruction_packet)
@@ -151,7 +164,6 @@ def get_connected_arduino_ports() :
     print('arduino 1 port --> ',arduino_1_obj.port)
     arduino_2_obj = handshake('arduino2')
     print('arduino 2 port --> ',arduino_2_obj.port)
-
     return [arduino_1_obj,arduino_2_obj]
 
 def get_available_serial_objects():
