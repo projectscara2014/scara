@@ -4,6 +4,7 @@ import serial
 import time
 from subordinate_directory.debug import debug
 
+<<<<<<< HEAD
 #--------------------- ARDUINO SETUP --------------------------
 arduino = serial.Serial('/dev/cu.usbmodem1421')
 # arduino = serial.Serial('/dev/tty.usbserial-A8YZSL0U')
@@ -40,6 +41,11 @@ arduino = decorate_serial_object(arduino)
 arduino.set_baudrate(57600)
 time.sleep(1)
 arduino.read(arduino.inWaiting())
+=======
+def init(arduino_serial_object):
+	global arduino
+	arduino = arduino_serial_object
+>>>>>>> ecc0ae7da5b07c07d5b25fb6c8e971c720276d8e
 
 GO_TO_SERVO_POS = 0
 
@@ -65,6 +71,7 @@ NUMBER_OF_TIMES_SENT_LIMIT = 100
 
 @debug()
 def send_and_check(instruction_packet,timeout=5) :
+<<<<<<< HEAD
 	global SEND_AND_CHECK_RECURSION_DEPTH 
 	global NUMBER_OF_TIMES_SENT
 
@@ -74,6 +81,10 @@ def send_and_check(instruction_packet,timeout=5) :
 
 	NUMBER_OF_TIMES_SENT += 1
 	print('number of times sent --> ',NUMBER_OF_TIMES_SENT)
+=======
+	# print(timeout) 
+	global arduino
+>>>>>>> ecc0ae7da5b07c07d5b25fb6c8e971c720276d8e
 
 	arduino.write(instruction_packet) 
 	time.sleep(0.5)
@@ -131,6 +142,10 @@ def reset_communication_flags() :
 
 def rotate() :
 	global GO_TO_SERVO_POS 
+	GO_TO_SERVO_POS = int(GO_TO_SERVO_POS)
+	print(START_BYTE)
+	print(MOVE_COMMAND)
+	print(GO_TO_SERVO_POS)
 	instruction_packet = chr(START_BYTE) + chr(MOVE_COMMAND) + chr(GO_TO_SERVO_POS)
 	send_and_check(instruction_packet,timeout = ROTATE_COMMUNICATION_TIMEOUT_LIMIT)
 	reset_communication_flags()
@@ -144,11 +159,6 @@ def place() :
 	instruction_packet = chr(START_BYTE) + chr(PLACE_COMMAND) + chr(0)
 	send_and_check(instruction_packet,timeout = PLACE_COMMUNICATION_TIMEOUT_LIMIT)
 	reset_communication_flags()
-
-def move(pos) : 
-	global GO_TO_SERVO_POS
-	GO_TO_SERVO_POS = pos
-	rotate()
 
 # instruction_packet = chr(START_BYTE) + 'h' + chr(0)
 # send_and_check(instruction_packet)

@@ -38,7 +38,7 @@ def coordinates_to_list(x,y):
 	return return_block_array
 
 def calculate_entire_block_position_list(alpha,beta,s=False) :
-
+	return [alpha,beta,alpha,beta,s,s,1] #comment LATER
 	global a
 	global b
 	default_s_value = 45
