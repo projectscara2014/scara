@@ -30,7 +30,7 @@ def debug(*arg,**kwarg) :
 	def wrapper_function(func) : 
 		def wrapper(*args,**kwargs) : 
 			print('entering ' + func.__name__)
-			func(*args,**kwargs)
+			return func(*args,**kwargs)
 			print('exiting ' + func.__name__)
 		return wrapper
 	return wrapper_function
