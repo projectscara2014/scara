@@ -1,4 +1,4 @@
-from gui_maker import*
+from gui.gui_maker import*
 
 close_button = button_maker("close", fg_color = "red", command = "close")
 

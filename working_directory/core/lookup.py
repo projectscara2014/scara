@@ -1,8 +1,8 @@
 import sys
 gui = sys.modules["__main__"]
 
-from subordinate_directory.debug import debug
-from subordinate_directory.string_handling import *
+from utils.debug import debug
+from utils.string_handling import *
 
 if sys.platform.startswith('win') : 
 	SYSTEM_PATH_SEPERATOR = '\\'
@@ -100,7 +100,7 @@ def mod(s):
 def change_array(array,num):
 	#num=0 ==> POSITION_ARRAY_FLAGS
 	#num=1 ==> DISPLAY_AREA_POSITIONS
-	with open(gui.WORKING_DIRECTORY + 'main_directory' + SYSTEM_PATH_SEPERATOR + 'variable_array.txt','r') as variable_array: 
+	with open(gui.WORKING_DIRECTORY + 'core' + SYSTEM_PATH_SEPERATOR + 'variable_array.txt','r') as variable_array: 
 		k=[]
 		for line in variable_array:
 			k.append(line)
@@ -110,7 +110,7 @@ def change_array(array,num):
 		s += '\n'
 	k[num] = s
 	
-	with open(gui.WORKING_DIRECTORY + 'main_directory' + SYSTEM_PATH_SEPERATOR + 'variable_array.txt','w') as variable_array :
+	with open(gui.WORKING_DIRECTORY + 'core' + SYSTEM_PATH_SEPERATOR + 'variable_array.txt','w') as variable_array :
 		for i in range(len(k)):
 			variable_array.write(k[i])
 ########### RIYANSH CODES ##########
@@ -231,7 +231,7 @@ def init_lookup() :
 				array.append(element.pop())
 			POSITION_ARRAY_FLAGS.append(array)
 
-	with open(gui.WORKING_DIRECTORY + 'main_directory' + SYSTEM_PATH_SEPERATOR + 'lookup.txt','r') as logs :
+	with open(gui.WORKING_DIRECTORY + 'core' + SYSTEM_PATH_SEPERATOR + 'lookup.txt','r') as logs :
 		logs_ = logs.read()
 		edit_position_array(logs_)
 		logs.close()

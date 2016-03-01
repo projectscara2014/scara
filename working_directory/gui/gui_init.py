@@ -12,7 +12,7 @@ def setup() :
 
 	def locate_working_directory() : 
 		working_directory = ''
-		for element in __file__.split(SPLITTING_CHARACTER)[:-3] :
+		for element in __file__.split(SPLITTING_CHARACTER)[:-2] :
 			working_directory += element + '{}'.format(SPLITTING_CHARACTER)
 		return working_directory
 	
@@ -23,7 +23,7 @@ def setup() :
 
 setup()
 
-from main_directory.gui import gui_main
+from gui import gui_main
 
 m = gui_main.MAIN()
 

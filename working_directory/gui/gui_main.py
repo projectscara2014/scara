@@ -1,9 +1,9 @@
-from gui_objects import *
-from gui_maker import *
+from gui.gui_objects import *
+from gui.gui_maker import *
 
 global_pass = "m"
 
-from main_directory.gui import scara_sim as scara
+from gui import scara_sim as scara
 
 class PASSWORD :
     

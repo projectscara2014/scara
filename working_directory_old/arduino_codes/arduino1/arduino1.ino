@@ -12,7 +12,7 @@ int flag_dynamixel2_disconnected = 0;
 
 //THRESHOLDS
 int threshold_12v = 700; //#CHANGE
-int threshold_5v = 800; //#CHANGE
+int threshold_5v = 700; //#CHANGE
 int threshold_ldr = 700;
 
 //Pin Definitions

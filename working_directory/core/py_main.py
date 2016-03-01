@@ -1,25 +1,24 @@
-###from main_directory import lookup
-from subordinate_directory import serial_ports_setup
+##from core import lookup
+from utils import serial_ports_setup
 
 [arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects()
 print(arduino1_serial_object)
 print(arduino2_serial_object)
-from main_directory import arduino1
+from comm import arduino1
 arduino1.init(arduino1_serial_object)
 arduino1.dynamixel_initialization1()
 
-# dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
-from main_directory import dynamixel
+from comm import dynamixel
 arduino1.dynamixel_initialization2()
 
-from main_directory import arduino2
+from comm import arduino2
 arduino2.init(arduino2_serial_object)
 
-from main_directory import lookup
+from core import lookup
 
 import time
 
-from subordinate_directory.debug import debug
+from utils.debug import debug
 
 CURRENT_ARRAY_LENGTH = 0
 CURRENT_ARRAY = []

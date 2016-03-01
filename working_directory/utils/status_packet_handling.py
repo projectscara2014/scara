@@ -1,5 +1,5 @@
-from subordinate_directory import string_handling # string_handling.char_to_int
-from subordinate_directory import exception_handling # handle_exception
+from utils import string_handling # string_handling.char_to_int
+from utils import exception_handling # handle_exception
 
 def print_packet(packet) :
 

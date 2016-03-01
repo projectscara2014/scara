@@ -1,6 +1,6 @@
 import sys
 gui = sys.modules['__main__']
-import error_logging
+from utils import error_logging
 
 def handle_exception(module_name,exception_name,*args) :
 	
