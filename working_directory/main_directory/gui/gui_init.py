@@ -26,3 +26,6 @@ setup()
 from main_directory.gui import gui_main
 
 m = gui_main.MAIN()
+
+# CHANGE shut down dynamixel power
+gui_main.scara.py_main.arduino1.initialize_to_default()
