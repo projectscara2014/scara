@@ -24,21 +24,25 @@ def setup() :
 setup()
 
 #---------------------- DYNAMIXEL AND ARDUINO CONTROLLING FUNCITONS -----------------------------
-from utils import serial_ports_setup
+from comm import comm_init
 
-[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects()
-print(arduino1_serial_object)
-print(arduino2_serial_object)
-from comm import arduino1
-arduino1.init(arduino1_serial_object)
-arduino1.dynamixel_initialization1()
+if(comm_init.arduino1_connected):
+	arduino1_serial_object = comm_init.arduino1_serial_object
+	from comm import arduino1
+	arduino1.init(arduino1_serial_object)
 
-# dynamixel_serial_object = serial_ports_setup.get_connected_dynamixel_object(dynamixel)
-from comm import dynamixel
-arduino1.dynamixel_initialization2()
+if(comm_init.arduino1_connected and comm_init.dynamixel_connected):
+	arduino1.dynamixel_initialization1()
+	from comm import dynamixel
+	arduino1.dynamixel_initialization2()
+else:
+	pass
+	# get dummy dynamixel object here
 
-from comm import arduino2
-arduino2.init(arduino2_serial_object)
+if(comm_init.arduino2_connected):
+	arduino2_serial_object = comm_init.arduino2_serial_object
+	from comm import arduino2
+	arduino2.init(arduino2_serial_object)
 
 from core import lookup
 from setup import this_to_that
