@@ -39,11 +39,15 @@ Servo vertical_servo;
 Servo gripper_servo;
 
 int COUNT = 0;
+int val_0_rot = 1248;   //
+int val_90_rot = 2172;  //
 
 void setup(){
   Serial.begin(57600);
   //attach
-  rotation_servo.attach(rotation_servo_pin);
+  // rotation_servo.attach(rotation_servo_pin);
+  pinMode(rotation_servo_pin,OUTPUT);
+  digitalWrite(rotation_servo_pin,LOW);
   vertical_servo.attach(vertical_servo_pin);
   gripper_servo.attach(gripper_servo_pin);
 
@@ -164,11 +168,24 @@ void place() {
   // double_blink();
 }
 
-void move(int position) {
-  // Serial.write("moving");
-  rotation_servo.write(position);
-  delay(10);
-  // double_blink();
+void move(int angle){
+  int angle_ = angle%90;
+  float f;
+  f = ((val_90_rot-val_0_rot)*1.0*angle_/90) + val_0_rot;
+  angle_ = int(f);
+  _move_3_(angle_);
+}
+
+void _move_3_(int on_time){
+  int off_time = 20000 - on_time;
+  for(int i = 0;i<25;i++){
+    digitalWrite(rotation_servo_pin,HIGH);
+    delay(on_time/1000);
+    delayMicroseconds(on_time%1000);
+    digitalWrite(rotation_servo_pin,LOW);
+    delay(off_time/1000);
+    delayMicroseconds(off_time%1000);
+  }
 }
 
 void _blink_() {
