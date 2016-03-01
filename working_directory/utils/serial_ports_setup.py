@@ -9,10 +9,19 @@ from utils import exception_handling
 from utils.debug import debug
 ###from utils.dummy_dynamixel import dummy_dynamixel
 
-def get_connected_arduino_objects() : 
-    #returns a list [arduino_1_serial_object,arduino_2_serial_object]
+def get_connected_arduino_objects(arduino1_flag,arduino2_flag) : 
+    #returns a list [arduino_1_serial_object,arduino_2_serial_objects
 
-    global arduino_1_obj,arduino_2_obj
+    global arduino_1_obj, arduino_2_obj
+    global serial_objects_list
+    global dynamixel_port
+
+    serial_objects_list = get_available_serial_objects()
+
+    [arduino_1_obj,arduino_2_obj] = get_connected_arduino_ports(arduino1_flag,arduino2_flag)
+
+    serial_objects_list[0].close() # CHANGE --- close all open ports
+    dynamixel_port = 'com8'
 
     def decorate_serial_object(serial_object) : 
         
@@ -65,7 +74,7 @@ def get_connected_dynamixel_object(dynamixel_module) :
     print("close other open ports")
     print("ok_1234")
 
-def get_connected_arduino_ports() : 
+def get_connected_arduino_ports(arduino1_flag,arduino2_flag) : 
     global serial_objects_list
 
     for obj in serial_objects_list:
@@ -156,13 +165,20 @@ def get_connected_arduino_ports() :
                 if handshake_function(serial_port) == True :
                     serial_objects_list.pop(serial_objects_list.index(serial_port))
                     return serial_port
-                
         raise OSError(device + ' is not connected')
-    
-    arduino_1_obj = handshake('arduino1')
-    print('arduino 1 port --> ',arduino_1_obj.port)
-    arduino_2_obj = handshake('arduino2')
-    print('arduino 2 port --> ',arduino_2_obj.port)
+
+    if(arduino1_flag):
+        arduino_1_obj = handshake('arduino1')
+        print('arduino 1 port --> ',arduino_1_obj.port)
+    else:
+        # arduino_1_obj =
+        pass # CHANGE
+    if(arduino2_flag):
+        arduino_2_obj = handshake('arduino2')
+        print('arduino 2 port --> ',arduino_2_obj.port)
+    else:
+        # arduino_2_obj = 
+        pass # CHANGE
     return [arduino_1_obj,arduino_2_obj]
 
 def get_available_serial_objects():
@@ -197,13 +213,6 @@ def get_available_serial_objects():
     time.sleep(3)
 
     return result
-
-serial_objects_list = get_available_serial_objects()
-
-[arduino_1_obj,arduino_2_obj] = get_connected_arduino_ports()
-
-serial_objects_list[0].close()
-dynamixel_port = 'com8'
 
 def find_dynamixel_and_arduino() :
     global dynamixel_port,arduino1_port,arduino2_port

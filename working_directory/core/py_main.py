@@ -1,7 +1,7 @@
 ##from core import lookup
 from utils import serial_ports_setup
 
-[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects()
+[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects(True,True)
 print(arduino1_serial_object)
 print(arduino2_serial_object)
 from comm import arduino1
