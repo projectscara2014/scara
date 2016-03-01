@@ -3,9 +3,9 @@
 import time                              #import time liabrary to use the time.sleep() function to generate delays
 import serial                            #import the serial library 
 
-from subordinate_directory import serial_ports_setup
-from subordinate_directory import status_packet_handling
-from subordinate_directory.string_handling import char_to_int
+from utils import serial_ports_setup # CHANGE
+from utils import status_packet_handling
+from utils.string_handling import char_to_int
 
 ##---IMPORTANT GLOBAL VARIABLES---
 GO_TO_DYNA_1_POS = 0

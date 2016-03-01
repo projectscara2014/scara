@@ -5,10 +5,9 @@ import platform # platform.system
 import inspect # inspect.stack
 import time     #time.time, time.sleep
 
-import __init__
-from subordinate_directory import exception_handling
-from subordinate_directory.debug import debug
-###from subordinate_directory.dummy_dynamixel import dummy_dynamixel
+from utils import exception_handling
+from utils.debug import debug
+###from utils.dummy_dynamixel import dummy_dynamixel
 
 def get_connected_arduino_objects() : 
     #returns a list [arduino_1_serial_object,arduino_2_serial_object]

@@ -1,6 +1,5 @@
 import serial
 import time
-from subordinate_directory import serial_ports_setup
 import sys
 
 global arduino1
