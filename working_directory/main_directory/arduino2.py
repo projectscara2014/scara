@@ -1,51 +1,9 @@
-import __init__
-
 import serial
 import time
-from subordinate_directory.debug import debug
 
-<<<<<<< HEAD
-#--------------------- ARDUINO SETUP --------------------------
-arduino = serial.Serial('/dev/cu.usbmodem1421')
-# arduino = serial.Serial('/dev/tty.usbserial-A8YZSL0U')
-# arduino = serial.Serial('com7')
-# from subordinate_directory import serial_ports_setup
-# arduino = serial_ports_setup.find_dynamixel_and_arduino()
-def decorate_serial_object(serial_object) : 
-	
-	def decorator(function) :
-		def wrapper(*args,**kwargs) : 
-			return_value = None
-			try : 
-				return_value = function(*args,**kwargs)
-			except OSError :
-				print('arduino not connected')
-			else :
-				return return_value
-		return wrapper
-
-	def set_baudrate(baudrate) : 
-		try :
-			serial_object.baudrate = baudrate
-		except serial.serialutil.SerialException :
-			print('arduino not connected')
-	
-	serial_object.write = decorator(serial_object.write)
-	serial_object.read = decorator(serial_object.read)
-	serial_object.inWaiting = decorator(serial_object.inWaiting)
-	serial_object.set_baudrate = set_baudrate
-	return serial_object
-#--------------------------------------------------------------
-
-arduino = decorate_serial_object(arduino)
-arduino.set_baudrate(57600)
-time.sleep(1)
-arduino.read(arduino.inWaiting())
-=======
 def init(arduino_serial_object):
 	global arduino
 	arduino = arduino_serial_object
->>>>>>> ecc0ae7da5b07c07d5b25fb6c8e971c720276d8e
 
 GO_TO_SERVO_POS = 0
 
@@ -69,22 +27,16 @@ SEND_AND_CHECK_RECURSION_DEPTH_LIMIT = 5
 NUMBER_OF_TIMES_SENT = 0
 NUMBER_OF_TIMES_SENT_LIMIT = 100
 
-@debug()
 def send_and_check(instruction_packet,timeout=5) :
-<<<<<<< HEAD
 	global SEND_AND_CHECK_RECURSION_DEPTH 
 	global NUMBER_OF_TIMES_SENT
 
-	print('sending')
+	# print('sending')
 
-	print(timeout) 
+	# print(timeout) 
 
 	NUMBER_OF_TIMES_SENT += 1
-	print('number of times sent --> ',NUMBER_OF_TIMES_SENT)
-=======
-	# print(timeout) 
-	global arduino
->>>>>>> ecc0ae7da5b07c07d5b25fb6c8e971c720276d8e
+	# print('number of times sent --> ',NUMBER_OF_TIMES_SENT)
 
 	arduino.write(instruction_packet) 
 	time.sleep(0.5)
@@ -92,28 +44,10 @@ def send_and_check(instruction_packet,timeout=5) :
 	elapsed_time = 0
 	FLAG = 0
 	while elapsed_time < timeout and FLAG != 2:
-		elapsed_time = time.time() - start_time
-		
+		elapsed_time = time.time() - start_time	
 		if arduino.inWaiting() > 0 :
 			returned_data = arduino.read(arduino.inWaiting())
-			print(returned_data)
-			
-			'''
-			if IN_RESET_CHARACTER in returned_data :
-				print('arduino2 has been reset')	# should this be handled in exception handling ?
-				FLAG = 0							# dismiss all the previous communication made
-				if SEND_AND_CHECK_RECURSION_DEPTH == SEND_AND_CHECK_RECURSION_DEPTH_LIMIT :
-					reset_communication_flags()
-					raise OSError('arduino2 not responding --> send and check recursion depth reached')
-				else :
-					SEND_AND_CHECK_RECURSION_DEPTH += 1
-					print('send and check recursion depth --> ' + str(SEND_AND_CHECK_RECURSION_DEPTH))
-					send_and_check(chr(START_BYTE) + chr(MOVE_OUT_OF_RESET_COMMAND) + chr(0))	# is timeout - elapsed_time correct
-				
-				rotate()
-				arduino.write(instruction_packet)
-			'''
-			
+			# print(returned_data)
 			if IN_RESET_CHARACTER in returned_data :
 				print('arduino2 has been reset')
 				send_and_check(chr(START_BYTE) + chr(MOVE_OUT_OF_RESET_COMMAND) + chr(0))	# is timeout - elapsed_time correct
@@ -126,7 +60,6 @@ def send_and_check(instruction_packet,timeout=5) :
 				FLAG += 1 
 			if NOT_OKAY_CHARACTER in returned_data : 
 				arduino.write(instruction_packet)
-
 	if FLAG != 2 : 
 		if NUMBER_OF_TIMES_SENT == NUMBER_OF_TIMES_SENT_LIMIT + 1:
 			raise OSError('arduino2 not responding')

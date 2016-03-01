@@ -180,4 +180,4 @@ def block_position_setup() :
 	setup_one_block()
 
 block_position_setup()
-print('and continuing ...')
+arduino1.initialize_to_default()
