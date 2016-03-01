@@ -10,7 +10,7 @@ elif sys.platform.startswith('darwin') :
 	SYSTEM_PATH_SEPERATOR = '/'
 
 try : 
-	from subordinate_directory import string_handling #char_to_int,skip_until_character
+	from utils import string_handling #char_to_int,skip_until_character
 except : 
 	WORKING_DIRECTORY = ''
 
@@ -28,13 +28,13 @@ except :
 		sys.path.append(WORKING_DIRECTORY)
  
 	setup()
-	from subordinate_directory import string_handling #char_to_int,skip_until_character
+	from utils import string_handling #char_to_int,skip_until_character
 else :
 	import sys
 	gui = sys.modules["__main__"]
 	WORKING_DIRECTORY = gui.WORKING_DIRECTORY
 
-from subordinate_directory import status_packet_handling #print_packet
+from utils import status_packet_handling #print_packet
 
 class Dynamixel : 
 	
@@ -137,11 +137,11 @@ class Dynamixel :
 		'''
 		memory = {}
 		text_memory = ''
-		# with open(gui.WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dymmy_dynamixel_memory.txt','r') as f : 
+		# with open(gui.WORKING_DIRECTORY + 'utils' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dymmy_dynamixel_memory.txt','r') as f : 
 		if dynamixel_id == 1 : 
-			memory_path = WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory_1.txt'
+			memory_path = WORKING_DIRECTORY + 'utils' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory_1.txt'
 		elif dynamixel_id == 2 :
-			memory_path = WORKING_DIRECTORY + 'subordinate_directory' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory_2.txt'
+			memory_path = WORKING_DIRECTORY + 'utils' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel' + SYSTEM_PATH_SEPERATOR + 'dummy_dynamixel_memory_2.txt'
 		else : 
 			raise 'dummy_dynamixel.read_memory(self,dynamixel_id) --> incorrect dynamixel ID'
 		with open(memory_path,'r') as f : 
