@@ -40,7 +40,6 @@ arduino1.dynamixel_initialization2()
 from comm import arduino2
 arduino2.init(arduino2_serial_object)
 
-from comm import arduino2
 from core import lookup
 from setup import this_to_that
 import time
