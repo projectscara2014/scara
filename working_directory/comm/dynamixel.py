@@ -8,8 +8,8 @@ from utils import status_packet_handling
 from utils.string_handling import char_to_int
 
 ##---IMPORTANT GLOBAL VARIABLES---
-GO_TO_DYNA_1_POS = 0
-GO_TO_DYNA_2_POS = 0
+GO_TO_DYNA_1_POS = 200
+GO_TO_DYNA_2_POS = -200
 
 ##---INITIALIZATION VARIABLES---
 dynamixel = ''
@@ -240,8 +240,8 @@ def till_dyna_reached() :
 def dynamixel_initializations():
     send_and_check(1,3,26,8,8,24)   #PID for motor 1
     send_and_check(2,3,26,8,8,24)   #PID for motor 2
-    send_and_check(1,3,32,0,1)      #SPEED for motor 1
-    send_and_check(2,3,32,0,1)      #SPEED for motor 2
+    send_and_check(1,3,32,100,0)      #SPEED for motor 1
+    send_and_check(2,3,32,100,0)      #SPEED for motor 2
     send_and_check(1,3,25,1)        #LED for motor 1
     send_and_check(2,3,25,1)        #LED for motor 2
 #-------------------------------------------------------------------

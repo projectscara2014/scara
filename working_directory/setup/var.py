@@ -1,6 +1,6 @@
 #------------------angles_to_coordinates----------------------
-LENGTH_OF_FIRST_ARM = 25.75
-LENGTH_OF_SECOND_ARM = 25.3
+LENGTH_OF_FIRST_ARM  = 24.6 #25.75
+LENGTH_OF_SECOND_ARM = 24.9 #25.3
 
 #------------------coordinates_to_angles---------------
 

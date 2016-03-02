@@ -38,7 +38,7 @@ def coordinates_to_list(x,y):
 	return return_block_array
 
 def calculate_entire_block_position_list(alpha,beta,s=False) :
-	return [alpha,beta,alpha,beta,s,s,1] #comment LATER
+	# return [alpha,beta,alpha,beta,s,s,1] #comment LATER
 	global a
 	global b
 	default_s_value = 45
@@ -89,7 +89,7 @@ def calculate_entire_block_position_list(alpha,beta,s=False) :
 			s1 = (s2 + 2*(z-theta))%90
 
 		#print([alpha_1,beta_1,alpha_2,beta_2,s1,s2,1])
-		return [alpha_1,beta_1,alpha_2,beta_2,s1,s2,1]
+		return [int(alpha_1),int(beta_1),int(alpha_2),int(beta_2),int(s1),int(s2),1]
 
 	def angles_to_scars(angle) :
 		return angle*4096.0/360
