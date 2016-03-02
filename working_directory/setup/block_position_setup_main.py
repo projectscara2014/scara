@@ -92,6 +92,7 @@ def on_key_press(event):
 
 	def move(keypress) :
 		global dynamixel_movement_per_command,servo_movement_per_command
+		global entire_block_position_list
 
 		if keypress == 119 :	
 			# "w" pressed
@@ -139,6 +140,7 @@ def on_key_press(event):
 			arduino2.pick()
 			entire_block_position_list = this_to_that.calculate_entire_block_position_list(dynamixel.GO_TO_DYNA_1_POS,\
 				dynamixel.GO_TO_DYNA_2_POS,arduino2.GO_TO_SERVO_POS)
+			print(entire_block_position_list)
 			if(dynamixel.GO_TO_DYNA_2_POS>0):
 				dynamixel.GO_TO_DYNA_1_POS = entire_block_position_list[0]
 				dynamixel.GO_TO_DYNA_2_POS = entire_block_position_list[1]
@@ -149,6 +151,7 @@ def on_key_press(event):
 				arduino2.GO_TO_SERVO_POS = int(entire_block_position_list[5])		
 			dynamixel.dyna_move()
 			arduino2.rotate()	
+			arduino2.place()
 		else :
 			print('INVALID KEY PRESSED')
 		print_everything()
@@ -174,8 +177,7 @@ def block_position_setup() :
 	def setup_one_block() : 
 		root.bind('<KeyPress>',on_key_press)
 		root.mainloop()
-		entire_block_position_list = this_to_that.calculate_entire_block_position_list(dynamixel.GO_TO_DYNA_1_POS,\
-			dynamixel.GO_TO_DYNA_2_POS,arduino2.GO_TO_SERVO_POS)
+		global entire_block_position_list
 		with open('saved_positions.txt','a') as f:
 			list_ = str(entire_block_position_list)
 			f.write(list_+'\n')
