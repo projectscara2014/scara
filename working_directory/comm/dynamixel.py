@@ -8,8 +8,8 @@ from utils import status_packet_handling
 from utils.string_handling import char_to_int
 
 ##---IMPORTANT GLOBAL VARIABLES---
-GO_TO_DYNA_1_POS = 200
-GO_TO_DYNA_2_POS = -200
+GO_TO_DYNA_1_POS = -200
+GO_TO_DYNA_2_POS = -500
 
 ##---INITIALIZATION VARIABLES---
 dynamixel = ''
@@ -19,7 +19,7 @@ motor_1_offset = 2048 - 15 + 63
 motor_2_offset = 2048 + 50 - 4
 motor_1_limit_high = 1500
 motor_1_limit_low  = -1500
-motor_2_limit_high = 1500
+motor_2_limit_high = 1500  # change in var.py
 motor_2_limit_low  = -1500
 
 ##---LIMITING VARIABLES---
