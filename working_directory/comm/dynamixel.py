@@ -8,8 +8,8 @@ from utils import status_packet_handling
 from utils.string_handling import char_to_int
 
 ##---IMPORTANT GLOBAL VARIABLES---
-GO_TO_DYNA_1_POS = -200
-GO_TO_DYNA_2_POS = -500
+GO_TO_DYNA_1_POS = 0
+GO_TO_DYNA_2_POS = 0
 
 ##---INITIALIZATION VARIABLES---
 dynamixel = ''
