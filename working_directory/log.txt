@@ -1,0 +1,7 @@
+3/Mar/2016 19:34:33 --> arduino1--> 12V brownout
+3/Mar/2016 19:50:54 --> arduino1--> 12V brownout
+3/Mar/2016 19:51:40 --> arduino1--> 12V brownout
+3/Mar/2016 19:52:15 --> arduino1--> 12V brownout
+3/Mar/2016 19:52:24 --> arduino1--> 12V brownout
+3/Mar/2016 19:53:06 --> arduino1--> 12V brownout
+3/Mar/2016 19:53:15 --> arduino1--> 12V brownout
