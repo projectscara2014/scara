@@ -22,8 +22,12 @@ def init(arduino1_serial_object):
 	if(not send_and_check('h','0')):
 		print("WRONG ARDUINO INITIALIZED")
 		sys.exit(0)
+		# CHANGE --- EH Arduino 1 disconnected
 	
 def initialize_to_default():
+	'''
+	Sends command to RESET Base Station 1
+	'''
 	if(not send_and_check('I','i')):
 		print("ERROR in arduino_initialization @arduino1.py")
 		sys.exit(0)
@@ -33,6 +37,7 @@ def dynamixel_initialization1():
 	if(not send_and_check('D','d')):
 		print("ERROR in dynamixel_initialization @arduino1.py")
 		sys.exit(0)
+		# CHANGE --- EH Arduino 1 disconnected
 	time.sleep(5)
 
 def dynamixel_initialization2():
