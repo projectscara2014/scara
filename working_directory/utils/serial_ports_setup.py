@@ -4,6 +4,7 @@ import serial # serial.Serial
 import platform # platform.system
 import inspect # inspect.stack
 import time     #time.time, time.sleep
+from functools import wraps
 
 from utils import exception_handling
 from utils.debug import debug
@@ -23,7 +24,9 @@ def get_connected_arduino_objects(arduino1_flag,arduino2_flag) :
 
     def decorate_serial_object(serial_object) : 
         
-        def decorator(function) :
+        def decorator() :
+        
+            @wraps(function)
             def wrapper(*args,**kwargs) : 
                 return_value = None
                 try : 
