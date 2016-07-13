@@ -9,6 +9,9 @@ elif sys.platform.startswith('darwin') :
 
 
 def setup() : 
+	'''
+	Sets up the working directory for the entire project
+	'''
 
 	def locate_working_directory() : 
 		working_directory = ''
@@ -21,11 +24,18 @@ def setup() :
 	print('working_directory --> ',WORKING_DIRECTORY)
 	sys.path.append(WORKING_DIRECTORY)
 
+def on_done() :
+	'''
+	Takes care of wrapping up everything before exiting the program
+	'''
+	gui_main.scara.py_main.arduino1.initialize_to_default()
+
+	# CHANGE  --- Everything else
+
 setup()
 
 from gui import gui_main
 
-m = gui_main.MAIN()
+m = gui_main.MAIN()		# initializes GUI object
 
-# CHANGE shut down dynamixel power
-gui_main.scara.py_main.arduino1.initialize_to_default()
+on_done() 
