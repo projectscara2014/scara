@@ -1,18 +1,18 @@
 ##from core import lookup
 from utils import serial_ports_setup
 
-[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects(True,True)
+[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects(True,True)  # CHANGE
 print(arduino1_serial_object)
 print(arduino2_serial_object)
 from comm import arduino1
-arduino1.init(arduino1_serial_object)
-arduino1.dynamixel_initialization1()
+arduino1.init(arduino1_serial_object) # handshaking and checking
+arduino1.dynamixel_initialization1() # power on dynamixel
 
 from comm import dynamixel
 arduino1.dynamixel_initialization2()
 
 from comm import arduino2
-arduino2.init(arduino2_serial_object)
+arduino2.init(arduino2_serial_object) ### UNCHANGED 16/6/16
 
 from core import lookup
 
@@ -41,7 +41,7 @@ def modify_blocks(obj):
     FLAG = False
 
     display_area_calc()
-
+    # p=0
     print(CURRENT_ARRAY_LENGTH)
     print("-----------------")
     for i in range (CURRENT_ARRAY_LENGTH):
@@ -49,9 +49,7 @@ def modify_blocks(obj):
             global_string+=" "
             continue
         print(i)
-        # print("LOOKUP_OUTPUT = ",lookup.LOOKUP_OUTPUT)
-        # print("DYNA_1_POS = ",lookup.DYNA_1_POS)
-        # print("DYNA_2_POS = ",lookup.DYNA_2_POS)
+
         #--------------- PICK FORWARD --------------------------
         print("Picking ",CURRENT_ARRAY[i]," from arena")
         
@@ -68,14 +66,9 @@ def modify_blocks(obj):
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.pick(LOOKUP_OUTPUT[2])
         arduino2.GO_TO_SERVO_POS = lookup.LOOKUP_OUTPUT[2]
-        try:
-            arduino2.rotate()   
-        except:
-            break
+        arduino2.rotate()   
         arduino2.pick()
-        # print("DYNA_1_POS = ",lookup.DYNA_1_POS)
-        # print("DYNA_2_POS = ",lookup.DYNA_2_POS)
-        # print("----")
+
         #-------------------------------------------------------
         time.sleep(1)
         print("----")
@@ -90,16 +83,18 @@ def modify_blocks(obj):
         dynamixel.dyna_move()
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
-        #arduino.place(DISPLAY_AREA_something)
-        arduino2.GO_TO_SERVO_POS = DISPLAY_AREA_POSITIONS[i][5]
-        arduino2.rotate()   
-        arduino2.place()
+
+        arduino2.GO_TO_SERVO_POS = DISPLAY_AREA_POSITIONS[i][5]  ## UNCHANGED 16/6/16
+        arduino2.rotate()  ## UNCHANGED 16/6/16 
+        arduino2.place()   ## UNCHANGED 16/6/16
         p = i+1
         if(FLAG):
             break
         #-------------------------------------------------------
         print("-----------------")
         time.sleep(1)
+    # p = i+1
+    # CHANGE
     print("wait thoda...\nwait thoda...\nwait thoda...")
     print("-----------------")
     for k in range (p):
@@ -119,9 +114,9 @@ def modify_blocks(obj):
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.pick(DISPLAY_AREA_something)
-        arduino2.GO_TO_SERVO_POS = DISPLAY_AREA_POSITIONS[i][5]
-        arduino2.rotate()   
-        arduino2.pick()
+        arduino2.GO_TO_SERVO_POS = DISPLAY_AREA_POSITIONS[i][5] ## UNCHANGED 16/6/16
+        arduino2.rotate()  ## UNCHANGED 16/6/16
+        arduino2.pick()   ## UNCHANGED 16/6/16
         #-------------------------------------------------------
         time.sleep(1)
         print("----")
@@ -138,7 +133,8 @@ def modify_blocks(obj):
         lookup.DYNA_1_POS = dynamixel.GO_TO_DYNA_1_POS
         lookup.DYNA_2_POS = dynamixel.GO_TO_DYNA_2_POS
         #arduino.place(LOOKUP_OUTPUT[2])
-        arduino2.GO_TO_SERVO_POS = lookup.LOOKUP_OUTPUT[2]
+        ## UNCHANGED 16/6/16
+        arduino2.GO_TO_SERVO_POS = int(lookup.LOOKUP_OUTPUT[2]) # CHANGED 12/7/16
         arduino2.rotate()   
         arduino2.place()
         #-------------------------------------------------------
@@ -153,9 +149,9 @@ def display_area_calc():
     global CURRENT_ARRAY_LENGTH
     global DISPLAY_AREA_TEMP
 
-    DISPLAY_AREA_POSITIONS = DISPLAY_AREA_TEMP[CURRENT_ARRAY_LENGTH -1]
+    DISPLAY_AREA_POSITIONS = DISPLAY_AREA_TEMP[CURRENT_ARRAY_LENGTH -1] # CHANGE
 
-def check_if_blocks_out_of_place():
+def check_if_blocks_out_of_place(): # CHANGE
     f=0
 
 # dynamixel.move_to(400,1500)

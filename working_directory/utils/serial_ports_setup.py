@@ -8,21 +8,19 @@ from functools import wraps
 
 from utils import exception_handling
 from utils.debug import debug
-###from utils.dummy_dynamixel import dummy_dynamixel
+#### from utils.dummy_dynamixel import dummy_dynamixel
 
 def get_connected_arduino_objects(arduino1_flag,arduino2_flag) : 
     #returns a list [arduino_1_serial_object,arduino_2_serial_objects
 
     global arduino_1_obj, arduino_2_obj
     global serial_objects_list
-    global dynamixel_port
 
     serial_objects_list = get_available_serial_objects()
 
     [arduino_1_obj,arduino_2_obj] = get_connected_arduino_ports(arduino1_flag,arduino2_flag)
 
-    serial_objects_list[0].close() # CHANGE --- close all open ports
-    dynamixel_port = 'com8'
+    # serial_objects_list[0].close() # CHANGE --- close all open ports
 
     def decorate_serial_object(serial_object) : 
         
@@ -58,26 +56,11 @@ def get_connected_arduino_objects(arduino1_flag,arduino2_flag) :
 
     return [arduino1,arduino2]
 
-def get_connected_dynamixel_object(dynamixel_module) : 
-    global serial_objects_list
-
-    def dynamixel_handshake(serial_object) : 
-        # returns True if dynamixel is connected to "serial_port", else returns False
-        serial_object.baudrate = 57600
-        dynamixel_module.dynamixel = serial_object
-        print(serial_object)
-        dynamixel_module.send_and_check(1,3,25,1)
-        print("okayyy")
-        print(dynamixel_module.dynamixel)
-        return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
-        print(return_value)
-
-    dynamixel_handshake(serial_objects_list[0])
-    print("okay")
-    print("close other open ports")
-    print("ok_1234")
-
 def get_connected_arduino_ports(arduino1_flag,arduino2_flag) : 
+    '''
+    Tries to perform handshaking with each connected device and determines the port numbers for connected Arduino devices
+    Returns respective Serial Objects
+    '''
     global serial_objects_list
 
     for obj in serial_objects_list:
@@ -86,10 +69,10 @@ def get_connected_arduino_ports(arduino1_flag,arduino2_flag) :
     def handshake(device) : 
         # returns the serial_port in "serial_ports_list" to which the "device" is connected
 
-        def arduino_1_handshake(serial_port) :
-            # returns True if arduino2 is connected to "serial_port", else returns False
+        def arduino_1_handshake(serial_obj) :
+            # returns True if arduino2 is connected to "serial_obj", else returns False
 
-            arduino = serial_port
+            arduino = serial_obj
             arduino.baudrate = 57600
             ARDUINO_NUMBER = '0'
             
@@ -109,7 +92,15 @@ def get_connected_arduino_ports(arduino1_flag,arduino2_flag) :
 
             return send_and_check('h')
 
-        def arduino_2_handshake(serial_port) : 
+        def arduino_2_handshake(serial_obj):
+            from comm import arduino2
+
+            arduino2.arduino = serial_obj
+
+            return arduino2.handshake()
+
+
+        def arduino_2_handshake_old(serial_port) : 
             # returns True if arduino1 is connedted to "serial_port", else returns False
             
             arduino = serial_port
@@ -163,34 +154,36 @@ def get_connected_arduino_ports(arduino1_flag,arduino2_flag) :
 
         ignore_serial_ports = ['/dev/tty.Bluetooth-Incoming-Port']
 
-        for serial_port in serial_objects_list :
-            if serial_port.port not in ignore_serial_ports :
-                if handshake_function(serial_port) == True :
-                    serial_objects_list.pop(serial_objects_list.index(serial_port))
-                    return serial_port
+        for serial_obj in serial_objects_list :
+            if serial_obj.port not in ignore_serial_ports :
+                if handshake_function(serial_obj) == True :
+                    serial_objects_list.pop(serial_objects_list.index(serial_obj))
+                    return serial_obj
         raise OSError(device + ' is not connected')
+        # CHANGE Exception Handling
 
     if(arduino1_flag):
         arduino_1_obj = handshake('arduino1')
         print('arduino 1 port --> ',arduino_1_obj.port)
     else:
-        # arduino_1_obj =
+        # arduino_1_obj = DUMMY OBJECT
         pass # CHANGE
     if(arduino2_flag):
+        # arduino_2_obj = arduino_1_obj ### UNCHANGED 16/6/16
         arduino_2_obj = handshake('arduino2')
         print('arduino 2 port --> ',arduino_2_obj.port)
     else:
-        # arduino_2_obj = 
+        # arduino_2_obj = DUMMY OBJECT
         pass # CHANGE
     return [arduino_1_obj,arduino_2_obj]
 
 def get_available_serial_objects():
-    """Lists serial ports
+    """Lists connected serial objects
 
     :raises EnvironmentError:
         On unsupported or unknown platforms
     :returns:
-        A list of available serial ports
+        A list of available serial objects
     """
     if sys.platform.startswith('win'):
         ports = ['COM' + str(i + 1) for i in range(256)]
@@ -217,45 +210,68 @@ def get_available_serial_objects():
 
     return result
 
-def find_dynamixel_and_arduino() :
-    global dynamixel_port,arduino1_port,arduino2_port
+def get_connected_dynamixel_object() : 
+    '''
+    Returns the Serial object for connected "USB to RS485" module
+    '''
+    global serial_objects_list     # all remaining serial objects are open here
 
-    #check if this function called by dynamixel.py, arduino1.py or arduino2.py
-    #return the arduino1 or arduino2 or dynamixel port respectively
-    stack = inspect.stack()
-    if 'dynamixel' in stack[1][1] :
-        try :
-            dynamixel = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
-        except :
-            dynamixel = dummy_dynamixel.Dynamixel()
-            return dynamixel
-            # exception_handling.handle_exception('dynamixel','cant connect')
-        else :
-            print(dynamixel)
-            dynamixel.baudrate = 57600                 #set baudrate equal to 57600
-            return dynamixel
-            # dynamixel = dummy_dynamixel.Dynamixel()
-            # return dynamixel
-            
-    elif 'arduino1' in stack[1][1] :
-        try :
-            arduino1 = serial.Serial(port = arduino1_port)
-        except :
-            raise OSError('ARDUINO1 NOT CONNECTED')
-        else :
-            print(arduino1)
-            arduino1.baudrate = 9600
-            return arduino1
+    ### CHANGE --- REMOVE THIS LATER
 
-    elif 'arduino2' in stack[1][1] :
-        try : 
-            arduino2 = serial.Serial(port = arduino2_port)
-        except : 
-            raise OSError('ARDUINO2 NOT CONNECTED')
-        else :
-            print(arduino2)
-            arduino2.baudrate = 9600
-            return arduino2
-    else : 
-        print('serial_ports_setup.py called by some module\
-            other that dynamixel.py or arduino.py')
+    dynamixel_port = 'com5'  # CHANGE ---- WTF?
+
+    print(dynamixel_port)
+
+    try :
+        for serial_object in serial_objects_list:
+            print "Closing Port : " + str(serial_object.port)
+            serial_object.close()
+        dynamixel = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
+    except :
+        # dynamixel = dummy_dynamixel.Dynamixel() ## UNCHANGED 16/6/16
+        # # return dynamixel ##CHANGED 16/6/16
+        # dynamixel = serial.Serial(port = dynamixel_port)
+        raise RuntimeError("Dynamixel not connected") # CHANGE
+        # exception_handling.handle_exception('dynamixel','cant connect') 
+    else :
+        print(dynamixel)
+        dynamixel.baudrate = 57600                 #set baudrate equal to 57600
+        return dynamixel
+        # dynamixel = dummy_dynamixel.Dynamixel()
+        # return dynamixel
+
+    ###  IF THIS WORKS THEN REMOVE UPAR KA
+
+    dynamixel_module = stack.inspect()[1][1]    # dynamixel module for functional usage
+
+    def dynamixel_handshake(serial_object) : 
+        '''
+        returns True if dynamixel is connected to "serial_port", else returns False
+        '''
+        serial_object.baudrate = 57600
+        dynamixel_module.dynamixel = serial_object
+        print(serial_object)
+        # # dynamixel_module.send_and_check(1,3,25,1)
+        # print("okayyy")
+        # print(dynamixel_module.dynamixel)
+
+        # CHANGE URGENT --- Some function to check Dynamixel is connected
+
+        # return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
+
+        print(return_value)
+        return return_value
+
+    return_object = None
+
+    for serial_object in serial_objects_list:
+        if(dynamixel_handshake(serial_object)):
+            return_object = serial_object
+        else:
+            serial_object.close()
+
+    if(return_object == None):
+        pass
+        # CHANGE EH
+    else:
+        return return_object

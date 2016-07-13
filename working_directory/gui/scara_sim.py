@@ -1,6 +1,5 @@
 import time
 import Tkinter as tk
-
 from core import py_main
 
 parameter_list = [0,1,1,2,3,5,8,13,21,34]*2
@@ -11,6 +10,9 @@ OCCURENCE_LIST = []
 max_length = 10
 
 def init_scara_sim():
+    '''
+    Obtains number of available blocks for each alphabet
+    '''
     global OCCURENCE_LIST
 
     p = py_main.lookup.POSITION_ARRAY_FLAGS
