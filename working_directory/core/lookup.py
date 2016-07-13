@@ -37,6 +37,8 @@ def lookup(letter,directive):
 	if (letter == "R"):
 		sort(3,directive)
 
+	# CHANGE CHANGE CHANGE
+
 @debug()
 def sort(index,directive):
 	#directive needs to be local

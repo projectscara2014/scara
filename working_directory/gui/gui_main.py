@@ -67,24 +67,8 @@ class SETUP :
     def deiconify(self):
         self.main_window.root.deiconify()
 
-class RUN :
-
-    def __init__(self,parent):
-        print("RUN window initialized")
-        self.master = parent
-        label1 = label_maker("Enter something:")
-        ip_box = input_box_maker()
-        ok_button = button_maker("Okay",command = some_fn)
-        back_button = button_maker("Back to Main menu", command = self.close_window)
-        self.main_window = window_maker("instance_mode",label1,2,ip_box,3,ok_button,8,back_button)
-        # self.main_window.mainloop_enable()
-
-    def close_window(self):
-        self.main_window.close_window()
-        self.master.deiconify()
-
 import Tkinter as tk
-class RUN2(tk.Toplevel):
+class RUN(tk.Toplevel):
     
     def __init__(self):
         tk.Toplevel.__init__(self)
@@ -153,14 +137,14 @@ class MAIN :
 
     def __init__(self):
         run_button = button_maker("RUN",bg_color = "purple",\
-         fg_color ="white", command = self.RUN_window_creator)
+            fg_color ="white", command = self.RUN_window_creator)
         setup_button = button_maker("SETUP", command = self.PASSWORD_window_creator)
         self.main_window = window_maker("instance_mode",setup_button,2,run_button) # object returned after window closed
         self.main_window.mainloop_enable()
 
     def RUN_window_creator(self):
         self.main_window.root.withdraw()
-        r = RUN2()
+        r = RUN()
         # r = RUN(self)
 
     def PASSWORD_window_creator(self):
