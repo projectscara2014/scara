@@ -6,6 +6,7 @@ import serial                            #import the serial library
 from utils import serial_ports_setup # CHANGE
 from utils import status_packet_handling
 from utils.string_handling import char_to_int
+from utils.exception_handling import handle_exception
 
 ##---IMPORTANT GLOBAL VARIABLES---
 GO_TO_DYNA_1_POS = 0
@@ -93,10 +94,10 @@ def send_and_check(motor_id,instruction,*args) :
            #     print("error packet => FALSE")
                 return status_packet
             else:
-                status_packet_handling.error_service_routine(error)
+                status_packet_handling.error_service_routine(error) # known error
     print("send_and_check>>limit overshoot")
-    status_packet_handling.error_service_routine(1,type=1)
-    # USER DEFINED ERROR: 1 :- IN CASE OF COMMUNICATION ERROR
+    # status_packet_handling.error_service_routine(1,type=1)
+    # # USER DEFINED ERROR: 1 :- IN CASE OF COMMUNICATION ERROR
     return False
 
 def constrain_limits():
@@ -159,7 +160,7 @@ def dyna_move():
             print("Writing to dynamixel again")
     if(count==dyna_write_limit):
         print("dyna write limit reached")
-        # CHANGE -- Handle Exception
+        handle_exception("not_responding") # CHECK
 
 def till_dyna_reached() :
     global GO_TO_DYNA_1_POS
@@ -206,6 +207,8 @@ def till_dyna_reached() :
     stall_count = 0
     reqd_pos = [GO_TO_DYNA_1_POS%4096,GO_TO_DYNA_2_POS%4096]
     current_pos = position_read()
+    if(current_pos == False):
+        return "again"
     last_pos = current_pos
 
     def compare(current,reqd):

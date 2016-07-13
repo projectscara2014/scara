@@ -118,14 +118,14 @@ def error_service_routine(error_byte_list,type = 0) :
 				exception_handling.handle_exception(__name__,error.get(i))
         # CHANGE -- DECIDE ERROR PRIORITY
         
-	elif(type == 1) : 
-		error_message = 'USER DEFINED ERROR : '
-		error = {
-		1 : 'COMMUNICATION ERROR'
-		}
-		error_message += error.get(error_byte_list)
-		print(error_message)
-		# CHANGE -- ERROR SERVICE ROUTINE
+	# elif(type == 1) : 
+	# 	error_message = 'USER DEFINED ERROR : '
+	# 	error = {
+	# 	1 : 'COMMUNICATION ERROR'
+	# 	}
+	# 	error_message += error.get(error_byte_list)
+	# 	print(error_message)
+	# 	# CHANGE -- ERROR SERVICE ROUTINE
 
 # def log(string) :
 #   logs = open(logs.txt)

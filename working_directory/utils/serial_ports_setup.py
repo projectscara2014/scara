@@ -5,7 +5,7 @@ import platform # platform.system
 import inspect # inspect.stack
 import time     #time.time, time.sleep
 
-from utils import exception_handling
+from utils.exception_handling import handle_exception
 from utils.debug import debug
 #### from utils.dummy_dynamixel import dummy_dynamixel
 
@@ -28,8 +28,8 @@ def get_connected_arduino_objects(arduino1_flag,arduino2_flag) :
                 return_value = None
                 try : 
                     return_value = function(*args,**kwargs)
-                except OSError :
-                    print('arduino disconnected')
+                except OSError, serial.serialutil.SerialException :
+                    handle_exception("disconnected") #CHANGE
                 else :
                     return return_value
             return wrapper
@@ -156,8 +156,7 @@ def get_connected_arduino_ports(arduino1_flag,arduino2_flag) :
                 if handshake_function(serial_obj) == True :
                     serial_objects_list.pop(serial_objects_list.index(serial_obj))
                     return serial_obj
-        raise OSError(device + ' is not connected')
-        # CHANGE Exception Handling
+        handle_exception(device+"_not_connected")
 
     if(arduino1_flag):
         arduino_1_obj = handshake('arduino1')
@@ -215,31 +214,31 @@ def get_connected_dynamixel_object() :
 
     ### CHANGE --- REMOVE THIS LATER
 
-    dynamixel_port = 'com5'  # CHANGE ---- WTF?
+    # dynamixel_port = 'com5'  # CHANGE ---- WTF?
 
-    print(dynamixel_port)
+    # print(dynamixel_port)
 
-    try :
-        for serial_object in serial_objects_list:
-            print "Closing Port : " + str(serial_object.port)
-            serial_object.close()
-        dynamixel = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
-    except :
-        # dynamixel = dummy_dynamixel.Dynamixel() ## UNCHANGED 16/6/16
-        # # return dynamixel ##CHANGED 16/6/16
-        # dynamixel = serial.Serial(port = dynamixel_port)
-        raise RuntimeError("Dynamixel not connected") # CHANGE
-        # exception_handling.handle_exception('dynamixel','cant connect') 
-    else :
-        print(dynamixel)
-        dynamixel.baudrate = 57600                 #set baudrate equal to 57600
-        return dynamixel
-        # dynamixel = dummy_dynamixel.Dynamixel()
-        # return dynamixel
+    # try :
+    #     for serial_object in serial_objects_list:
+    #         print "Closing Port : " + str(serial_object.port)
+    #         serial_object.close()
+    #     dynamixel = serial.Serial(port = dynamixel_port)      #create an instance of the serial.Serial class 
+    # except :
+    #     # dynamixel = dummy_dynamixel.Dynamixel() ## UNCHANGED 16/6/16
+    #     # # return dynamixel ##CHANGED 16/6/16
+    #     # dynamixel = serial.Serial(port = dynamixel_port)
+    #     raise RuntimeError("Dynamixel not connected") # CHANGE
+    #     # exception_handling.handle_exception('dynamixel','cant connect') 
+    # else :
+    #     print(dynamixel)
+    #     dynamixel.baudrate = 57600                 #set baudrate equal to 57600
+    #     return dynamixel
+    #     # dynamixel = dummy_dynamixel.Dynamixel()
+    #     # return dynamixel
 
     ###  IF THIS WORKS THEN REMOVE UPAR KA
 
-    dynamixel_module = stack.inspect()[1][1]    # dynamixel module for functional usage
+    dynamixel_module = inspect.stack()[1][0]    # dynamixel module for functional usage
 
     def dynamixel_handshake(serial_object) : 
         '''
@@ -248,13 +247,8 @@ def get_connected_dynamixel_object() :
         serial_object.baudrate = 57600
         dynamixel_module.dynamixel = serial_object
         print(serial_object)
-        # # dynamixel_module.send_and_check(1,3,25,1)
-        # print("okayyy")
-        # print(dynamixel_module.dynamixel)
 
-        # CHANGE URGENT --- Some function to check Dynamixel is connected
-
-        # return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
+        return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
 
         print(return_value)
         return return_value
