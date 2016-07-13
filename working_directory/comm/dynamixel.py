@@ -31,7 +31,7 @@ max_acceptable_error_in_position = 0
 
 def init() : 
     global dynamixel
-    dynamixel = serial_ports_setup.find_dynamixel_and_arduino()
+    dynamixel = serial_ports_setup.get_connected_dynamixel_object()
     dynamixel_initializations()
 
 def send_and_check(motor_id,instruction,*args) :
@@ -210,7 +210,6 @@ def till_dyna_reached() :
 
     def compare(current,reqd):
         global max_acceptable_error_in_position
-
         current[0] = reqd[0]     # COMMENT when dynamixel 1 works
         l = zip(current,reqd)
         def mod(s):
@@ -238,12 +237,13 @@ def till_dyna_reached() :
     return False
 
 def dynamixel_initializations():
+    send_and_check(1,3,25,1)        #LED for motor 1
+    send_and_check(2,3,25,1)        #LED for motor 2
     send_and_check(1,3,26,8,8,24)   #PID for motor 1
     send_and_check(2,3,26,8,8,24)   #PID for motor 2
     send_and_check(1,3,32,100,0)      #SPEED for motor 1
     send_and_check(2,3,32,100,0)      #SPEED for motor 2
-    send_and_check(1,3,25,1)        #LED for motor 1
-    send_and_check(2,3,25,1)        #LED for motor 2
+    # send_and_check(2,3,25,1)        #LED for motor 2
 #-------------------------------------------------------------------
 
 
