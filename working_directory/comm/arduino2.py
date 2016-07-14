@@ -22,7 +22,6 @@ HANDSHAKE_COMMAND = 2
 PICK_COMMAND = 3
 PLACE_COMMAND = 4
 MOVE_COMMAND = 5
-GO_TO_RESET_COMMAND = 6
 # ------------------------------------------
 
 # ----------- COMMAND DONE TIMES -----------
@@ -70,12 +69,8 @@ def get_instruction_name(instruction) :
 		return 'MOVE_COMMAND'
 	elif instruction == HANDSHAKE_COMMAND :
 		return 'HANDSHAKE_COMMAND'
-	elif instruction == GO_TO_RESET_COMMAND:
-		return 'GO_TO_RESET_COMMAND'
 	else : 
-		print("arduino2 - get_instruction_name - invalid instruction")
-		import sys
-		sys.exit(1)
+		return 0
 
 # -handling if IN_RESET_CNARACTER received-
 
@@ -186,7 +181,7 @@ def send_and_check(instruction,parameter=0) :
 		start_time = time.time()
 		while (elapsed_time <= OKAY_TIME_THRESHOLD) and (arduino.inWaiting() == 0) : 
 			elapsed_time = time.time() - start_time
-		print('send_and_check - okay_character - elapsed time - {0}'.format(elapsed_time))
+		# print('send_and_check - okay_character - elapsed time - {0}'.format(elapsed_time))
 		if(elapsed_time > OKAY_TIME_THRESHOLD) : 
 			send_instruction_count += 1
 			# write(instruction,parameter)
@@ -226,7 +221,7 @@ def send_and_check(instruction,parameter=0) :
 
 				while (elapsed_time <= done_time_threshold) and (arduino.inWaiting() == 0) : 
 					elapsed_time = time.time() - start_time
-				print('send_and_check - done_character - elapsed time - {0}'.format(elapsed_time))
+				# print('send_and_check - done_character - elapsed time - {0}'.format(elapsed_time))
 				if(elapsed_time > done_time_threshold) : 
 					send_instruction_count += 1
 					# write(instruction,parameter)
@@ -258,25 +253,15 @@ def place() :
 def rotate() : 
 	send_and_check(MOVE_COMMAND,int(GO_TO_SERVO_POS))
 
-def reset():
-	send_and_check(GO_TO_RESET_COMMAND)
+
 
 
 
 # # --------------- TESTING ------------------
 
-arduino = serial.Serial('com6')
-arduino.baudrate = 57600
+# arduino = serial.Serial('com4')
+# arduino.baudrate = 57600
 # handshake()
-time.sleep(7)
-reset()
-# time.sleep(5)
-# handshake()
-# pick()
-# time.sleep(5)
-# reset()
-
-
 # # pick()
 # # time.sleep(5)
 # # GO_TO_SERVO_POS = 45
