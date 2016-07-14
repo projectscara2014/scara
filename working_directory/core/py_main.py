@@ -1,23 +1,13 @@
-##from core import lookup
-from utils import serial_ports_setup
-
-[arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects(True,True)  # CHANGE
-print(arduino1_serial_object)
-print(arduino2_serial_object)
-from comm import arduino1
-arduino1.init(arduino1_serial_object) # handshaking and checking
-arduino1.dynamixel_initialization1() # power on dynamixel
-
-from comm import dynamixel
-arduino1.dynamixel_initialization2()
-
-from comm import arduino2
-arduino2.init(arduino2_serial_object) ### UNCHANGED 16/6/16
-
-from core import lookup
+def print_karo():
+    print("PYMAIN KARO NA")
 
 import time
 
+from core import lookup
+from utils import serial_ports_setup
+from comm import arduino1
+from comm import dynamixel
+from comm import arduino2
 from utils.debug import debug
 
 CURRENT_ARRAY_LENGTH = 0
@@ -27,6 +17,19 @@ DISPLAY_AREA_POSITIONS = []
 DISPLAY_AREA_TEMP = [[[346, -699, -347, 699, 45, 50.35959481963653, 1]], [[291, -693, -395, 693, 45, 50.30605210551902, 1], [395, -693, -291, 693, 45, 50.30605210551902, 1]], [[229, -671, -436, 671, 45, 50.14344516933812, 1], [346, -699, -347, 699, 45, 50.35959481963653, 1], [435, -671, -230, 671, 45, 50.14344516933812, 1]], [[161, -635, -468, 635, 45, 49.86503213862371, 1], [291, -693, -395, 693, 45, 50.30605210551902, 1], [395, -693, -291, 693, 45, 50.30605210551902, 1], [467, -635, -161, 635, 45, 49.86503213862371, 1]], [[86, -582, -490, 582, 45, 49.45627639295879, 1], [229, -671, -436, 671, 45, 50.14344516933812, 1], [346, -699, -347, 699, 45, 50.35959481963653, 1], [435, -671, -230, 671, 45, 50.14344516933812, 1], [489, -582, -87, 582, 45, 49.45627639295879, 1]]]
 
 FLAG = False
+
+def init():
+    [arduino1_serial_object,arduino2_serial_object] = serial_ports_setup.get_connected_arduino_objects(True,True)  # CHANGE
+    print(arduino1_serial_object)
+    print(arduino2_serial_object)
+    arduino1.init(arduino1_serial_object) # handshaking and checking
+    arduino1.dynamixel_initialization1() # power on dynamixel
+
+    dynamixel.init()
+    arduino1.dynamixel_initialization2()
+
+    arduino2.init(arduino2_serial_object) ### UNCHANGED 16/6/16
+    lookup.init_lookup()
 
 @debug()
 def modify_blocks(obj):

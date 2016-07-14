@@ -153,6 +153,7 @@ def get_connected_arduino_ports(arduino1_flag,arduino2_flag) :
 
         for serial_obj in serial_objects_list :
             if serial_obj.port not in ignore_serial_ports :
+                print("Checking =====> " + serial_obj.port)
                 if handshake_function(serial_obj) == True :
                     serial_objects_list.pop(serial_objects_list.index(serial_obj))
                     return serial_obj
@@ -206,7 +207,7 @@ def get_available_serial_objects():
 
     return result
 
-def get_connected_dynamixel_object() : 
+def get_connected_dynamixel_object(set_dyna_obj,send_and_check_fn) : 
     '''
     Returns the Serial object for connected "USB to RS485" module
     '''
@@ -238,17 +239,19 @@ def get_connected_dynamixel_object() :
 
     ###  IF THIS WORKS THEN REMOVE UPAR KA
 
-    dynamixel_module = inspect.stack()[1][0]    # dynamixel module for functional usage
+    # dynamixel_module = inspect.stack()[1][0]    # dynamixel module for functional usage
 
     def dynamixel_handshake(serial_object) : 
         '''
         returns True if dynamixel is connected to "serial_port", else returns False
         '''
         serial_object.baudrate = 57600
-        dynamixel_module.dynamixel = serial_object
+        # dynamixel_module.dynamixel = serial_object
+        set_dyna_obj(serial_object)
         print(serial_object)
 
-        return_value = dynamixel_module.send_and_check(2,3,25,1)        #LED for motor 2
+        return_value = send_and_check_fn(2,3,25,1)   #LED for motor 2
+        # return_value = dynamixel_module.send_and_check(2,3,25,1)   #LED for motor 2
 
         print(return_value)
         return return_value
@@ -263,6 +266,6 @@ def get_connected_dynamixel_object() :
 
     if(return_object == None):
         pass
-        # CHANGE EH
+        handle_exception("dynamixel_not_connected")
     else:
         return return_object

@@ -237,12 +237,9 @@ def init_lookup() :
 		logs_ = logs.read()
 		edit_position_array(logs_)
 		logs.close()
-
-######### Initialization call #########
-
-init_lookup()
-print("Position array :- ",POSITION_ARRAY)
-print
-print('position array flags : ',POSITION_ARRAY_FLAGS)
-print
-change_array(POSITION_ARRAY_FLAGS,0)
+	
+	print("Position array :- ",POSITION_ARRAY)
+	print
+	print('position array flags : ',POSITION_ARRAY_FLAGS)
+	print
+	change_array(POSITION_ARRAY_FLAGS,0)
