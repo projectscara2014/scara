@@ -29,11 +29,17 @@ dyna_write_limit     = 3
 read_limit           = 80
 stall_count_limit    = 10
 max_acceptable_error_in_position = 0
+max_acceptable_error_after_dyna_write_limit_reached = 1
 
 def init() : 
     global dynamixel
-    dynamixel = serial_ports_setup.get_connected_dynamixel_object()
+    dynamixel = serial_ports_setup.get_connected_dynamixel_object(set_dyna_obj,send_and_check)
     dynamixel_initializations()
+    dyna_move() # CHANGE
+
+def set_dyna_obj(obj):
+    global dynamixel
+    dynamixel = obj
 
 def send_and_check(motor_id,instruction,*args) :
     '''
@@ -122,6 +128,7 @@ def dyna_move():
     constrain_limits()
     global dyna_write_limit
     count = 0
+    global max_acceptable_error_in_position
 
     # FUNCTION TO CORRECTLY MOVE THE DYNAMIXEL TO THE REQUIRED POSITION
     def position_write(motor_id,goal_pos) :
@@ -157,10 +164,14 @@ def dyna_move():
         else:
             count +=1
             print("Somethings Wrong")
-            print("Writing to dynamixel again")
+            print("Writing to dynamixel again")        
     if(count==dyna_write_limit):
-        print("dyna write limit reached")
-        handle_exception("not_responding") # CHECK
+        max_acceptable_error_in_position += max_acceptable_error_after_dyna_write_limit_reached
+        if(not till_dyna_reached()):
+            print("dyna write limit reached")
+            handle_exception("not_responding") # CHECK    
+        max_acceptable_error_in_position -= max_acceptable_error_after_dyna_write_limit_reached
+        
 
 def till_dyna_reached() :
     global GO_TO_DYNA_1_POS
@@ -197,6 +208,7 @@ def till_dyna_reached() :
 
         if(not(status_packet1 and status_packet2)):
             print("position_read did not get a status_packet")
+            # raise NameError()
             return False
         
         current_angles = [angle_from_status_packet(status_packet1,motor_1_offset)\
@@ -207,12 +219,16 @@ def till_dyna_reached() :
     stall_count = 0
     reqd_pos = [GO_TO_DYNA_1_POS%4096,GO_TO_DYNA_2_POS%4096]
     current_pos = position_read()
-    if(current_pos == False):
-        return "again"
+    print("Value of 'current_pos' before calling 'compare' is "+str(current_pos))
+    # if(current_pos == False):
+    #     print("returning 'again' due to 'False' current_pos")
+    #     return "again"
     last_pos = current_pos
 
     def compare(current,reqd):
         global max_acceptable_error_in_position
+        # print("'compare' got reqd = "+str(reqd)+" & current = "+str(current))
+        print("'compare' got reqd = "+str(reqd[1])+" & current = "+str(current[1]))
         current[0] = reqd[0]     # COMMENT when dynamixel 1 works
         l = zip(current,reqd)
         def mod(s):
@@ -225,14 +241,18 @@ def till_dyna_reached() :
         return True
     
     while(count < read_limit):
-        if(compare(current_pos,reqd_pos)):
+        if(current_pos == False):           # could not read pos
+            print("Could not read current_pos")
+            handle_exception("did_brownout_occur")
+            # return "again"
+        elif(compare(current_pos,reqd_pos)):  # reached reqd pos
             return True
-        elif(current_pos == last_pos):
+        elif(current_pos == last_pos):      # current pos not changed
             if(stall_count < stall_count_limit) :
                 stall_count += 1
             else:
                 return "again"
-        else:
+        else:                               # current pos change hua
             stall_count = 0
             last_pos = current_pos
         current_pos = position_read()
@@ -250,8 +270,6 @@ def dynamixel_initializations():
 #-------------------------------------------------------------------
 
 
-init()
-dyna_move()
 ##move_to(180)
 
 HYPER_LIST = []

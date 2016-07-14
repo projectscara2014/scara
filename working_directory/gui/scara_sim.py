@@ -4,12 +4,12 @@ from core import py_main
 
 parameter_list = [0,1,1,2,3,5,8,13,21,34]*2
 
-print(parameter_list)
+# print(parameter_list)
 
 OCCURENCE_LIST = []
 max_length = 10
 
-def init_scara_sim():
+def init():
     '''
     Obtains number of available blocks for each alphabet
     '''
@@ -64,4 +64,3 @@ def called_by_GUI(obj,progress_page,string):
     print("trying to open button")
     print("returning control")
 
-init_scara_sim()
