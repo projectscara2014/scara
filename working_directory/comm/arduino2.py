@@ -7,6 +7,7 @@ arduino = None
 def init(arduino_serial_object) : 
 	global arduino
 	arduino = arduino_serial_object
+	reset()
 
 # ------------ PYTHON BYTES ----------------
 START_BYTE_1 = 255
@@ -22,6 +23,7 @@ HANDSHAKE_COMMAND = 2
 PICK_COMMAND = 3
 PLACE_COMMAND = 4
 MOVE_COMMAND = 5
+GO_TO_RESET_COMMAND = 6
 # ------------------------------------------
 
 # ----------- COMMAND DONE TIMES -----------
@@ -29,6 +31,8 @@ GET_OUT_OF_RESET_COMMAND_DONE_TIME = 2
 PICK_COMMAND_DONE_TIME = 13
 PLACE_COMMAND_DONE_TIME = 10
 MOVE_COMMAND_DONE_TIME = 5
+GO_TO_RESET_COMMAND_DONE_TIME = 2
+HANDSHAKE_COMMAND_DONE_TIME = 2
 # ------------------------------------------
 
 # -------- ARDUINO RETURN CHARACTERS -------
@@ -69,8 +73,12 @@ def get_instruction_name(instruction) :
 		return 'MOVE_COMMAND'
 	elif instruction == HANDSHAKE_COMMAND :
 		return 'HANDSHAKE_COMMAND'
+	elif instruction == GO_TO_RESET_COMMAND:
+		return 'GO_TO_RESET_COMMAND'
 	else : 
-		return 0
+		print("arduino2 - get_instruction_name - invalid instruction")
+		import sys
+		sys.exit(1)
 
 # -handling if IN_RESET_CNARACTER received-
 
@@ -84,6 +92,10 @@ def get_done_time(instruction) :
 		return PLACE_COMMAND_DONE_TIME
 	elif instruction == MOVE_COMMAND : 
 		return MOVE_COMMAND_DONE_TIME
+	elif instruction == GO_TO_RESET_COMMAND : 
+		return GO_TO_RESET_COMMAND_DONE_TIME
+	elif instruction == HANDSHAKE_COMMAND : 
+		return HANDSHAKE_COMMAND_DONE_TIME
 	else : 
 		return 0
 
@@ -181,7 +193,7 @@ def send_and_check(instruction,parameter=0) :
 		start_time = time.time()
 		while (elapsed_time <= OKAY_TIME_THRESHOLD) and (arduino.inWaiting() == 0) : 
 			elapsed_time = time.time() - start_time
-		# print('send_and_check - okay_character - elapsed time - {0}'.format(elapsed_time))
+		print('send_and_check - okay_character - elapsed time - {0}'.format(elapsed_time))
 		if(elapsed_time > OKAY_TIME_THRESHOLD) : 
 			send_instruction_count += 1
 			# write(instruction,parameter)
@@ -221,7 +233,7 @@ def send_and_check(instruction,parameter=0) :
 
 				while (elapsed_time <= done_time_threshold) and (arduino.inWaiting() == 0) : 
 					elapsed_time = time.time() - start_time
-				# print('send_and_check - done_character - elapsed time - {0}'.format(elapsed_time))
+				print('send_and_check - done_character - elapsed time - {0}'.format(elapsed_time))
 				if(elapsed_time > done_time_threshold) : 
 					send_instruction_count += 1
 					# write(instruction,parameter)
@@ -253,15 +265,29 @@ def place() :
 def rotate() : 
 	send_and_check(MOVE_COMMAND,int(GO_TO_SERVO_POS))
 
-
+def reset():
+	send_and_check(GO_TO_RESET_COMMAND)
 
 
 
 # # --------------- TESTING ------------------
 
-# arduino = serial.Serial('com4')
+# arduino = serial.Serial('com6')
 # arduino.baudrate = 57600
 # handshake()
+# time.sleep(7)
+# pick()
+# time.sleep(5)
+# pick()
+# time.sleep(5)
+# reset()
+# # time.sleep(5)
+# # handshake()
+# time.sleep(5)
+# pick()
+
+
+
 # # pick()
 # # time.sleep(5)
 # # GO_TO_SERVO_POS = 45
