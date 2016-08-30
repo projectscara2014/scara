@@ -83,7 +83,8 @@ def send_and_check(motor_id,instruction,*args) :
         if(status_packet == False) :
             # No status packet / Incorrect status packet
             count+=1
-        elif(status_packet == True):
+        elif(status_packet == True): 
+            # TRUE ONLY WHEN Dynamixel 1
             return True
         else:
           #  print("decoded status",list(status_packet))
@@ -167,8 +168,6 @@ def till_dyna_reached() :
     global read_limit
     global stall_count_limit
 
-    send_and_check_msg = "\xff\xff\x01\x04\x00\x00\x00\xfa"
-
     def position_read():
 
         def angle_from_status_packet(packet,offset) : 
@@ -191,7 +190,8 @@ def till_dyna_reached() :
         global motor_1_offset
         global motor_2_offset
 
-        status_packet1 = send_and_check_msg
+        #status_packet1 = send_and_check(1,2,36,2)# UNCOMMENT when Dynamixel 1 works
+        status_packet1 = "\xff\xff\x01\x04\x00\x00\x00\xfa" # COMMENT when Dynamixel 1 works
         status_packet2 = send_and_check(2,2,36,2)
 
         if(not(status_packet1 and status_packet2)):
@@ -210,7 +210,7 @@ def till_dyna_reached() :
 
     def compare(current,reqd):
         global max_acceptable_error_in_position
-        current[0] = reqd[0]
+        current[0] = reqd[0]     # COMMENT when dynamixel 1 works
         l = zip(current,reqd)
         def mod(s):
             if(s<0):s*=-1
