@@ -103,29 +103,30 @@ def error_service_routine(error_byte_list,type = 0) :
 	if(type == 0) :
 	
 		error = {
-		0 : 'INPUT VOLTAGE ERROR',
-		1 : 'ANGLE LIMIT ERROR',
-		2 : 'OVERHEATING ERROR',
-		3 : 'RANGE ERROR',
-		4 : 'CHECKSUM ERROR',
-		5 : 'OVERLOAD ERROR',
-		6 : 'INSTRUCTION ERROR',
-		7 : 'INVALID ERROR BYTE', 
+		0 : 'input_voltage_error',
+		1 : 'angle_limit_error',
+		2 : 'overheating_error',
+		3 : 'range_error',
+		4 : 'checksum_error',
+		5 : 'overload_error',
+		6 : 'instruction_error',
+		7 : 'invalid_error_byte_error', 
 		}
 		
 		for i in range(len(error_byte_list)) :
 			if(error_byte_list[i]) :
-				exception_handling.handle_exception(__name__,error.get(i))
+				# print("Error sent by dynamixel ==> "+error.get(i))
+				exception_handling.handle_exception(error.get(i))
         # CHANGE -- DECIDE ERROR PRIORITY
         
-	elif(type == 1) : 
-		error_message = 'USER DEFINED ERROR : '
-		error = {
-		1 : 'COMMUNICATION ERROR'
-		}
-		error_message += error.get(error_byte_list)
-		print(error_message)
-		# CHANGE -- ERROR SERVICE ROUTINE
+	# elif(type == 1) : 
+	# 	error_message = 'USER DEFINED ERROR : '
+	# 	error = {
+	# 	1 : 'COMMUNICATION ERROR'
+	# 	}
+	# 	error_message += error.get(error_byte_list)
+	# 	print(error_message)
+	# 	# CHANGE -- ERROR SERVICE ROUTINE
 
 # def log(string) :
 #   logs = open(logs.txt)

@@ -1,4 +1,11 @@
+# ------ general ------
 *.pyc
+# ---------------------
+
+# ----- dhr -----------
+working_directory/log.txt
+working_directory/core/variable_array.txt
+# ---------------------
 
 #——————— ironstein ———————
 env
