@@ -1,4 +1,0 @@
-#---------- DYNAMIXEL RAM --------------
-speed = 3,range = (4:10)
-length = 5, range = (:3)
-blue = 3

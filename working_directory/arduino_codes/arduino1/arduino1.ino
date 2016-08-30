@@ -5,9 +5,13 @@
 int flag_ldr;
 =======
 int flag_check_ldr =  0;
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/develop
 int flag_check_5v_brownout = 1;
 int flag_check_12v_brownout = 0;
+=======
+int flag_check_12v_brownout = 1;
+>>>>>>> develop
 
 // FLAGS -- Status
 int flag_5v_brownout_detected = 0;
@@ -19,6 +23,7 @@ int flag_dynamixel2_disconnected = 0;
 >>>>>>> refs/remotes/origin/develop
 
 //THRESHOLDS
+<<<<<<< HEAD
 int threshold_12v = 512; //#CHANGE
 int threshold_5v = 512; //#CHANGE
 <<<<<<< HEAD
@@ -33,6 +38,17 @@ char pin_ldr_1 = A1;
 char pin_ldr_2 = A2;
 <<<<<<< HEAD
 =======
+=======
+int threshold_12v = 700; //#CHANGE
+int threshold_5v = 700; //#CHANGE
+int threshold_ldr = 700;
+
+//Pin Definitions
+char pin_5v_brownout = A2;
+char pin_12v_brownout = A3;
+char pin_ldr_1 = A5;
+char pin_ldr_2 = A4;
+>>>>>>> develop
 int pin_relay_5v = 6;
 int pin_relay_12v = 7;
 >>>>>>> refs/remotes/origin/develop
@@ -49,6 +65,7 @@ char serial_command;
 =======
 int input_ldr1;
 int input_ldr2;
+<<<<<<< HEAD
 char serial_command;
 char data_packet;
 int debug_pin = 13;
@@ -57,6 +74,12 @@ int debug_pin = 13;
 =======
 >>>>>>> refs/remotes/origin/develop
 >>>>>>> origin/master
+=======
+char serial_data_received;
+char last_sent_data_packet;
+// char next_expected_data_packet = ' ';
+int debug_pin = 13;
+>>>>>>> develop
 
 void setup() {
 	Serial.begin(57600);
@@ -66,6 +89,7 @@ void setup() {
 	pinMode(pin_12v_brownout,INPUT);
 	pinMode(pin_ldr_1,INPUT);
 	pinMode(pin_ldr_2,INPUT);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -84,6 +108,15 @@ void setup() {
 	// Safety Initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
+=======
+    pinMode(debug_pin,OUTPUT);
+    pinMode(pin_relay_5v,OUTPUT);
+    pinMode(pin_relay_12v,OUTPUT);
+
+    // Safety Initializations
+    turn_off_dynamixel();
+    turn_off_backup_battery();
+>>>>>>> develop
 
     // Other Initializations
     digitalWrite(13,HIGH);
@@ -93,16 +126,17 @@ void setup() {
 void loop() {
 	// checks for serial communication
 	if(Serial.available()>0){
-		serial_command = Serial.read();
-		service_serial_command(serial_command);
+		serial_data_received = Serial.read();
+		service_serial_data_received(serial_data_received);
 	}
 
 	// checks for 12 Volt brown out
 	if(flag_check_12v_brownout == 1){
-		check_for_12v_brownout();
+		check_for_12v_brownout();		
 	}
 
 	// checks for 5 Volt brown out
+<<<<<<< HEAD
 	if(flag_check_5v_brownout == 1){
 		check_for_12v_brownout();
 	}
@@ -117,6 +151,9 @@ void service_serial_command(char serial_command){
 >>>>>>> origin/master
 	
 =======
+=======
+	check_for_5v_brownout();
+>>>>>>> develop
 
 	// checks for LDR status
 	if(flag_check_ldr == 1){
@@ -125,8 +162,9 @@ void service_serial_command(char serial_command){
 }
 
 // Functions to be run continuously
-void service_serial_command(char serial_command){
+void service_serial_data_received(char serial_data_received){
 	// This function is used for calling various functions as per the serial command. 
+<<<<<<< HEAD
 	if(serial_command == 'I'){ //* Initialize arduino
 		initialize_to_default();
 	}
@@ -135,13 +173,34 @@ void service_serial_command(char serial_command){
 >>>>>>> develop
 =======
     if(serial_command == 'D'){ //* Dynamixel supply on
+=======
+	if(serial_data_received == 'I'){ //* Initialize arduino
+		initialize_to_default();
+	}
+    else if(serial_data_received == 'D'){ //* Dynamixel supply on
+>>>>>>> develop
     	initialize_dynamixel();
     }
-    if(serial_command == 'R'){ //* Repeat last sent data packet
+    else if(serial_data_received == 'R'){ //* Repeat last sent data packet
     	repeat_last_sent_data_packet();
     }
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/develop
 >>>>>>> origin/master
+=======
+    else if(serial_data_received == 'L'){ //* Start checking LDR values
+    	start_checking_ldr();
+    }
+    else if(serial_data_received == 'S'){ //* Ask for status
+    	send_status();
+    }
+    else if(serial_data_received == 'h'){ //* Handshaking initialized
+    	send_handshaking_value();
+    }
+    else{
+    	send('x');
+    }
+>>>>>>> develop
 	//#CHANGE
 }
 
@@ -151,11 +210,16 @@ void check_for_12v_brownout(){
 	// This function is used to check for stable 12 Volts
 >>>>>>> refs/remotes/origin/develop
 	input_12v = analogRead(pin_12v_brownout);
-	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
+	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation) 900 500
+	// Serial.println(input_12v);
+
 	if(input_12v<threshold_12v){
 		turn_off_dynamixel();
 		flag_12v_brownout_detected = 1;
-		flag_check_12v_brownout = 0;
+	}
+	else{
+		// turn_on_dynamixel(); //COMMENT LATER
+		flag_12v_brownout_detected = 0;
 	}
 }
 
@@ -165,14 +229,14 @@ void check_for_5v_brownout(){
 	// This function is used to check for stable 5 Volts
 >>>>>>> refs/remotes/origin/develop
 	input_5v = analogRead(pin_5v_brownout);
-	if(flag_5v_brownout_detected == 1){
-		// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
-		if(input_5v<threshold_5v){
-			turn_on_backup_battery();
-			flag_5v_brownout_detected = 1;
-		}
+	// 	// CHANGE LATER (to ensure actual brownout and not a minor fluctuation)
+
+	if(input_5v<threshold_5v){
+		turn_on_backup_battery();
+		flag_5v_brownout_detected = 1;
 	}
 	else{
+<<<<<<< HEAD
 		if(input_5v>threshold_5v){
 			turn_off_backup_battery();
 			flag_5v_brownout_detected = 0;
@@ -205,6 +269,11 @@ void turn_off_backup_battery(){
 >>>>>>> origin/master
 =======
 	}	
+=======
+		turn_off_backup_battery();
+		flag_5v_brownout_detected = 0;
+	}
+>>>>>>> develop
 }
 
 void check_both_ldr(){
@@ -230,8 +299,7 @@ void initialize_to_default(){
 	// This function gives default initializations
 	turn_off_dynamixel();
 	turn_off_backup_battery();
-	data_packet = 'i'; //* initialization acknowledgement
-	Serial.write(data_packet);
+	send('i'); //* initialization acknowledgement
 	digitalWrite(debug_pin,LOW);
 	//#CHANGE
 }
@@ -240,25 +308,54 @@ void initialize_to_default(){
 =======
 
 void initialize_dynamixel(){
-	turn_on_dynamixel();
-	data_packet = 'd'; //* Acknowledgement that supply is on
-	Serial.write(data_packet); 
-	while(Serial.available()!=1){}
-	serial_command = Serial.read();
-	if(serial_command == 'Y'){ //* Dynamixel acknowledgement
-		flag_check_ldr = 1;
-		flag_check_12v_brownout = 1;
+	check_for_12v_brownout();
+	if(flag_12v_brownout_detected == 1){
+		send('B'); //* 12V brown_out
 	}
 	else{
-		data_packet = 'x'; //* Wrong Command 
-		Serial.write(data_packet);
+		flag_check_12v_brownout = 0;
+		turn_on_dynamixel();
+		send('d'); //* Acknowledgement that supply is on
 	}
 }
 
-void repeat_last_sent_data_packet(){
-	Serial.write(data_packet);
+void start_checking_ldr(){
+	flag_check_12v_brownout = 1;
+	flag_check_ldr = 1;
+	send('l'); //* Acknowledgement that LDR checking has started
 }
 
+void send(char character){
+	last_sent_data_packet = character;
+	Serial.write(last_sent_data_packet);
+}
+
+
+void repeat_last_sent_data_packet(){
+	Serial.write(last_sent_data_packet);
+}
+
+void send_status(){
+	if(flag_12v_brownout_detected == 1){
+		send('B'); //* 12V brown_out
+	}
+	if(flag_5v_brownout_detected == 1){
+		send('b'); //*  5V brown_out
+	}
+	if(flag_dynamixel1_disconnected == 1){
+		send('1'); //* Dynamixel 1 & 2 Disconnected
+	}
+	if(flag_dynamixel2_disconnected == 1){
+		send('2'); //* Dynamixel 2 Disconnected
+	}
+	if(flag_12v_brownout_detected+flag_5v_brownout_detected+flag_dynamixel1_disconnected+flag_dynamixel2_disconnected == 0){
+		send('o'); //* All OK
+	}
+}
+
+void send_handshaking_value(){
+	send('0'); //* Indicates Arduino number == 1
+}
 // Functions for ease of access
 void turn_on_backup_battery(){
 	// This function will turn on backup battery
@@ -279,6 +376,7 @@ void turn_on_dynamixel(){
 
 
 // Debug Funciton
+<<<<<<< HEAD
 void blink_debug_led(){
 	digitalWrite(debug_pin,LOW);
 	delay(500);
@@ -286,3 +384,10 @@ void blink_debug_led(){
 >>>>>>> refs/remotes/origin/develop
 }
 >>>>>>> origin/master
+=======
+// void blink_debug_led(){
+// 	digitalWrite(debug_pin,LOW);
+// 	delay(500);
+// 	digitalWrite(debug_pin,HIGH);
+// }
+>>>>>>> develop
