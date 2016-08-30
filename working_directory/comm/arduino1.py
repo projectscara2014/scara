@@ -1,6 +1,7 @@
 import serial
 import time
 import sys
+from utils.exception_handling import handle_exception
 
 global arduino1
 
@@ -52,7 +53,8 @@ def get_status():
 	if(recieved_packet != 'o'):
 		service_arduino1_error_packets(recieved_packet)
 	else:
-		print("All OK")
+		print("All OK on Arduino 1's side")
+		
 def send_and_check(outgoing_packet,expected_packet):
 	global send_and_check_count
 	global last_sent_command
@@ -110,15 +112,20 @@ def service_arduino1_error_packets(recieved_packet):
 	print("ARDUINO1.PY ERROR ===>"),
 	if(recieved_packet == 'B'):
 		print("12V supply brownout occured")
+		handle_exception("brownout_12V")
 	elif(recieved_packet == 'b'):
 		print("5V supply brownout occured")
+		handle_exception("brownout_5V")
 	elif(recieved_packet == '1'):
 		print("Dynamixel 1 and 2 disconnected")
+		handle_exception("dynamixel_1_and_2_disconnected")
 	elif(recieved_packet == '2'):
 		print("Dynamixel 2 disconnected")
+		handle_exception("dynamixel2_disconnected")
 	elif(recieved_packet == 'x'):
 		return_val = send_and_recieve(last_sent_command)
 		print("Incorrect protocol")
+		handle_exception("command_not_understood")
 
 	return return_val
 	# CHANGE

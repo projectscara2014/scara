@@ -1,4 +1,8 @@
 import sys
+<<<<<<< HEAD
+=======
+import inspect
+>>>>>>> feature/test_case_1
 
 WORKING_DIRECTORY = ''
 SPLITTING_CHARACTER = ''
@@ -23,6 +27,7 @@ def setup() :
 setup()
 
 import sys
+<<<<<<< HEAD
 gui = sys.modules['__main__']
 from utils import error_logging
 
@@ -93,6 +98,30 @@ def invalid_error_byte_error() :
 # py_main related funcitons
 
 def handle_exception(module_name,exception_name,*args) :
+=======
+gui_init_module = sys.modules['__main__']
+
+from utils import error_logging
+
+
+def log_error(module_name,exception_name) : 
+	error_logging.log(module_name + '--> ' + exception_name)
+
+def handle_exception(exception_name,*args):
+	module_name = inspect.stack()[1][1].split("\\")[-1].split(".")[0]
+
+	executable_string = "gui_init_module.gui_exception_handling." + module_name + "_" + exception_name + "(*args)"
+	print(executable_string)
+
+	log_error(module_name,exception_name)
+	try : 
+		exec(executable_string)
+	except NameError : 
+		print('invalid exception')  # CHANGE -- Let GUI print this in a msg box
+		sys.exit(0) # CHANGE -- delete
+
+def handle_exception_old(module_name,exception_name,*args) :
+>>>>>>> feature/test_case_1
 	
 	# ---------- modules and corresponding exceptions -----------
 	arduino1 = {
@@ -142,11 +171,17 @@ def handle_exception(module_name,exception_name,*args) :
 	}
 
 	module_name = module_name.split('.')[-1]	# getting only the module names and not the entire path
+<<<<<<< HEAD
 
 	def log_error(module_name,exception_name) : 
 		error_logging.log(module_name + '--> ' + exception_name)
 
 
+=======
+
+
+
+>>>>>>> feature/test_case_1
 	if module_name in module_names.keys() and\
 		exception_name in module_names[module_name].keys() :
 		# CHANGE -- Implement functions in GUI and call from here
@@ -158,4 +193,16 @@ def handle_exception(module_name,exception_name,*args) :
 		sys.exit(1)
 		# CHANGE -- Let GUI print this in a msg box
 	
+<<<<<<< HEAD
 handle_exception('arduino1','12V brownout')
+=======
+# handle_exception('arduino1','12V brownout')
+
+# # ----- TESTING -- Delete later --------
+# def exception_handling_testing_errr(*args):
+# 	print("Heyyy")
+# 	print(str(args))
+
+# handle_exception("testing_errr",1)
+# # -------------------------------------
+>>>>>>> feature/test_case_1

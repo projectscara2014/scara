@@ -36,6 +36,12 @@ setup()
 
 from gui import gui_main
 
+from gui import gui_exception_handling
+
+print("All modules imported")
+gui_main.scara.py_main.init()
+gui_main.scara.init()
+
 m = gui_main.MAIN()		# initializes GUI object
 
 on_done() 

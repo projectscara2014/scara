@@ -1,0 +1,1494 @@
+('working_directory --> ', 'C:\\Users\\dhrre\\Desktop\\Projects\\scara git\\scara\\working_directory\\')
+All modules imported
+COM4
+COM5
+COM8
+Checking =====> COM4
+Checking =====> COM5
+Checking =====> COM8
+('arduino 1 port --> ', 'COM8')
+Checking =====> COM4
+Arduino2 Command => HANDSHAKE_COMMAND
+Arduino2 Command => HANDSHAKE_COMMAND
+('arduino 2 port --> ', 'COM4')
+Serial<id=0x2b48358, open=True>(port='COM8', baudrate=57600, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
+Serial<id=0x2b483c8, open=True>(port='COM4', baudrate=57600, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
+py_to_arduino1 ---> I
+arduino1_to_py ---> i
+recieved_packet matches expected_packet
+py_to_arduino1 ---> h
+arduino1_to_py ---> 0
+recieved_packet matches expected_packet
+py_to_arduino1 ---> D
+arduino1_to_py ---> d
+recieved_packet matches expected_packet
+Serial<id=0x2b482e8, open=True>(port='COM5', baudrate=57600, bytesize=8, parity='N', stopbits=1, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
+
+Target value: 0 ; 0
+Constrained value: 0 ; 0
+Value of 'current_pos' before calling 'compare' is [2096, 365]
+'compare' got reqd = 0 & current = 365
+'compare' got reqd = 0 & current = 331
+'compare' got reqd = 0 & current = 290
+'compare' got reqd = 0 & current = 248
+'compare' got reqd = 0 & current = 203
+'compare' got reqd = 0 & current = 157
+'compare' got reqd = 0 & current = 117
+'compare' got reqd = 0 & current = 73
+'compare' got reqd = 0 & current = 34
+'compare' got reqd = 0 & current = 23
+'compare' got reqd = 0 & current = 20
+'compare' got reqd = 0 & current = 2
+'compare' got reqd = 0 & current = 4082
+'compare' got reqd = 0 & current = 4072
+'compare' got reqd = 0 & current = 4068
+'compare' got reqd = 0 & current = 4068
+'compare' got reqd = 0 & current = 4068
+'compare' got reqd = 0 & current = 4068
+'compare' got reqd = 0 & current = 4069
+'compare' got reqd = 0 & current = 4070
+'compare' got reqd = 0 & current = 4072
+'compare' got reqd = 0 & current = 4073
+'compare' got reqd = 0 & current = 4075
+'compare' got reqd = 0 & current = 4076
+'compare' got reqd = 0 & current = 4078
+'compare' got reqd = 0 & current = 4079
+'compare' got reqd = 0 & current = 4081
+'compare' got reqd = 0 & current = 4082
+'compare' got reqd = 0 & current = 4083
+'compare' got reqd = 0 & current = 4084
+'compare' got reqd = 0 & current = 4085
+'compare' got reqd = 0 & current = 4086
+'compare' got reqd = 0 & current = 4087
+'compare' got reqd = 0 & current = 4087
+'compare' got reqd = 0 & current = 4088
+'compare' got reqd = 0 & current = 4089
+'compare' got reqd = 0 & current = 4090
+'compare' got reqd = 0 & current = 4090
+'compare' got reqd = 0 & current = 4091
+'compare' got reqd = 0 & current = 4091
+'compare' got reqd = 0 & current = 4092
+'compare' got reqd = 0 & current = 4092
+'compare' got reqd = 0 & current = 4093
+'compare' got reqd = 0 & current = 4093
+'compare' got reqd = 0 & current = 4094
+'compare' got reqd = 0 & current = 4093
+'compare' got reqd = 0 & current = 4093
+'compare' got reqd = 0 & current = 4094
+'compare' got reqd = 0 & current = 4094
+'compare' got reqd = 0 & current = 4094
+'compare' got reqd = 0 & current = 4094
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 4095
+'compare' got reqd = 0 & current = 0
+py_to_arduino1 ---> L
+arduino1_to_py ---> l
+recieved_packet matches expected_packet
+('Position array :- ', [[[1500, 0, 1500, 0, 2, 2], [-1458, 0, -1458, 0, 1, 1], [486, -1296, 486, -1296, 0, 0]], [[1431, -162, 1431, -162, 1, 1], [972, -891, 972, -891, 0, 0], [-513, -486, -513, -486, 1, 1]], [[351, 1350, 351, 1350, 70, 70], [459, 459, 459, 459, 100, 100]], [[-1500, -405, -1500, -405, 0, 0], [-486, -243, -486, -243, 0, 0]]])
+
+('position array flags : ', [[1, 1, 1], [1, 1, 1], [1, 1], [1, 1]])
+
+hullalala le 
+checking string => SCARA
+going out of GUI...
+passing control
+receiving controool
+entering modify_blocks
+entering display_area_calc
+5
+-----------------
+0
+('Picking ', 'S', ' from arena')
+entering lookup
+entering sort
+Target value: 459 ; 459
+Constrained value: 459 ; 459
+Value of 'current_pos' before calling 'compare' is [2096, 1]
+'compare' got reqd = 459 & current = 1
+common string not there
+'compare' got reqd = 459 & current = 4091
+'compare' got reqd = 459 & current = 4084
+'compare' got reqd = 459 & current = 4069
+'compare' got reqd = 459 & current = 4048
+'compare' got reqd = 459 & current = 4039
+'compare' got reqd = 459 & current = 4052
+'compare' got reqd = 459 & current = 4091
+'compare' got reqd = 459 & current = 56
+'compare' got reqd = 459 & current = 144
+'compare' got reqd = 459 & current = 226
+common string not there
+'compare' got reqd = 459 & current = 338
+'compare' got reqd = 459 & current = 380
+'compare' got reqd = 459 & current = 411
+'compare' got reqd = 459 & current = 447
+'compare' got reqd = 459 & current = 475
+'compare' got reqd = 459 & current = 486
+'compare' got reqd = 459 & current = 492
+'compare' got reqd = 459 & current = 492
+'compare' got reqd = 459 & current = 492
+'compare' got reqd = 459 & current = 492
+'compare' got reqd = 459 & current = 493
+'compare' got reqd = 459 & current = 491
+'compare' got reqd = 459 & current = 490
+'compare' got reqd = 459 & current = 489
+'compare' got reqd = 459 & current = 486
+'compare' got reqd = 459 & current = 484
+'compare' got reqd = 459 & current = 482
+'compare' got reqd = 459 & current = 480
+'compare' got reqd = 459 & current = 478
+'compare' got reqd = 459 & current = 477
+'compare' got reqd = 459 & current = 475
+'compare' got reqd = 459 & current = 474
+'compare' got reqd = 459 & current = 473
+'compare' got reqd = 459 & current = 473
+'compare' got reqd = 459 & current = 471
+'compare' got reqd = 459 & current = 471
+'compare' got reqd = 459 & current = 470
+'compare' got reqd = 459 & current = 469
+'compare' got reqd = 459 & current = 468
+'compare' got reqd = 459 & current = 468
+'compare' got reqd = 459 & current = 467
+'compare' got reqd = 459 & current = 466
+'compare' got reqd = 459 & current = 465
+'compare' got reqd = 459 & current = 464
+'compare' got reqd = 459 & current = 464
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 459
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'S', ' on display area')
+Target value: 86 ; -582
+Constrained value: 86 ; -582
+common string not there
+Value of 'current_pos' before calling 'compare' is [2096, 458]
+'compare' got reqd = 3514 & current = 458
+'compare' got reqd = 3514 & current = 464
+'compare' got reqd = 3514 & current = 480
+'compare' got reqd = 3514 & current = 498
+'compare' got reqd = 3514 & current = 516
+'compare' got reqd = 3514 & current = 516
+'compare' got reqd = 3514 & current = 493
+'compare' got reqd = 3514 & current = 422
+'compare' got reqd = 3514 & current = 323
+'compare' got reqd = 3514 & current = 254
+'compare' got reqd = 3514 & current = 196
+'compare' got reqd = 3514 & current = 147
+'compare' got reqd = 3514 & current = 111
+'compare' got reqd = 3514 & current = 78
+'compare' got reqd = 3514 & current = 37
+'compare' got reqd = 3514 & current = 4092
+'compare' got reqd = 3514 & current = 4049
+'compare' got reqd = 3514 & current = 4005
+'compare' got reqd = 3514 & current = 3960
+'compare' got reqd = 3514 & current = 3915
+'compare' got reqd = 3514 & current = 3871
+'compare' got reqd = 3514 & current = 3828
+'compare' got reqd = 3514 & current = 3783
+'compare' got reqd = 3514 & current = 3741
+'compare' got reqd = 3514 & current = 3699
+'compare' got reqd = 3514 & current = 3655
+'compare' got reqd = 3514 & current = 3612
+'compare' got reqd = 3514 & current = 3570
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3491
+'compare' got reqd = 3514 & current = 3478
+'compare' got reqd = 3514 & current = 3477
+'compare' got reqd = 3514 & current = 3477
+'compare' got reqd = 3514 & current = 3478
+'compare' got reqd = 3514 & current = 3480
+'compare' got reqd = 3514 & current = 3481
+'compare' got reqd = 3514 & current = 3484
+'compare' got reqd = 3514 & current = 3486
+'compare' got reqd = 3514 & current = 3487
+'compare' got reqd = 3514 & current = 3488
+'compare' got reqd = 3514 & current = 3490
+'compare' got reqd = 3514 & current = 3492
+'compare' got reqd = 3514 & current = 3494
+'compare' got reqd = 3514 & current = 3495
+'compare' got reqd = 3514 & current = 3497
+'compare' got reqd = 3514 & current = 3498
+'compare' got reqd = 3514 & current = 3500
+'compare' got reqd = 3514 & current = 3501
+'compare' got reqd = 3514 & current = 3502
+'compare' got reqd = 3514 & current = 3503
+'compare' got reqd = 3514 & current = 3504
+'compare' got reqd = 3514 & current = 3505
+'compare' got reqd = 3514 & current = 3506
+'compare' got reqd = 3514 & current = 3506
+'compare' got reqd = 3514 & current = 3507
+'compare' got reqd = 3514 & current = 3507
+'compare' got reqd = 3514 & current = 3507
+'compare' got reqd = 3514 & current = 3508
+'compare' got reqd = 3514 & current = 3509
+'compare' got reqd = 3514 & current = 3508
+'compare' got reqd = 3514 & current = 3509
+'compare' got reqd = 3514 & current = 3509
+'compare' got reqd = 3514 & current = 3510
+'compare' got reqd = 3514 & current = 3510
+'compare' got reqd = 3514 & current = 3511
+'compare' got reqd = 3514 & current = 3511
+'compare' got reqd = 3514 & current = 3511
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3512
+'compare' got reqd = 3514 & current = 3513
+'compare' got reqd = 3514 & current = 3513
+'compare' got reqd = 3514 & current = 3513
+'compare' got reqd = 3514 & current = 3513
+'compare' got reqd = 3514 & current = 3514
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+1
+('Picking ', 'C', ' from arena')
+entering lookup
+entering sort
+Target value: 486 ; -1296
+Constrained value: 486 ; -1296
+Value of 'current_pos' before calling 'compare' is [2096, 3506]
+'compare' got reqd = 2800 & current = 3506
+'compare' got reqd = 2800 & current = 3477
+'compare' got reqd = 2800 & current = 3438
+'compare' got reqd = 2800 & current = 3396
+'compare' got reqd = 2800 & current = 3348
+'compare' got reqd = 2800 & current = 3302
+'compare' got reqd = 2800 & current = 3259
+'compare' got reqd = 2800 & current = 3213
+'compare' got reqd = 2800 & current = 3166
+'compare' got reqd = 2800 & current = 3125
+'compare' got reqd = 2800 & current = 3085
+'compare' got reqd = 2800 & current = 3033
+'compare' got reqd = 2800 & current = 2977
+'compare' got reqd = 2800 & current = 2926
+'compare' got reqd = 2800 & current = 2875
+'compare' got reqd = 2800 & current = 2832
+'compare' got reqd = 2800 & current = 2792
+'compare' got reqd = 2800 & current = 2768
+'compare' got reqd = 2800 & current = 2764
+'compare' got reqd = 2800 & current = 2766
+'compare' got reqd = 2800 & current = 2766
+'compare' got reqd = 2800 & current = 2766
+'compare' got reqd = 2800 & current = 2767
+'compare' got reqd = 2800 & current = 2768
+'compare' got reqd = 2800 & current = 2769
+'compare' got reqd = 2800 & current = 2771
+'compare' got reqd = 2800 & current = 2773
+'compare' got reqd = 2800 & current = 2775
+'compare' got reqd = 2800 & current = 2776
+'compare' got reqd = 2800 & current = 2778
+'compare' got reqd = 2800 & current = 2780
+'compare' got reqd = 2800 & current = 2781
+'compare' got reqd = 2800 & current = 2782
+'compare' got reqd = 2800 & current = 2784
+'compare' got reqd = 2800 & current = 2785
+'compare' got reqd = 2800 & current = 2786
+'compare' got reqd = 2800 & current = 2787
+'compare' got reqd = 2800 & current = 2789
+'compare' got reqd = 2800 & current = 2790
+'compare' got reqd = 2800 & current = 2791
+'compare' got reqd = 2800 & current = 2792
+'compare' got reqd = 2800 & current = 2793
+'compare' got reqd = 2800 & current = 2794
+'compare' got reqd = 2800 & current = 2794
+'compare' got reqd = 2800 & current = 2795
+'compare' got reqd = 2800 & current = 2795
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2800
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'C', ' on display area')
+Target value: 229 ; -671
+Constrained value: 229 ; -671
+Value of 'current_pos' before calling 'compare' is [2096, 2804]
+'compare' got reqd = 3425 & current = 2804
+'compare' got reqd = 3425 & current = 2823
+'compare' got reqd = 3425 & current = 2861
+'compare' got reqd = 3425 & current = 2912
+'compare' got reqd = 3425 & current = 2967
+'compare' got reqd = 3425 & current = 3018
+'compare' got reqd = 3425 & current = 3059
+'compare' got reqd = 3425 & current = 3095
+'compare' got reqd = 3425 & current = 3143
+'compare' got reqd = 3425 & current = 3200
+'compare' got reqd = 3425 & current = 3254
+'compare' got reqd = 3425 & current = 3302
+'compare' got reqd = 3425 & current = 3346
+'compare' got reqd = 3425 & current = 3392
+'compare' got reqd = 3425 & current = 3436
+'compare' got reqd = 3425 & current = 3458
+'compare' got reqd = 3425 & current = 3460
+'compare' got reqd = 3425 & current = 3460
+'compare' got reqd = 3425 & current = 3460
+'compare' got reqd = 3425 & current = 3460
+'compare' got reqd = 3425 & current = 3458
+'compare' got reqd = 3425 & current = 3456
+'compare' got reqd = 3425 & current = 3456
+'compare' got reqd = 3425 & current = 3456
+'compare' got reqd = 3425 & current = 3454
+'compare' got reqd = 3425 & current = 3452
+'compare' got reqd = 3425 & current = 3450
+'compare' got reqd = 3425 & current = 3448
+'compare' got reqd = 3425 & current = 3446
+'compare' got reqd = 3425 & current = 3445
+'compare' got reqd = 3425 & current = 3444
+'compare' got reqd = 3425 & current = 3442
+'compare' got reqd = 3425 & current = 3441
+'compare' got reqd = 3425 & current = 3440
+'compare' got reqd = 3425 & current = 3438
+'compare' got reqd = 3425 & current = 3437
+'compare' got reqd = 3425 & current = 3436
+'compare' got reqd = 3425 & current = 3435
+'compare' got reqd = 3425 & current = 3434
+'compare' got reqd = 3425 & current = 3433
+'compare' got reqd = 3425 & current = 3433
+'compare' got reqd = 3425 & current = 3432
+'compare' got reqd = 3425 & current = 3432
+'compare' got reqd = 3425 & current = 3432
+'compare' got reqd = 3425 & current = 3431
+'compare' got reqd = 3425 & current = 3431
+'compare' got reqd = 3425 & current = 3431
+'compare' got reqd = 3425 & current = 3430
+'compare' got reqd = 3425 & current = 3430
+'compare' got reqd = 3425 & current = 3429
+'compare' got reqd = 3425 & current = 3429
+'compare' got reqd = 3425 & current = 3428
+'compare' got reqd = 3425 & current = 3428
+'compare' got reqd = 3425 & current = 3428
+'compare' got reqd = 3425 & current = 3428
+'compare' got reqd = 3425 & current = 3428
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+Somethings Wrong
+Writing to dynamixel again
+Value of 'current_pos' before calling 'compare' is [2096, 3426]
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+Value of 'current_pos' before calling 'compare' is [2096, 3426]
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+'compare' got reqd = 3425 & current = 3426
+Value of 'current_pos' before calling 'compare' is [2096, 3426]
+'compare' got reqd = 3425 & current = 3426
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+2
+('Picking ', 'A', ' from arena')
+entering lookup
+entering sort
+Target value: -513 ; -486
+Constrained value: -513 ; -486
+Value of 'current_pos' before calling 'compare' is [2096, 3436]
+'compare' got reqd = 3610 & current = 3436
+'compare' got reqd = 3610 & current = 3469
+'compare' got reqd = 3610 & current = 3513
+'compare' got reqd = 3610 & current = 3558
+'compare' got reqd = 3610 & current = 3598
+'compare' got reqd = 3610 & current = 3615
+'compare' got reqd = 3610 & current = 3623
+'compare' got reqd = 3610 & current = 3625
+'compare' got reqd = 3610 & current = 3625
+'compare' got reqd = 3610 & current = 3625
+'compare' got reqd = 3610 & current = 3624
+'compare' got reqd = 3610 & current = 3622
+'compare' got reqd = 3610 & current = 3620
+'compare' got reqd = 3610 & current = 3620
+'compare' got reqd = 3610 & current = 3620
+'compare' got reqd = 3610 & current = 3620
+'compare' got reqd = 3610 & current = 3620
+'compare' got reqd = 3610 & current = 3618
+'compare' got reqd = 3610 & current = 3614
+'compare' got reqd = 3610 & current = 3610
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'A', ' on display area')
+Target value: 346 ; -699
+Constrained value: 346 ; -699
+Value of 'current_pos' before calling 'compare' is [2096, 3603]
+'compare' got reqd = 3397 & current = 3603
+'compare' got reqd = 3397 & current = 3577
+'compare' got reqd = 3397 & current = 3539
+'compare' got reqd = 3397 & current = 3497
+'compare' got reqd = 3397 & current = 3450
+'compare' got reqd = 3397 & current = 3409
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3396
+'compare' got reqd = 3397 & current = 3400
+'compare' got reqd = 3397 & current = 3397
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+3
+('Picking ', 'R', ' from arena')
+entering lookup
+entering sort
+Target value: -486 ; -243
+Constrained value: -486 ; -243
+Value of 'current_pos' before calling 'compare' is [2096, 3409]
+'compare' got reqd = 3853 & current = 3409
+'compare' got reqd = 3853 & current = 3441
+'compare' got reqd = 3853 & current = 3478
+'compare' got reqd = 3853 & current = 3509
+'compare' got reqd = 3853 & current = 3548
+'compare' got reqd = 3853 & current = 3605
+'compare' got reqd = 3853 & current = 3661
+'compare' got reqd = 3853 & current = 3710
+'compare' got reqd = 3853 & current = 3755
+'compare' got reqd = 3853 & current = 3798
+'compare' got reqd = 3853 & current = 3843
+'compare' got reqd = 3853 & current = 3870
+'compare' got reqd = 3853 & current = 3881
+'compare' got reqd = 3853 & current = 3889
+'compare' got reqd = 3853 & current = 3891
+'compare' got reqd = 3853 & current = 3891
+'compare' got reqd = 3853 & current = 3891
+'compare' got reqd = 3853 & current = 3891
+'compare' got reqd = 3853 & current = 3889
+'compare' got reqd = 3853 & current = 3878
+'compare' got reqd = 3853 & current = 3867
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3862
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3867
+'compare' got reqd = 3853 & current = 3869
+'compare' got reqd = 3853 & current = 3869
+'compare' got reqd = 3853 & current = 3869
+'compare' got reqd = 3853 & current = 3869
+'compare' got reqd = 3853 & current = 3868
+'compare' got reqd = 3853 & current = 3868
+'compare' got reqd = 3853 & current = 3868
+'compare' got reqd = 3853 & current = 3866
+'compare' got reqd = 3853 & current = 3866
+'compare' got reqd = 3853 & current = 3865
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3863
+'compare' got reqd = 3853 & current = 3863
+'compare' got reqd = 3853 & current = 3862
+'compare' got reqd = 3853 & current = 3862
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3860
+'compare' got reqd = 3853 & current = 3859
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3859
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+Somethings Wrong
+Writing to dynamixel again
+Value of 'current_pos' before calling 'compare' is [2096, 3854]
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+common string not there
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+Value of 'current_pos' before calling 'compare' is [2096, 3854]
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+Value of 'current_pos' before calling 'compare' is [2096, 3854]
+'compare' got reqd = 3853 & current = 3854
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'R', ' on display area')
+Target value: 435 ; -671
+Constrained value: 435 ; -671
+Value of 'current_pos' before calling 'compare' is [2096, 3846]
+'compare' got reqd = 3425 & current = 3846
+'compare' got reqd = 3425 & current = 3821
+'compare' got reqd = 3425 & current = 3796
+'compare' got reqd = 3425 & current = 3770
+'compare' got reqd = 3425 & current = 3739
+common string not there
+'compare' got reqd = 3425 & current = 3613
+'compare' got reqd = 3425 & current = 3554
+'compare' got reqd = 3425 & current = 3507
+'compare' got reqd = 3425 & current = 3461
+'compare' got reqd = 3425 & current = 3420
+'compare' got reqd = 3425 & current = 3399
+'compare' got reqd = 3425 & current = 3390
+'compare' got reqd = 3425 & current = 3389
+'compare' got reqd = 3425 & current = 3389
+'compare' got reqd = 3425 & current = 3389
+'compare' got reqd = 3425 & current = 3391
+'compare' got reqd = 3425 & current = 3395
+'compare' got reqd = 3425 & current = 3402
+'compare' got reqd = 3425 & current = 3405
+'compare' got reqd = 3425 & current = 3406
+'compare' got reqd = 3425 & current = 3409
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3416
+'compare' got reqd = 3425 & current = 3416
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3414
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3414
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3415
+'compare' got reqd = 3425 & current = 3416
+'compare' got reqd = 3425 & current = 3416
+'compare' got reqd = 3425 & current = 3417
+'compare' got reqd = 3425 & current = 3417
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3420
+'compare' got reqd = 3425 & current = 3420
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3422
+'compare' got reqd = 3425 & current = 3422
+'compare' got reqd = 3425 & current = 3422
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3424
+'compare' got reqd = 3425 & current = 3424
+'compare' got reqd = 3425 & current = 3425
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+4
+('Picking ', 'A', ' from arena')
+entering lookup
+entering sort
+Target value: 972 ; -891
+Constrained value: 972 ; -891
+Value of 'current_pos' before calling 'compare' is [2096, 3416]
+'compare' got reqd = 3205 & current = 3416
+'compare' got reqd = 3205 & current = 3383
+'compare' got reqd = 3205 & current = 3340
+'compare' got reqd = 3205 & current = 3300
+'compare' got reqd = 3205 & current = 3257
+'compare' got reqd = 3205 & current = 3217
+'compare' got reqd = 3205 & current = 3197
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3195
+'compare' got reqd = 3205 & current = 3195
+'compare' got reqd = 3205 & current = 3195
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3199
+'compare' got reqd = 3205 & current = 3198
+'compare' got reqd = 3205 & current = 3197
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3196
+Value of 'current_pos' before calling 'compare' is [2096, 3197]
+'compare' got reqd = 3205 & current = 3197
+'compare' got reqd = 3205 & current = 3198
+'compare' got reqd = 3205 & current = 3198
+'compare' got reqd = 3205 & current = 3198
+'compare' got reqd = 3205 & current = 3198
+'compare' got reqd = 3205 & current = 3199
+'compare' got reqd = 3205 & current = 3199
+'compare' got reqd = 3205 & current = 3200
+'compare' got reqd = 3205 & current = 3200
+'compare' got reqd = 3205 & current = 3201
+'compare' got reqd = 3205 & current = 3201
+'compare' got reqd = 3205 & current = 3201
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3205
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'A', ' on display area')
+Target value: 489 ; -582
+Constrained value: 489 ; -582
+Value of 'current_pos' before calling 'compare' is [2096, 3211]
+'compare' got reqd = 3514 & current = 3211
+'compare' got reqd = 3514 & current = 3237
+'compare' got reqd = 3514 & current = 3281
+'compare' got reqd = 3514 & current = 3328
+'compare' got reqd = 3514 & current = 3373
+'compare' got reqd = 3514 & current = 3417
+'compare' got reqd = 3514 & current = 3465
+'compare' got reqd = 3514 & current = 3508
+'compare' got reqd = 3514 & current = 3524
+'compare' got reqd = 3514 & current = 3528
+'compare' got reqd = 3514 & current = 3529
+'compare' got reqd = 3514 & current = 3525
+'compare' got reqd = 3514 & current = 3520
+'compare' got reqd = 3514 & current = 3520
+'compare' got reqd = 3514 & current = 3523
+'compare' got reqd = 3514 & current = 3524
+'compare' got reqd = 3514 & current = 3525
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3526
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3526
+'compare' got reqd = 3514 & current = 3526
+'compare' got reqd = 3514 & current = 3525
+'compare' got reqd = 3514 & current = 3525
+'compare' got reqd = 3514 & current = 3524
+'compare' got reqd = 3514 & current = 3524
+'compare' got reqd = 3514 & current = 3523
+'compare' got reqd = 3514 & current = 3523
+'compare' got reqd = 3514 & current = 3523
+'compare' got reqd = 3514 & current = 3522
+'compare' got reqd = 3514 & current = 3521
+'compare' got reqd = 3514 & current = 3521
+'compare' got reqd = 3514 & current = 3520
+'compare' got reqd = 3514 & current = 3520
+'compare' got reqd = 3514 & current = 3519
+'compare' got reqd = 3514 & current = 3519
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3517
+'compare' got reqd = 3514 & current = 3517
+'compare' got reqd = 3514 & current = 3517
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3514
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+wait thoda...
+wait thoda...
+wait thoda...
+-----------------
+('Picking ', 'A', ' from display area')
+Target value: 489 ; -582
+Constrained value: 489 ; -582
+Value of 'current_pos' before calling 'compare' is [2096, 3514]
+'compare' got reqd = 3514 & current = 3514
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'A', ' in arena')
+entering lookup
+entering sort
+Target value: 972 ; -891
+Constrained value: 972 ; -891
+Value of 'current_pos' before calling 'compare' is [2096, 3504]
+'compare' got reqd = 3205 & current = 3504
+'compare' got reqd = 3205 & current = 3471
+'compare' got reqd = 3205 & current = 3428
+'compare' got reqd = 3205 & current = 3388
+'compare' got reqd = 3205 & current = 3346
+'compare' got reqd = 3205 & current = 3301
+'compare' got reqd = 3205 & current = 3259
+'compare' got reqd = 3205 & current = 3217
+'compare' got reqd = 3205 & current = 3195
+'compare' got reqd = 3205 & current = 3190
+'compare' got reqd = 3205 & current = 3190
+'compare' got reqd = 3205 & current = 3190
+'compare' got reqd = 3205 & current = 3192
+'compare' got reqd = 3205 & current = 3190
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3189
+'compare' got reqd = 3205 & current = 3190
+'compare' got reqd = 3205 & current = 3191
+'compare' got reqd = 3205 & current = 3192
+'compare' got reqd = 3205 & current = 3193
+'compare' got reqd = 3205 & current = 3194
+'compare' got reqd = 3205 & current = 3194
+'compare' got reqd = 3205 & current = 3195
+'compare' got reqd = 3205 & current = 3196
+'compare' got reqd = 3205 & current = 3197
+'compare' got reqd = 3205 & current = 3198
+'compare' got reqd = 3205 & current = 3199
+'compare' got reqd = 3205 & current = 3199
+'compare' got reqd = 3205 & current = 3199
+common string not there
+'compare' got reqd = 3205 & current = 3201
+'compare' got reqd = 3205 & current = 3201
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3202
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3203
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3204
+'compare' got reqd = 3205 & current = 3205
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+bring it on
+('Picking ', 'R', ' from display area')
+Target value: 435 ; -671
+Constrained value: 435 ; -671
+Value of 'current_pos' before calling 'compare' is [2096, 3211]
+'compare' got reqd = 3425 & current = 3211
+'compare' got reqd = 3425 & current = 3236
+'compare' got reqd = 3425 & current = 3279
+'compare' got reqd = 3425 & current = 3328
+'compare' got reqd = 3425 & current = 3376
+'compare' got reqd = 3425 & current = 3416
+'compare' got reqd = 3425 & current = 3431
+'compare' got reqd = 3425 & current = 3435
+'compare' got reqd = 3425 & current = 3435
+'compare' got reqd = 3425 & current = 3436
+'compare' got reqd = 3425 & current = 3436
+'compare' got reqd = 3425 & current = 3435
+'compare' got reqd = 3425 & current = 3429
+'compare' got reqd = 3425 & current = 3425
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'R', ' in arena')
+entering lookup
+entering sort
+Target value: -486 ; -243
+Constrained value: -486 ; -243
+Value of 'current_pos' before calling 'compare' is [2096, 3437]
+'compare' got reqd = 3853 & current = 3437
+'compare' got reqd = 3853 & current = 3473
+'compare' got reqd = 3853 & current = 3517
+'compare' got reqd = 3853 & current = 3562
+'compare' got reqd = 3853 & current = 3605
+'compare' got reqd = 3853 & current = 3649
+'compare' got reqd = 3853 & current = 3692
+'compare' got reqd = 3853 & current = 3738
+'compare' got reqd = 3853 & current = 3783
+'compare' got reqd = 3853 & current = 3828
+'compare' got reqd = 3853 & current = 3859
+'compare' got reqd = 3853 & current = 3871
+'compare' got reqd = 3853 & current = 3878
+'compare' got reqd = 3853 & current = 3882
+'compare' got reqd = 3853 & current = 3883
+'compare' got reqd = 3853 & current = 3884
+'compare' got reqd = 3853 & current = 3884
+'compare' got reqd = 3853 & current = 3883
+'compare' got reqd = 3853 & current = 3881
+'compare' got reqd = 3853 & current = 3879
+'compare' got reqd = 3853 & current = 3876
+'compare' got reqd = 3853 & current = 3866
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3862
+'compare' got reqd = 3853 & current = 3866
+'compare' got reqd = 3853 & current = 3866
+'compare' got reqd = 3853 & current = 3866
+'compare' got reqd = 3853 & current = 3865
+'compare' got reqd = 3853 & current = 3865
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3864
+'compare' got reqd = 3853 & current = 3863
+'compare' got reqd = 3853 & current = 3862
+'compare' got reqd = 3853 & current = 3862
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3861
+'compare' got reqd = 3853 & current = 3860
+'compare' got reqd = 3853 & current = 3860
+'compare' got reqd = 3853 & current = 3860
+'compare' got reqd = 3853 & current = 3859
+'compare' got reqd = 3853 & current = 3859
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3858
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3857
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3856
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+Somethings Wrong
+Writing to dynamixel again
+Value of 'current_pos' before calling 'compare' is [2096, 3854]
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3855
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+Value of 'current_pos' before calling 'compare' is [2096, 3854]
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+'compare' got reqd = 3853 & current = 3854
+Value of 'current_pos' before calling 'compare' is [2096, 3854]
+'compare' got reqd = 3853 & current = 3854
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+bring it on
+('Picking ', 'A', ' from display area')
+Target value: 346 ; -699
+Constrained value: 346 ; -699
+Value of 'current_pos' before calling 'compare' is [2096, 3846]
+'compare' got reqd = 3397 & current = 3846
+'compare' got reqd = 3397 & current = 3820
+'compare' got reqd = 3397 & current = 3795
+'compare' got reqd = 3397 & current = 3770
+'compare' got reqd = 3397 & current = 3740
+'compare' got reqd = 3397 & current = 3686
+'compare' got reqd = 3397 & current = 3616
+'compare' got reqd = 3397 & current = 3556
+'compare' got reqd = 3397 & current = 3508
+'compare' got reqd = 3397 & current = 3461
+'compare' got reqd = 3397 & current = 3411
+'compare' got reqd = 3397 & current = 3374
+'compare' got reqd = 3397 & current = 3364
+'compare' got reqd = 3397 & current = 3362
+'compare' got reqd = 3397 & current = 3361
+'compare' got reqd = 3397 & current = 3360
+'compare' got reqd = 3397 & current = 3362
+'compare' got reqd = 3397 & current = 3365
+'compare' got reqd = 3397 & current = 3371
+'compare' got reqd = 3397 & current = 3379
+'compare' got reqd = 3397 & current = 3388
+'compare' got reqd = 3397 & current = 3388
+'compare' got reqd = 3397 & current = 3385
+'compare' got reqd = 3397 & current = 3385
+'compare' got reqd = 3397 & current = 3383
+'compare' got reqd = 3397 & current = 3381
+'compare' got reqd = 3397 & current = 3381
+'compare' got reqd = 3397 & current = 3381
+'compare' got reqd = 3397 & current = 3381
+'compare' got reqd = 3397 & current = 3382
+'compare' got reqd = 3397 & current = 3383
+'compare' got reqd = 3397 & current = 3384
+'compare' got reqd = 3397 & current = 3384
+'compare' got reqd = 3397 & current = 3385
+'compare' got reqd = 3397 & current = 3386
+'compare' got reqd = 3397 & current = 3386
+'compare' got reqd = 3397 & current = 3388
+'compare' got reqd = 3397 & current = 3388
+'compare' got reqd = 3397 & current = 3389
+'compare' got reqd = 3397 & current = 3390
+'compare' got reqd = 3397 & current = 3391
+'compare' got reqd = 3397 & current = 3392
+'compare' got reqd = 3397 & current = 3392
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3393
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3394
+'compare' got reqd = 3397 & current = 3395
+'compare' got reqd = 3397 & current = 3395
+'compare' got reqd = 3397 & current = 3395
+'compare' got reqd = 3397 & current = 3395
+'compare' got reqd = 3397 & current = 3396
+'compare' got reqd = 3397 & current = 3396
+'compare' got reqd = 3397 & current = 3396
+'compare' got reqd = 3397 & current = 3396
+'compare' got reqd = 3397 & current = 3397
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'A', ' in arena')
+entering lookup
+entering sort
+Target value: -513 ; -486
+Constrained value: -513 ; -486
+Value of 'current_pos' before calling 'compare' is [2096, 3403]
+'compare' got reqd = 3610 & current = 3403
+'compare' got reqd = 3610 & current = 3430
+'compare' got reqd = 3610 & current = 3474
+'compare' got reqd = 3610 & current = 3521
+'compare' got reqd = 3610 & current = 3567
+'compare' got reqd = 3610 & current = 3603
+'compare' got reqd = 3610 & current = 3614
+'compare' got reqd = 3610 & current = 3618
+'compare' got reqd = 3610 & current = 3618
+'compare' got reqd = 3610 & current = 3618
+'compare' got reqd = 3610 & current = 3618
+'compare' got reqd = 3610 & current = 3616
+'compare' got reqd = 3610 & current = 3615
+'compare' got reqd = 3610 & current = 3615
+'compare' got reqd = 3610 & current = 3615
+'compare' got reqd = 3610 & current = 3615
+'compare' got reqd = 3610 & current = 3615
+'compare' got reqd = 3610 & current = 3616
+'compare' got reqd = 3610 & current = 3617
+'compare' got reqd = 3610 & current = 3617
+'compare' got reqd = 3610 & current = 3612
+'compare' got reqd = 3610 & current = 3608
+'compare' got reqd = 3610 & current = 3606
+'compare' got reqd = 3610 & current = 3608
+'compare' got reqd = 3610 & current = 3610
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+bring it on
+('Picking ', 'C', ' from display area')
+Target value: 229 ; -671
+Constrained value: 229 ; -671
+Value of 'current_pos' before calling 'compare' is [2096, 3599]
+'compare' got reqd = 3425 & current = 3599
+'compare' got reqd = 3425 & current = 3571
+'compare' got reqd = 3425 & current = 3531
+'compare' got reqd = 3425 & current = 3490
+'compare' got reqd = 3425 & current = 3451
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+common string not there
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3427
+'compare' got reqd = 3425 & current = 3428
+'compare' got reqd = 3425 & current = 3424
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3417
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3417
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3418
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3419
+'compare' got reqd = 3425 & current = 3420
+'compare' got reqd = 3425 & current = 3420
+'compare' got reqd = 3425 & current = 3420
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3421
+'compare' got reqd = 3425 & current = 3422
+'compare' got reqd = 3425 & current = 3422
+'compare' got reqd = 3425 & current = 3422
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3423
+'compare' got reqd = 3425 & current = 3424
+'compare' got reqd = 3425 & current = 3424
+'compare' got reqd = 3425 & current = 3424
+'compare' got reqd = 3425 & current = 3425
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'C', ' in arena')
+entering lookup
+entering sort
+Target value: 486 ; -1296
+Constrained value: 486 ; -1296
+Value of 'current_pos' before calling 'compare' is [2096, 3416]
+'compare' got reqd = 2800 & current = 3416
+'compare' got reqd = 2800 & current = 3381
+'compare' got reqd = 2800 & current = 3337
+'compare' got reqd = 2800 & current = 3297
+'compare' got reqd = 2800 & current = 3257
+'compare' got reqd = 2800 & current = 3214
+'compare' got reqd = 2800 & current = 3175
+'compare' got reqd = 2800 & current = 3144
+'compare' got reqd = 2800 & current = 3100
+'compare' got reqd = 2800 & current = 3041
+'compare' got reqd = 2800 & current = 2981
+'compare' got reqd = 2800 & current = 2924
+'compare' got reqd = 2800 & current = 2875
+'compare' got reqd = 2800 & current = 2835
+'compare' got reqd = 2800 & current = 2795
+'compare' got reqd = 2800 & current = 2768
+'compare' got reqd = 2800 & current = 2765
+'compare' got reqd = 2800 & current = 2767
+'compare' got reqd = 2800 & current = 2767
+'compare' got reqd = 2800 & current = 2767
+'compare' got reqd = 2800 & current = 2767
+'compare' got reqd = 2800 & current = 2768
+'compare' got reqd = 2800 & current = 2769
+'compare' got reqd = 2800 & current = 2771
+'compare' got reqd = 2800 & current = 2773
+'compare' got reqd = 2800 & current = 2775
+'compare' got reqd = 2800 & current = 2777
+'compare' got reqd = 2800 & current = 2778
+'compare' got reqd = 2800 & current = 2781
+'compare' got reqd = 2800 & current = 2782
+'compare' got reqd = 2800 & current = 2782
+'compare' got reqd = 2800 & current = 2784
+'compare' got reqd = 2800 & current = 2785
+'compare' got reqd = 2800 & current = 2787
+'compare' got reqd = 2800 & current = 2788
+'compare' got reqd = 2800 & current = 2788
+'compare' got reqd = 2800 & current = 2790
+'compare' got reqd = 2800 & current = 2790
+'compare' got reqd = 2800 & current = 2791
+'compare' got reqd = 2800 & current = 2792
+'compare' got reqd = 2800 & current = 2793
+'compare' got reqd = 2800 & current = 2794
+'compare' got reqd = 2800 & current = 2794
+'compare' got reqd = 2800 & current = 2795
+'compare' got reqd = 2800 & current = 2795
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2796
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2797
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2798
+'compare' got reqd = 2800 & current = 2800
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+bring it on
+('Picking ', 'S', ' from display area')
+Target value: 86 ; -582
+Constrained value: 86 ; -582
+Value of 'current_pos' before calling 'compare' is [2096, 2805]
+'compare' got reqd = 3514 & current = 2805
+'compare' got reqd = 3514 & current = 2825
+'compare' got reqd = 3514 & current = 2864
+'compare' got reqd = 3514 & current = 2915
+'compare' got reqd = 3514 & current = 2966
+'compare' got reqd = 3514 & current = 3015
+'compare' got reqd = 3514 & current = 3062
+'compare' got reqd = 3514 & current = 3107
+'compare' got reqd = 3514 & current = 3154
+'compare' got reqd = 3514 & current = 3199
+'compare' got reqd = 3514 & current = 3237
+'compare' got reqd = 3514 & current = 3277
+'compare' got reqd = 3514 & current = 3330
+'compare' got reqd = 3514 & current = 3386
+'compare' got reqd = 3514 & current = 3436
+'compare' got reqd = 3514 & current = 3483
+'compare' got reqd = 3514 & current = 3526
+'compare' got reqd = 3514 & current = 3548
+'compare' got reqd = 3514 & current = 3549
+'compare' got reqd = 3514 & current = 3549
+'compare' got reqd = 3514 & current = 3549
+'compare' got reqd = 3514 & current = 3549
+'compare' got reqd = 3514 & current = 3546
+'compare' got reqd = 3514 & current = 3543
+'compare' got reqd = 3514 & current = 3541
+'compare' got reqd = 3514 & current = 3541
+'compare' got reqd = 3514 & current = 3540
+'compare' got reqd = 3514 & current = 3539
+'compare' got reqd = 3514 & current = 3536
+'compare' got reqd = 3514 & current = 3535
+'compare' got reqd = 3514 & current = 3534
+'compare' got reqd = 3514 & current = 3532
+'compare' got reqd = 3514 & current = 3530
+'compare' got reqd = 3514 & current = 3529
+'compare' got reqd = 3514 & current = 3528
+'compare' got reqd = 3514 & current = 3527
+'compare' got reqd = 3514 & current = 3526
+'compare' got reqd = 3514 & current = 3525
+'compare' got reqd = 3514 & current = 3524
+'compare' got reqd = 3514 & current = 3523
+'compare' got reqd = 3514 & current = 3523
+'compare' got reqd = 3514 & current = 3522
+'compare' got reqd = 3514 & current = 3522
+'compare' got reqd = 3514 & current = 3521
+'compare' got reqd = 3514 & current = 3521
+'compare' got reqd = 3514 & current = 3520
+'compare' got reqd = 3514 & current = 3520
+'compare' got reqd = 3514 & current = 3519
+'compare' got reqd = 3514 & current = 3519
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3518
+'compare' got reqd = 3514 & current = 3517
+'compare' got reqd = 3514 & current = 3517
+'compare' got reqd = 3514 & current = 3517
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3516
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3515
+'compare' got reqd = 3514 & current = 3514
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PICK_COMMAND
+----
+('Placing ', 'S', ' in arena')
+entering lookup
+entering sort
+Target value: 459 ; 459
+Constrained value: 459 ; 459
+Value of 'current_pos' before calling 'compare' is [2096, 3515]
+'compare' got reqd = 459 & current = 3515
+'compare' got reqd = 459 & current = 3513
+'compare' got reqd = 459 & current = 3502
+'compare' got reqd = 459 & current = 3492
+'compare' got reqd = 459 & current = 3495
+'compare' got reqd = 459 & current = 3520
+'compare' got reqd = 459 & current = 3573
+'compare' got reqd = 459 & current = 3648
+'compare' got reqd = 459 & current = 3737
+'compare' got reqd = 459 & current = 3804
+'compare' got reqd = 459 & current = 3863
+'compare' got reqd = 459 & current = 3910
+'compare' got reqd = 459 & current = 3946
+'compare' got reqd = 459 & current = 3979
+'compare' got reqd = 459 & current = 4016
+'compare' got reqd = 459 & current = 4058
+'compare' got reqd = 459 & current = 4
+'compare' got reqd = 459 & current = 47
+'compare' got reqd = 459 & current = 93
+'compare' got reqd = 459 & current = 138
+'compare' got reqd = 459 & current = 183
+'compare' got reqd = 459 & current = 226
+'compare' got reqd = 459 & current = 269
+'compare' got reqd = 459 & current = 312
+'compare' got reqd = 459 & current = 354
+'compare' got reqd = 459 & current = 397
+'compare' got reqd = 459 & current = 440
+'compare' got reqd = 459 & current = 477
+'compare' got reqd = 459 & current = 494
+'compare' got reqd = 459 & current = 496
+'compare' got reqd = 459 & current = 496
+'compare' got reqd = 459 & current = 495
+'compare' got reqd = 459 & current = 493
+'compare' got reqd = 459 & current = 491
+'compare' got reqd = 459 & current = 490
+'compare' got reqd = 459 & current = 488
+'compare' got reqd = 459 & current = 487
+'compare' got reqd = 459 & current = 485
+'compare' got reqd = 459 & current = 483
+'compare' got reqd = 459 & current = 480
+'compare' got reqd = 459 & current = 479
+'compare' got reqd = 459 & current = 477
+'compare' got reqd = 459 & current = 476
+'compare' got reqd = 459 & current = 476
+'compare' got reqd = 459 & current = 475
+'compare' got reqd = 459 & current = 473
+'compare' got reqd = 459 & current = 472
+'compare' got reqd = 459 & current = 470
+'compare' got reqd = 459 & current = 469
+'compare' got reqd = 459 & current = 468
+'compare' got reqd = 459 & current = 468
+'compare' got reqd = 459 & current = 467
+'compare' got reqd = 459 & current = 466
+'compare' got reqd = 459 & current = 466
+'compare' got reqd = 459 & current = 465
+'compare' got reqd = 459 & current = 465
+'compare' got reqd = 459 & current = 464
+'compare' got reqd = 459 & current = 464
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 463
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 462
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 461
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+'compare' got reqd = 459 & current = 460
+Somethings Wrong
+Writing to dynamixel again
+Value of 'current_pos' before calling 'compare' is [2096, 459]
+'compare' got reqd = 459 & current = 459
+Arduino2 Command => MOVE_COMMAND
+Arduino2 Command => PLACE_COMMAND
+-----------------
+bring it on
+trying to open button
+returning control
+py_to_arduino1 ---> I
+arduino1_to_py ---> i
+recieved_packet matches expected_packet
+[Finished in 359.6s]
